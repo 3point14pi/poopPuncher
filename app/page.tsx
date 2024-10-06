@@ -5,21 +5,33 @@ import styles from './index.module.css';
 
 export default function SecretPage() {
   {/* VARIABLES */}
-  const [count, setCount] = useState(1);
+  const [count, setCount] = useState(0);
   const [level, setLevel] = useState(1);
+
+  // Level
   const [amountOfCookiesForLevelUp, setAmountOfCookiesForLevelUp] = useState(100);
   const [addToAmountOfCookiesForLevelUp, setAddToAmountOfCookiesForLevelUp] = useState(100);
-  const [poopsClickedEver, setPoopsClickedEver] = useState(0);
   const [poopBarThing, setPoopBarThing] = useState(0);
+
+  // Poops clicked ever
+  const [poopsClickedEver, setPoopsClickedEver] = useState(0);
+
+  // Amount of poops
   const [poopPressed, setPoopPressed] = useState(false);
+
+  // Poops per click
   const [PoopPerClick, setPoopPerClick] = useState(1);
   const [costToBuyPoopClick, setCostToBuyPoopClick] = useState(100);
   const [costToAddCostToBuyPoopClick, setCostToAddCostToBuyPoopClick] = useState(10);
+
+  // Poops per second
   const [divideAmountOfPoopsPerSecond, setDivideAmountOfPoopsPerSecond] = useState(0);
   const [displayPoopPerSecond, setDisplayPoopPerSecond] = useState(0);
   const [realDivideAmountOfPoopsPerSecond, setRealDivideAmountOfPoopsPerSecond] = useState(100);
-  const [amountOfPoopsPerSecond, setAmountOfPoopsPerSecond] = useState(1);
+  const [amountOfPoopsPerSecond, setAmountOfPoopsPerSecond] = useState(0);
   const [didExceedPoop, setDidExceedPoop] = useState(false);
+
+  // Shop
   const [costToBuyPoopsPerSecond, setCostToBuyPoopsPerSecond] = useState(100);
   const [costToAddCostBuyPoopsPerSecond, setcostToAddCostBuyPoopsPerSecond] = useState(20);
 
@@ -30,17 +42,7 @@ export default function SecretPage() {
     setPoopBarThing(poopBarThing + PoopPerClick);
   }
 
-  {/* Level Up Logic */}
-  useEffect(() => {
-    if (poopBarThing >= amountOfCookiesForLevelUp) {
-      // Level up logic, ensure it only runs once per level-up
-      setLevel((prevLevel) => prevLevel + 1);
-      setPoopBarThing((prevPoopBarThing) => prevPoopBarThing - amountOfCookiesForLevelUp);
-      setAmountOfCookiesForLevelUp((prevAmount) => prevAmount + addToAmountOfCookiesForLevelUp);
-      setAddToAmountOfCookiesForLevelUp((prevAddAmount) => prevAddAmount + 50);
-    }
-  }, [poopBarThing, amountOfCookiesForLevelUp, addToAmountOfCookiesForLevelUp]);
-
+  
   {/* SHOP */}
   function morePoopPerClick() {
     if (count >= costToBuyPoopClick) {
@@ -52,7 +54,7 @@ export default function SecretPage() {
       alert("You don't have enough poops you poop head!");
     }
   }
-
+  
   {/* Add more poops per second */}
   const addMorePoopsPerSecond = () => {
     if (count >= costToBuyPoopsPerSecond) {
@@ -71,8 +73,20 @@ export default function SecretPage() {
       alert("You don't have enough poops you poop head!");
     }
   };
-
+  
   {/* BACKGROUND STUFF */}
+
+  {/* Level Up Logic */}
+  useEffect(() => {
+    if (poopBarThing >= amountOfCookiesForLevelUp) {
+      // Level up logic, ensure it only runs once per level-up
+      setLevel((prevLevel) => prevLevel + 1);
+      setPoopBarThing((prevPoopBarThing) => prevPoopBarThing - amountOfCookiesForLevelUp);
+      setAmountOfCookiesForLevelUp((prevAmount) => prevAmount + addToAmountOfCookiesForLevelUp);
+      setAddToAmountOfCookiesForLevelUp((prevAddAmount) => prevAddAmount + 50);
+    }
+  }, [poopBarThing, amountOfCookiesForLevelUp, addToAmountOfCookiesForLevelUp]);
+
   useEffect(() => {
     const interval = setInterval(() => {
       if (divideAmountOfPoopsPerSecond > 0) {
@@ -99,30 +113,46 @@ export default function SecretPage() {
 
   return (
     <div className={styles.body}>
+      {/* BACKROUND */}
       <img className={styles.backround} src="toiletPaperBackround.png" alt="" />
+      {/* LEFT MENU */}
       <span className={styles.leftMenu}>
         <p className={styles.poopMarket}>Poop Market</p>
+
         <br />
         <button className={styles.morePoopClicker} onClick={morePoopPerClick}>
           Click to add more poop per click ({costToBuyPoopClick} Poops)
         </button> <br /> <br />
+
         <button onClick={addMorePoopsPerSecond} className={styles.addMorePoopsPerSecond}>
           Click to add more poop per second ({costToBuyPoopsPerSecond} Poops)
         </button>
       </span>
+
+      {/* RIGHT BAR */}
 
       <div className={styles.rightBar}>
         <div className={styles.stats}>Stats</div> <br />
         <div className={styles.level}>Level: {level}
           <div className={styles.levelBar} style={{ width: `${poopBarThing / amountOfCookiesForLevelUp * 100}%`, height: '20px', backgroundColor: 'green' }}></div>
         </div> <br />
-        <div className={styles.poopsClicked}>Poops clicked: {count}</div> <br />
-        <div className={styles.poopsPerSecond}>Poops per second: {displayPoopPerSecond}</div>
+        <div className={styles.statsPoop}>Poops clicked: {count}</div> <br />
+        <div className={styles.statsPoop}>Poops clicked ever: {poopsClickedEver}</div> <br />
+        <div className={styles.statsShop}>Poops per click: {PoopPerClick}</div> <br />
+        <div className={styles.statsShop}>Poops per second: {displayPoopPerSecond}</div>
       </div>
 
+      {/* STUFF */}
+
       <div className={styles.stuff}>
-        <div className={styles.stuffTitle}>Stuff</div>
+        <div className={styles.stuffTitle}>Stuff</div>  <br />
+        <div className={styles.lotteryPicGroup}>
+          <img className={styles.lotteryPic} src="lotteryTicket.png" alt="lotteryTicketPic" />
+          <span className={styles.lotteryPicLabel}><strong>Lottery</strong></span>
+        </div>
       </div>
+      
+      {/* IMAGES */}
 
       <img
         className={styles.stinkLines}

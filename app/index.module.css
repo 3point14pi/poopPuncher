@@ -126,7 +126,7 @@
 }
 
 .level{
-  background-color: aquamarine;
+  background-color: rgb(127, 255, 127);
   border-radius: 20px;
   padding: 5px;
 }
@@ -135,14 +135,14 @@
   border-radius: 20px;
 }
 
-.poopsClicked {
+.statsPoop {
   background-color: aquamarine;
   border-radius: 20px;
   padding: 5px;
 }
 
-.poopsPerSecond {
-  background-color: aquamarine;
+.statsShop {
+  background-color: rgb(127, 255, 182);
   border-radius: 20px;
   padding: 5px;
 }
@@ -168,4 +168,33 @@
   font-size: 20px;
   background-color: rgb(233, 126, 11);
   border-radius: 20px;
+}
+
+.lotteryPic {
+  /* position: absolute; */
+  width: 100px;
+  /* left: 0px; */
+}
+
+.lotteryPicLabel {
+  position: relative;
+  letter-spacing: 2px;
+  font-size: 40px;
+  top: -30px;
+  left: 5px;
+
+}
+
+.lotteryPicGroup {
+  position: relative;
+  background-color: red;
+  border-radius: 20px;
+  padding: -20px;
+  box-shadow: 4px 4px 6px rgba(0, 0, 0, 0.7);
+}
+
+.lotteryPicGroup:hover {
+  box-shadow: 4px 4px 6px rgba(0, 0, 0, 0);
+  right: -3px;
+  top: 3px;
 }
