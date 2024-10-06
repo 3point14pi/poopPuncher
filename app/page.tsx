@@ -14,7 +14,7 @@ export default function SecretPage() {
   const [poopPressed, setPoopPressed] = useState(false);
   const [PoopPerClick, setPoopPerClick] = useState(1);
   const [costToBuyPoopClick, setCostToBuyPoopClick] = useState(100);
-  const [costToAddCostToBuyPoopClick, setcostToAddCostToBuyPoopClick] = useState(10);
+  const [costToAddCostToBuyPoopClick, setCostToAddCostToBuyPoopClick] = useState(10);
   const [divideAmountOfPoopsPerSecond, setDivideAmountOfPoopsPerSecond] = useState(0);
   const [displayPoopPerSecond, setDisplayPoopPerSecond] = useState(0);
   const [realDivideAmountOfPoopsPerSecond, setRealDivideAmountOfPoopsPerSecond] = useState(100);
@@ -27,24 +27,26 @@ export default function SecretPage() {
   function clickPoop() {
     setCount(count + PoopPerClick);
     setPoopsClickedEver(poopsClickedEver + PoopPerClick);
-    const updatedPoopBarThing = poopBarThing + PoopPerClick;
-
-    if (updatedPoopBarThing >= amountOfCookiesForLevelUp) {
-      setLevel(level + 1);
-      setPoopBarThing(updatedPoopBarThing - amountOfCookiesForLevelUp); // Only subtract the overflow part
-      setAmountOfCookiesForLevelUp(amountOfCookiesForLevelUp + addToAmountOfCookiesForLevelUp);
-      setAddToAmountOfCookiesForLevelUp(addToAmountOfCookiesForLevelUp + 50);
-    } else {
-      setPoopBarThing(updatedPoopBarThing);
-    }
+    setPoopBarThing(poopBarThing + PoopPerClick);
   }
+
+  {/* Level Up Logic */}
+  useEffect(() => {
+    if (poopBarThing >= amountOfCookiesForLevelUp) {
+      // Level up logic, ensure it only runs once per level-up
+      setLevel((prevLevel) => prevLevel + 1);
+      setPoopBarThing((prevPoopBarThing) => prevPoopBarThing - amountOfCookiesForLevelUp);
+      setAmountOfCookiesForLevelUp((prevAmount) => prevAmount + addToAmountOfCookiesForLevelUp);
+      setAddToAmountOfCookiesForLevelUp((prevAddAmount) => prevAddAmount + 50);
+    }
+  }, [poopBarThing, amountOfCookiesForLevelUp, addToAmountOfCookiesForLevelUp]);
 
   {/* SHOP */}
   function morePoopPerClick() {
     if (count >= costToBuyPoopClick) {
       setPoopPerClick(PoopPerClick + 1);
       setCostToBuyPoopClick(costToBuyPoopClick + costToAddCostToBuyPoopClick);
-      setcostToAddCostToBuyPoopClick(costToAddCostToBuyPoopClick + 5);
+      setCostToAddCostToBuyPoopClick(costToAddCostToBuyPoopClick + 5);
       setCount(count - costToBuyPoopClick);
     } else {
       alert("You don't have enough poops you poop head!");
@@ -54,7 +56,7 @@ export default function SecretPage() {
   {/* Add more poops per second */}
   const addMorePoopsPerSecond = () => {
     if (count >= costToBuyPoopsPerSecond) {
-      if (didExceedPoop === false) {
+      if (!didExceedPoop) {
         setDivideAmountOfPoopsPerSecond(divideAmountOfPoopsPerSecond + 1);
         setDisplayPoopPerSecond(divideAmountOfPoopsPerSecond + 1);
       } else {
@@ -79,37 +81,17 @@ export default function SecretPage() {
           setDidExceedPoop(true);
           setCount((prevCount) => prevCount + amountOfPoopsPerSecond);
           setPoopsClickedEver((prevPoops) => prevPoops + amountOfPoopsPerSecond);
-          setPoopBarThing((prevPoopBar) => {
-            const newPoopBar = prevPoopBar + amountOfPoopsPerSecond;
-            if (newPoopBar >= amountOfCookiesForLevelUp) {
-              setLevel(level + 1);
-              return newPoopBar - amountOfCookiesForLevelUp; // Carry over the extra
-            }
-            return newPoopBar;
-          });
+          setPoopBarThing((prevPoopBar) => prevPoopBar + amountOfPoopsPerSecond);
         } else {
           setCount((prevCount) => prevCount + 1);
           setPoopsClickedEver((prevPoops) => prevPoops + 1);
-          setPoopBarThing((prevPoopBar) => {
-            const newPoopBar = prevPoopBar + 1;
-            if (newPoopBar >= amountOfCookiesForLevelUp) {
-              setLevel(level + 1);
-              return newPoopBar - amountOfCookiesForLevelUp; // Carry over the extra
-            }
-            return newPoopBar;
-          });
+          setPoopBarThing((prevPoopBar) => prevPoopBar + 1);
         }
       }
     }, realDivideAmountOfPoopsPerSecond);
 
     return () => clearInterval(interval);
   }, [realDivideAmountOfPoopsPerSecond, amountOfPoopsPerSecond, divideAmountOfPoopsPerSecond]);
-
-  useEffect(() => {
-    if (didExceedPoop) {
-      setAmountOfPoopsPerSecond((prevCount) => prevCount + 1);
-    }
-  }, [didExceedPoop]);
 
   useEffect(() => {
     setRealDivideAmountOfPoopsPerSecond(1000 / divideAmountOfPoopsPerSecond);
