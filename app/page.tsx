@@ -220,8 +220,8 @@ export default function SecretPage() {
   return (
     <div className={styles.body}>
       {/* FONTS */}
-      <link href="https://fonts.cdnfonts.com/css/jumbo-sale-trial" rel="stylesheet"></link>
-      <style>@import url('https://fonts.cdnfonts.com/css/jumbo-sale-trial');</style>
+      {/* <link href="https://fonts.cdnfonts.com/css/jumbo-sale-trial" rel="stylesheet"></link>
+      <style>@import url('https://fonts.cdnfonts.com/css/jumbo-sale-trial');</style> */}
       {/* BACKROUND */}
       <img className={styles.backround} src="toiletPaperBackround.png" alt="" />
       {/* LEFT MENU */}
