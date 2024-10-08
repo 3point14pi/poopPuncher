@@ -4,118 +4,110 @@ import { useState, useEffect } from 'react';
 import styles from './index.module.css';
 
 export default function SecretPage() {
-  // Removed 'isFirstVisit' as it was unused
-  // const [isFirstVisit, setIsFirstVisit] = useState(false); 
-
   // Check for first visit
   useEffect(() => {
-    const firstVisitCheck = localStorage.getItem('firstVisit');
-    if (!firstVisitCheck) {
-      // If no record, it's the first visit
-      alert("Welcome to poop puncher! Just punch the poop and figure stuff out on your own. Blehhhhh. heehehehe. BYEEE!!!");
-      localStorage.setItem('firstVisit', 'no');
+    if (typeof window !== 'undefined') {  // Ensure this runs only on the client
+      const firstVisitCheck = localStorage.getItem('firstVisit');
+      if (!firstVisitCheck) {
+        alert("Welcome to poop puncher! Just punch the poop and figure stuff out on your own. Blehhhhh. heehehehe. BYEEE!!!");
+        localStorage.setItem('firstVisit', 'no');
 
-      localStorage.setItem('count', JSON.stringify(0));
-      localStorage.setItem('level', JSON.stringify(1));
-  
-      localStorage.setItem('amountOfCookiesForLevelUp', JSON.stringify(100));
-      localStorage.setItem('addToAmountOfCookiesForLevelUp', JSON.stringify(100));
-      localStorage.setItem('poopBarThing', JSON.stringify(0));
-  
-      localStorage.setItem('poopsClickedEver', JSON.stringify(0));
-  
-      localStorage.setItem('poopsPerClick', JSON.stringify(1));
-      localStorage.setItem('costToBuyPoopClick', JSON.stringify(100));
-      localStorage.setItem('costToAddCostToBuyPoopClick', JSON.stringify(10));
-  
-      localStorage.setItem('amountOfPoopsPerSecond', JSON.stringify(0));
-      localStorage.setItem('divideAmountOfPoopsPerSecond', JSON.stringify(0));
-      localStorage.setItem('realDivideAmountOfPoopsPerSecond', JSON.stringify(100));
-      localStorage.setItem('displayPoopPerSecond', JSON.stringify(0));
-      localStorage.setItem('didExceedPoop', JSON.stringify(false));
-  
-      localStorage.setItem('costToBuyPoopsPerSecond', JSON.stringify(100));
-      localStorage.setItem('costToAddCostBuyPoopsPerSecond', JSON.stringify(20));
-      // setIsFirstVisit(true); // Unused state, so this line is commented out
+        localStorage.setItem('count', JSON.stringify(0));
+        localStorage.setItem('level', JSON.stringify(1));
+        localStorage.setItem('amountOfCookiesForLevelUp', JSON.stringify(100));
+        localStorage.setItem('addToAmountOfCookiesForLevelUp', JSON.stringify(100));
+        localStorage.setItem('poopBarThing', JSON.stringify(0));
+        localStorage.setItem('poopsClickedEver', JSON.stringify(0));
+        localStorage.setItem('poopsPerClick', JSON.stringify(1));
+        localStorage.setItem('costToBuyPoopClick', JSON.stringify(100));
+        localStorage.setItem('costToAddCostToBuyPoopClick', JSON.stringify(10));
+        localStorage.setItem('amountOfPoopsPerSecond', JSON.stringify(0));
+        localStorage.setItem('divideAmountOfPoopsPerSecond', JSON.stringify(0));
+        localStorage.setItem('realDivideAmountOfPoopsPerSecond', JSON.stringify(100));
+        localStorage.setItem('displayPoopPerSecond', JSON.stringify(0));
+        localStorage.setItem('didExceedPoop', JSON.stringify(false));
+        localStorage.setItem('costToBuyPoopsPerSecond', JSON.stringify(100));
+        localStorage.setItem('costToAddCostBuyPoopsPerSecond', JSON.stringify(20));
+      }
     }
   }, []);
 
   {/* VARIABLES */}
-  const savedCount = parseInt(localStorage.getItem("count") || "0");
+  const savedCount = typeof window !== 'undefined' ? parseInt(localStorage.getItem("count") || "0") : 0;
   const [count, setCount] = useState(savedCount);
 
-  const savedLevel = parseInt(localStorage.getItem("level") || "1");
+  const savedLevel = typeof window !== 'undefined' ? parseInt(localStorage.getItem("level") || "1") : 1;
   const [level, setLevel] = useState(savedLevel);
 
   // Level
-  const savedAmountOfCookiesForLevelUp = parseInt(localStorage.getItem("amountOfCookiesForLevelUp") || "100");
+  const savedAmountOfCookiesForLevelUp = typeof window !== 'undefined' ? parseInt(localStorage.getItem("amountOfCookiesForLevelUp") || "100") : 100;
   const [amountOfCookiesForLevelUp, setAmountOfCookiesForLevelUp] = useState(savedAmountOfCookiesForLevelUp);
 
-  const savedAddToAmountOfCookiesForLevelUp = parseInt(localStorage.getItem("addToAmountOfCookiesForLevelUp") || "100");
+  const savedAddToAmountOfCookiesForLevelUp = typeof window !== 'undefined' ? parseInt(localStorage.getItem("addToAmountOfCookiesForLevelUp") || "100") : 100;
   const [addToAmountOfCookiesForLevelUp, setAddToAmountOfCookiesForLevelUp] = useState(savedAddToAmountOfCookiesForLevelUp);
 
-  const savedPoopBarThing = parseInt(localStorage.getItem("poopBarThing") || "0");
+  const savedPoopBarThing = typeof window !== 'undefined' ? parseInt(localStorage.getItem("poopBarThing") || "0") : 0;
   const [poopBarThing, setPoopBarThing] = useState(savedPoopBarThing);
 
   // Poops clicked ever
-  const savedPoopsClickedEver = parseInt(localStorage.getItem("poopsClickedEver") || "0");
+  const savedPoopsClickedEver = typeof window !== 'undefined' ? parseInt(localStorage.getItem("poopsClickedEver") || "0") : 0;
   const [poopsClickedEver, setPoopsClickedEver] = useState(savedPoopsClickedEver);
 
   // Poops per click
-  const savedPoopPerClick = parseInt(localStorage.getItem("poopsPerClick") || "1");
+  const savedPoopPerClick = typeof window !== 'undefined' ? parseInt(localStorage.getItem("poopsPerClick") || "1") : 1;
   const [PoopPerClick, setPoopPerClick] = useState(savedPoopPerClick);
 
-  const savedCostToBuyPoopClick = parseInt(localStorage.getItem("costToBuyPoopClick") || "100");
+  const savedCostToBuyPoopClick = typeof window !== 'undefined' ? parseInt(localStorage.getItem("costToBuyPoopClick") || "100") : 100;
   const [costToBuyPoopClick, setCostToBuyPoopClick] = useState(savedCostToBuyPoopClick);
 
-  const savedCostToAddCostToBuyPoopClick = parseInt(localStorage.getItem("costToAddCostToBuyPoopClick") || "10");
+  const savedCostToAddCostToBuyPoopClick = typeof window !== 'undefined' ? parseInt(localStorage.getItem("costToAddCostToBuyPoopClick") || "10") : 10;
   const [costToAddCostToBuyPoopClick, setCostToAddCostToBuyPoopClick] = useState(savedCostToAddCostToBuyPoopClick);
 
   // Poops per second
-  const savedDivideAmountOfPoopsPerSecond = parseInt(localStorage.getItem("divideAmountOfPoopsPerSecond") || "0");
+  const savedDivideAmountOfPoopsPerSecond = typeof window !== 'undefined' ? parseInt(localStorage.getItem("divideAmountOfPoopsPerSecond") || "0") : 0;
   const [divideAmountOfPoopsPerSecond, setDivideAmountOfPoopsPerSecond] = useState(savedDivideAmountOfPoopsPerSecond);
 
-  const savedDisplayPoopPerSecond = parseInt(localStorage.getItem("displayPoopPerSecond") || "0");
+  const savedDisplayPoopPerSecond = typeof window !== 'undefined' ? parseInt(localStorage.getItem("displayPoopPerSecond") || "0") : 0;
   const [displayPoopPerSecond, setDisplayPoopPerSecond] = useState(savedDisplayPoopPerSecond);
 
-  const savedRealDivideAmountOfPoopsPerSecond = parseInt(localStorage.getItem("realDivideAmountOfPoopsPerSecond") || "100");
+  const savedRealDivideAmountOfPoopsPerSecond = typeof window !== 'undefined' ? parseInt(localStorage.getItem("realDivideAmountOfPoopsPerSecond") || "100") : 100;
   const [realDivideAmountOfPoopsPerSecond, setRealDivideAmountOfPoopsPerSecond] = useState(savedRealDivideAmountOfPoopsPerSecond);
 
-  const savedAmountOfPoopsPerSecond = parseInt(localStorage.getItem("amountOfPoopsPerSecond") || "0");
+  const savedAmountOfPoopsPerSecond = typeof window !== 'undefined' ? parseInt(localStorage.getItem("amountOfPoopsPerSecond") || "0") : 0;
   const [amountOfPoopsPerSecond, setAmountOfPoopsPerSecond] = useState(savedAmountOfPoopsPerSecond);
 
-  const savedDidExceedPoop = JSON.parse(localStorage.getItem("didExceedPoop") || "false");
+  const savedDidExceedPoop = typeof window !== 'undefined' ? JSON.parse(localStorage.getItem("didExceedPoop") || "false") : false;
   const [didExceedPoop, setDidExceedPoop] = useState(savedDidExceedPoop);
 
   // Shop
-  const savedCostToBuyPoopsPerSecond = parseInt(localStorage.getItem("costToBuyPoopsPerSecond") || "100");
+  const savedCostToBuyPoopsPerSecond = typeof window !== 'undefined' ? parseInt(localStorage.getItem("costToBuyPoopsPerSecond") || "100") : 100;
   const [costToBuyPoopsPerSecond, setCostToBuyPoopsPerSecond] = useState(savedCostToBuyPoopsPerSecond);
 
-  const savedCostToAddCostBuyPoopsPerSecond = parseInt(localStorage.getItem("costToAddCostBuyPoopsPerSecond") || "20");
+  const savedCostToAddCostBuyPoopsPerSecond = typeof window !== 'undefined' ? parseInt(localStorage.getItem("costToAddCostBuyPoopsPerSecond") || "20") : 20;
   const [costToAddCostBuyPoopsPerSecond, setCostToAddCostBuyPoopsPerSecond] = useState(savedCostToAddCostBuyPoopsPerSecond);
 
   // Stuff
   const [isLottery, setIsLottery] = useState(false);
-  // Removed 'isPooperMan' and 'setIsPooperMan' as they were unused
-  // const [isPooperMan, setIsPooperMan] = useState(false);
 
   function save() {
-    localStorage.setItem('count', JSON.stringify(count));
-    localStorage.setItem('level', JSON.stringify(level));
-    localStorage.setItem('amountOfCookiesForLevelUp', JSON.stringify(amountOfCookiesForLevelUp));
-    localStorage.setItem('addToAmountOfCookiesForLevelUp', JSON.stringify(addToAmountOfCookiesForLevelUp));
-    localStorage.setItem('poopBarThing', JSON.stringify(poopBarThing));
-    localStorage.setItem('poopsClickedEver', JSON.stringify(poopsClickedEver));
-    localStorage.setItem('poopsPerClick', JSON.stringify(PoopPerClick));
-    localStorage.setItem('costToBuyPoopClick', JSON.stringify(costToBuyPoopClick));
-    localStorage.setItem('costToAddCostToBuyPoopClick', JSON.stringify(costToAddCostToBuyPoopClick));
-    localStorage.setItem('amountOfPoopsPerSecond', JSON.stringify(amountOfPoopsPerSecond));
-    localStorage.setItem('divideAmountOfPoopsPerSecond', JSON.stringify(divideAmountOfPoopsPerSecond));
-    localStorage.setItem('realDivideAmountOfPoopsPerSecond', JSON.stringify(realDivideAmountOfPoopsPerSecond));
-    localStorage.setItem('displayPoopPerSecond', JSON.stringify(displayPoopPerSecond));
-    localStorage.setItem('didExceedPoop', JSON.stringify(didExceedPoop));
-    localStorage.setItem('costToBuyPoopsPerSecond', JSON.stringify(costToBuyPoopsPerSecond));
-    localStorage.setItem('costToAddCostBuyPoopsPerSecond', JSON.stringify(costToAddCostBuyPoopsPerSecond));
+    if (typeof window !== 'undefined') {  // Ensure this runs only on the client
+      localStorage.setItem('count', JSON.stringify(count));
+      localStorage.setItem('level', JSON.stringify(level));
+      localStorage.setItem('amountOfCookiesForLevelUp', JSON.stringify(amountOfCookiesForLevelUp));
+      localStorage.setItem('addToAmountOfCookiesForLevelUp', JSON.stringify(addToAmountOfCookiesForLevelUp));
+      localStorage.setItem('poopBarThing', JSON.stringify(poopBarThing));
+      localStorage.setItem('poopsClickedEver', JSON.stringify(poopsClickedEver));
+      localStorage.setItem('poopsPerClick', JSON.stringify(PoopPerClick));
+      localStorage.setItem('costToBuyPoopClick', JSON.stringify(costToBuyPoopClick));
+      localStorage.setItem('costToAddCostToBuyPoopClick', JSON.stringify(costToAddCostToBuyPoopClick));
+      localStorage.setItem('amountOfPoopsPerSecond', JSON.stringify(amountOfPoopsPerSecond));
+      localStorage.setItem('divideAmountOfPoopsPerSecond', JSON.stringify(divideAmountOfPoopsPerSecond));
+      localStorage.setItem('realDivideAmountOfPoopsPerSecond', JSON.stringify(realDivideAmountOfPoopsPerSecond));
+      localStorage.setItem('displayPoopPerSecond', JSON.stringify(displayPoopPerSecond));
+      localStorage.setItem('didExceedPoop', JSON.stringify(didExceedPoop));
+      localStorage.setItem('costToBuyPoopsPerSecond', JSON.stringify(costToBuyPoopsPerSecond));
+      localStorage.setItem('costToAddCostBuyPoopsPerSecond', JSON.stringify(costToAddCostBuyPoopsPerSecond));
+    }
   }
 
   {/* WHAT HAPPENS WHEN CLICKED POOP */}
@@ -128,19 +120,14 @@ export default function SecretPage() {
 
   const [poopPressed, setPoopPressed] = useState(false);
 
-  // What happens when clicked poop
-
-  // Handle poop button press
   function handlePoopPress() {
     setPoopPressed(true);
   }
 
-  // Handle poop button release
   function handlePoopRelease() {
     setPoopPressed(false);
   }
 
-  {/* SHOP */}
   function morePoopPerClick() {
     if (count >= costToBuyPoopClick) {
       setPoopPerClick(PoopPerClick + 1);
@@ -152,16 +139,10 @@ export default function SecretPage() {
     }
   }
 
-  {/* STUFF */}
-
   function toggleIsLottery() {
     setIsLottery((prevState) => !prevState);
   }
 
-  // Removed 'pooperManLotteryGo' as it was unused
-  // function pooperManLotteryGo() { }
-
-  {/* Add more poops per second */}
   const addMorePoopsPerSecond = () => {
     if (count >= costToBuyPoopsPerSecond) {
       if (!didExceedPoop) {
@@ -180,12 +161,8 @@ export default function SecretPage() {
     }
   };
 
-  {/* BACKGROUND STUFF */}
-
-  {/* Level Up Logic */}
   useEffect(() => {
     if (poopBarThing >= amountOfCookiesForLevelUp) {
-      // Level up logic, ensure it only runs once per level-up
       setLevel((prevLevel) => prevLevel + 1);
       setPoopBarThing((prevPoopBarThing) => prevPoopBarThing - amountOfCookiesForLevelUp);
       setAmountOfCookiesForLevelUp((prevAmount) => prevAmount + addToAmountOfCookiesForLevelUp);
@@ -194,23 +171,25 @@ export default function SecretPage() {
   }, [poopBarThing, amountOfCookiesForLevelUp, addToAmountOfCookiesForLevelUp]);
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      if (divideAmountOfPoopsPerSecond > 0) {
-        if (divideAmountOfPoopsPerSecond > 100) {
-          setRealDivideAmountOfPoopsPerSecond(1000);
-          setDidExceedPoop(true);
-          setCount((prevCount) => prevCount + amountOfPoopsPerSecond);
-          setPoopsClickedEver((prevPoops) => prevPoops + amountOfPoopsPerSecond);
-          setPoopBarThing((prevPoopBar) => prevPoopBar + amountOfPoopsPerSecond);
-        } else {
-          setCount((prevCount) => prevCount + 1);
-          setPoopsClickedEver((prevPoops) => prevPoops + 1);
-          setPoopBarThing((prevPoopBar) => prevPoopBar + 1);
+    if (typeof window !== 'undefined') {  // Ensure this runs only on the client
+      const interval = setInterval(() => {
+        if (divideAmountOfPoopsPerSecond > 0) {
+          if (divideAmountOfPoopsPerSecond > 100) {
+            setRealDivideAmountOfPoopsPerSecond(1000);
+            setDidExceedPoop(true);
+            setCount((prevCount) => prevCount + amountOfPoopsPerSecond);
+            setPoopsClickedEver((prevPoops) => prevPoops + amountOfPoopsPerSecond);
+            setPoopBarThing((prevPoopBar) => prevPoopBar + amountOfPoopsPerSecond);
+          } else {
+            setCount((prevCount) => prevCount + 1);
+            setPoopsClickedEver((prevPoops) => prevPoops + 1);
+            setPoopBarThing((prevPoopBar) => prevPoopBar + 1);
+          }
         }
-      }
-    }, realDivideAmountOfPoopsPerSecond);
+      }, realDivideAmountOfPoopsPerSecond);
 
-    return () => clearInterval(interval);
+      return () => clearInterval(interval);
+    }
   }, [realDivideAmountOfPoopsPerSecond, amountOfPoopsPerSecond, divideAmountOfPoopsPerSecond]);
 
   useEffect(() => {
