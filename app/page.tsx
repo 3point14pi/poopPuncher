@@ -119,7 +119,7 @@ export default function SecretPage() {
     toggleIsPooperManSure()
     setCount(count - 100);
     setPoopBarThing(poopBarThing - 100)
-    let winOrLose = Math.floor(Math.random() * 5);
+    const winOrLose = Math.floor(Math.random() * 5);
     if (count >= 100) {
       if (winOrLose == 0) {
         setCount(count + 500)
