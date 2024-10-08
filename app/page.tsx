@@ -232,12 +232,13 @@ export default function SecretPage() {
 
         <br />
         <button className={styles.morePoopClicker} onClick={morePoopPerClick}>
-          Click to add more poop per click ({costToBuyPoopClick} Poops)
-        </button> <br /> <br />
+  Click to add more poop per click (&#39;{costToBuyPoopClick}&#39; Poops)
+</button> <br /> <br />
+<button onClick={addMorePoopsPerSecond} className={styles.addMorePoopsPerSecond}>
+  Click to add more poop per second (&#39;{costToBuyPoopsPerSecond}&#39; Poops)
+</button>
 
-        <button onClick={addMorePoopsPerSecond} className={styles.addMorePoopsPerSecond}>
-          Click to add more poop per second ({costToBuyPoopsPerSecond} Poops)
-        </button>
+
       </span>
 
       {/* RIGHT BAR */}
