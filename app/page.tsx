@@ -40,57 +40,57 @@ export default function SecretPage() {
   }, []);
 
   {/* VARIABLES */}
-  let savedCount = parseInt(localStorage.getItem("count") || "0");
+  const savedCount = parseInt(localStorage.getItem("count") || "0");
   const [count, setCount] = useState(savedCount);
 
-  let savedLevel = parseInt(localStorage.getItem("level") || "1");
+  const savedLevel = parseInt(localStorage.getItem("level") || "1");
   const [level, setLevel] = useState(savedLevel);
 
   // Level
-  let savedAmountOfCookiesForLevelUp = parseInt(localStorage.getItem("amountOfCookiesForLevelUp") || "100");
+  const savedAmountOfCookiesForLevelUp = parseInt(localStorage.getItem("amountOfCookiesForLevelUp") || "100");
   const [amountOfCookiesForLevelUp, setAmountOfCookiesForLevelUp] = useState(savedAmountOfCookiesForLevelUp);
 
-  let savedAddToAmountOfCookiesForLevelUp = parseInt(localStorage.getItem("addToAmountOfCookiesForLevelUp") || "100");
+  const savedAddToAmountOfCookiesForLevelUp = parseInt(localStorage.getItem("addToAmountOfCookiesForLevelUp") || "100");
   const [addToAmountOfCookiesForLevelUp, setAddToAmountOfCookiesForLevelUp] = useState(savedAddToAmountOfCookiesForLevelUp);
 
-  let savedPoopBarThing = parseInt(localStorage.getItem("poopBarThing") || "0");
+  const savedPoopBarThing = parseInt(localStorage.getItem("poopBarThing") || "0");
   const [poopBarThing, setPoopBarThing] = useState(savedPoopBarThing);
 
   // Poops clicked ever
-  let savedPoopsClickedEver = parseInt(localStorage.getItem("poopsClickedEver") || "0");
+  const savedPoopsClickedEver = parseInt(localStorage.getItem("poopsClickedEver") || "0");
   const [poopsClickedEver, setPoopsClickedEver] = useState(savedPoopsClickedEver);
 
   // Poops per click
-  let savedPoopPerClick = parseInt(localStorage.getItem("poopsPerClick") || "1");
+  const savedPoopPerClick = parseInt(localStorage.getItem("poopsPerClick") || "1");
   const [PoopPerClick, setPoopPerClick] = useState(savedPoopPerClick);
 
-  let savedCostToBuyPoopClick = parseInt(localStorage.getItem("costToBuyPoopClick") || "100");
+  const savedCostToBuyPoopClick = parseInt(localStorage.getItem("costToBuyPoopClick") || "100");
   const [costToBuyPoopClick, setCostToBuyPoopClick] = useState(savedCostToBuyPoopClick);
 
-  let savedCostToAddCostToBuyPoopClick = parseInt(localStorage.getItem("costToAddCostToBuyPoopClick") || "10");
+  const savedCostToAddCostToBuyPoopClick = parseInt(localStorage.getItem("costToAddCostToBuyPoopClick") || "10");
   const [costToAddCostToBuyPoopClick, setCostToAddCostToBuyPoopClick] = useState(savedCostToAddCostToBuyPoopClick);
 
   // Poops per second
-  let savedDivideAmountOfPoopsPerSecond = parseInt(localStorage.getItem("divideAmountOfPoopsPerSecond") || "0");
+  const savedDivideAmountOfPoopsPerSecond = parseInt(localStorage.getItem("divideAmountOfPoopsPerSecond") || "0");
   const [divideAmountOfPoopsPerSecond, setDivideAmountOfPoopsPerSecond] = useState(savedDivideAmountOfPoopsPerSecond);
 
-  let savedDisplayPoopPerSecond = parseInt(localStorage.getItem("displayPoopPerSecond") || "0");
+  const savedDisplayPoopPerSecond = parseInt(localStorage.getItem("displayPoopPerSecond") || "0");
   const [displayPoopPerSecond, setDisplayPoopPerSecond] = useState(savedDisplayPoopPerSecond);
 
-  let savedRealDivideAmountOfPoopsPerSecond = parseInt(localStorage.getItem("realDivideAmountOfPoopsPerSecond") || "100");
+  const savedRealDivideAmountOfPoopsPerSecond = parseInt(localStorage.getItem("realDivideAmountOfPoopsPerSecond") || "100");
   const [realDivideAmountOfPoopsPerSecond, setRealDivideAmountOfPoopsPerSecond] = useState(savedRealDivideAmountOfPoopsPerSecond);
 
-  let savedAmountOfPoopsPerSecond = parseInt(localStorage.getItem("amountOfPoopsPerSecond") || "0");
+  const savedAmountOfPoopsPerSecond = parseInt(localStorage.getItem("amountOfPoopsPerSecond") || "0");
   const [amountOfPoopsPerSecond, setAmountOfPoopsPerSecond] = useState(savedAmountOfPoopsPerSecond);
 
-  let savedDidExceedPoop = JSON.parse(localStorage.getItem("didExceedPoop") || "false");
+  const savedDidExceedPoop = JSON.parse(localStorage.getItem("didExceedPoop") || "false");
   const [didExceedPoop, setDidExceedPoop] = useState(savedDidExceedPoop);
 
   // Shop
-  let savedCostToBuyPoopsPerSecond = parseInt(localStorage.getItem("costToBuyPoopsPerSecond") || "100");
+  const savedCostToBuyPoopsPerSecond = parseInt(localStorage.getItem("costToBuyPoopsPerSecond") || "100");
   const [costToBuyPoopsPerSecond, setCostToBuyPoopsPerSecond] = useState(savedCostToBuyPoopsPerSecond);
 
-  let savedCostToAddCostBuyPoopsPerSecond = parseInt(localStorage.getItem("costToAddCostBuyPoopsPerSecond") || "20");
+  const savedCostToAddCostBuyPoopsPerSecond = parseInt(localStorage.getItem("costToAddCostBuyPoopsPerSecond") || "20");
   const [costToAddCostBuyPoopsPerSecond, setCostToAddCostBuyPoopsPerSecond] = useState(savedCostToAddCostBuyPoopsPerSecond);
 
   //Stuff
