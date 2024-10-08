@@ -23,7 +23,7 @@
   position: fixed;
   height: 90vh;
   width: 35vw;
-  top: 10vh;
+  bottom: 0vh;
   right: 35vw;
 }
 
@@ -178,9 +178,9 @@
 
 .lotteryPicLabel {
   position: relative;
-  letter-spacing: 2px;
-  font-size: 40px;
-  top: -30px;
+  letter-spacing: 0.05w;
+  font-size: 4vw;
+  top: -1vh;
   left: 5px;
 
 }
@@ -197,4 +197,35 @@
   box-shadow: 4px 4px 6px rgba(0, 0, 0, 0);
   right: -3px;
   top: 3px;
+}
+
+.lotteryScreen {
+  position: fixed;
+  top: 3%;
+  left: 3%; 
+  width: 94%;
+  height: 94%;
+  background-color: rgb(24, 198, 59);
+  pointer-events: none;
+  border-radius: 20px;
+}
+
+.lotteryTitle {
+  margin-top: 30px;
+  font-size: 75px;
+  font-family: 'Jumbo Sale Trial', sans-serif;
+}
+
+.lotteryXExit {
+  position: fixed;
+  font-size: 50px;
+  top: 50px;
+  left: 5vw;
+}
+
+.pooperManLottery {
+  position: fixed;
+  left: 100px;
+  width: 300px;
+  opacity: 1;
 }
