@@ -4,7 +4,8 @@ import { useState, useEffect } from 'react';
 import styles from './index.module.css';
 
 export default function SecretPage() {
-  const [isFirstVisit, setIsFirstVisit] = useState(false);
+  // Removed 'isFirstVisit' as it was unused
+  // const [isFirstVisit, setIsFirstVisit] = useState(false); 
 
   // Check for first visit
   useEffect(() => {
@@ -35,7 +36,7 @@ export default function SecretPage() {
   
       localStorage.setItem('costToBuyPoopsPerSecond', JSON.stringify(100));
       localStorage.setItem('costToAddCostBuyPoopsPerSecond', JSON.stringify(20));
-      setIsFirstVisit(true);
+      // setIsFirstVisit(true); // Unused state, so this line is commented out
     }
   }, []);
 
@@ -93,9 +94,10 @@ export default function SecretPage() {
   const savedCostToAddCostBuyPoopsPerSecond = parseInt(localStorage.getItem("costToAddCostBuyPoopsPerSecond") || "20");
   const [costToAddCostBuyPoopsPerSecond, setCostToAddCostBuyPoopsPerSecond] = useState(savedCostToAddCostBuyPoopsPerSecond);
 
-  //Stuff
+  // Stuff
   const [isLottery, setIsLottery] = useState(false);
-  const [isPooperMan, setIsPooperMan] = useState(false);
+  // Removed 'isPooperMan' and 'setIsPooperMan' as they were unused
+  // const [isPooperMan, setIsPooperMan] = useState(false);
 
   function save() {
     localStorage.setItem('count', JSON.stringify(count));
@@ -118,33 +120,28 @@ export default function SecretPage() {
 
   // The rest of your code remains the same
 
-
-  
-
   {/* WHAT HAPPENS WHEN CLICKED POOP */}
   function clickPoop() {
     setCount(count + PoopPerClick);
     setPoopsClickedEver(poopsClickedEver + PoopPerClick);
     setPoopBarThing(poopBarThing + PoopPerClick);
-    save()
+    save();
   }
 
   const [poopPressed, setPoopPressed] = useState(false);
 
-// What happens when clicked poop
+  // What happens when clicked poop
 
-// Handle poop button press
-function handlePoopPress() {
-  setPoopPressed(true);
-}
+  // Handle poop button press
+  function handlePoopPress() {
+    setPoopPressed(true);
+  }
 
-// Handle poop button release
-function handlePoopRelease() {
-  setPoopPressed(false);
-}
+  // Handle poop button release
+  function handlePoopRelease() {
+    setPoopPressed(false);
+  }
 
-
-  
   {/* SHOP */}
   function morePoopPerClick() {
     if (count >= costToBuyPoopClick) {
@@ -156,17 +153,15 @@ function handlePoopRelease() {
       alert("You don't have enough poops you poop head!");
     }
   }
-  
+
   {/* STUFF */}
 
   function toggleIsLottery() {
     setIsLottery((prevState) => !prevState);
-  }  
-
-  function pooperManLotteryGo() {
-
   }
-  
+
+  // Removed 'pooperManLotteryGo' as it was unused
+  // function pooperManLotteryGo() { }
 
   {/* Add more poops per second */}
   const addMorePoopsPerSecond = () => {
@@ -186,7 +181,7 @@ function handlePoopRelease() {
       alert("You don't have enough poops you poop head!");
     }
   };
-  
+
   {/* BACKGROUND STUFF */}
 
   {/* Level Up Logic */}
@@ -290,7 +285,7 @@ function handlePoopRelease() {
         <div className={styles.lotteryScreen} style={{ opacity: isLottery ? 0.9 : 0, pointerEvents: isLottery ? 'all' : 'none'}}>
           <div className={styles.lotteryTitle}>Lottery</div>
           <button className={styles.lotteryXExit} onClick={toggleIsLottery}>&#10008;</button>
-          <img className={styles.pooperManLottery}src="pooperManLottery.png" alt="PooperManLottery" />
+          <img className={styles.pooperManLottery} src="pooperManLottery.png" alt="PooperManLottery" />
         </div>
       </div>
     </div>
