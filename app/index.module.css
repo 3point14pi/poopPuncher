@@ -182,7 +182,6 @@
   font-size: 4vw;
   top: -1vh;
   left: 5px;
-
 }
 
 .lotteryPicGroup {
@@ -213,7 +212,7 @@
 .lotteryTitle {
   margin-top: 30px;
   font-size: 75px;
-  font-family: 'Jumbo Sale Trial', sans-serif;
+  /* font-family: 'Jumbo Sale Trial', sans-serif; */
 }
 
 .lotteryXExit {

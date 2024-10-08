@@ -223,7 +223,7 @@ export default function SecretPage() {
     <div className={styles.body}>
       {/* FONTS */}
       <link href="https://fonts.cdnfonts.com/css/jumbo-sale-trial" rel="stylesheet"></link>
-      <style>@import url( &#39https://fonts.cdnfonts.com/css/jumbo-sale-trial&#39);</style>
+      {/* <style>@import url('https://fonts.cdnfonts.com/css/jumbo-sale-trial');</style> */}
       {/* BACKROUND */}
       <img className={styles.backround} src="toiletPaperBackround.png" alt="" />
       {/* LEFT MENU */}
