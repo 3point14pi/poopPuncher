@@ -228,3 +228,56 @@
   width: 300px;
   opacity: 1;
 }
+
+.areYouSurePooperManBody {
+  position: fixed;
+  width: 50vw;
+  height: 40vh;
+  left: 25vw;
+  top: 30vh;
+  background-color: rgb(152, 213, 20);
+  border-radius: 20px;
+  opacity: 1;
+  box-shadow: 4px 4px 6px rgba(0, 0, 0, 0.7);
+}
+
+.yesDoPooperMan {
+  position: fixed;
+  font-size: 25px;
+  left: 370px;
+  top: 310px;
+  width: 8vw;
+  background-color: rgb(163, 235, 7);
+  padding: 120px;
+  border-radius: 20px;
+  box-shadow: 4px 4px 6px rgba(0, 0, 0, 0.7);
+}
+
+.yesDoPooperMan:hover {
+  box-shadow: 4px 4px 6px rgba(0, 0, 0, 0);
+  left: 371px;
+  top: 311px;
+}
+
+.noDoPooperMan {
+  position: fixed;
+  font-size: 25px;
+  right: 370px;
+  top: 310px;
+  width: 8vw;
+  background-color: rgb(163, 235, 7);
+  padding: 120px;
+  border-radius: 20px;
+  box-shadow: 4px 4px 6px rgba(0, 0, 0, 0.7);
+}
+
+.noDoPooperMan:hover {
+  box-shadow: 4px 4px 6px rgba(0, 0, 0, 0);
+  right: 369px;
+  top: 311px;
+}
+
+.areYouSurePooperManBodyTitle {
+  margin-top: 10px;
+  font-size: 30px;
+}

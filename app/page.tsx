@@ -6,7 +6,7 @@ import styles from './index.module.css';
 export default function SecretPage() {
   // Check for first visit
   useEffect(() => {
-    if (typeof window !== 'undefined') {  // Ensure this runs only on the client
+    if (typeof window !== 'undefined') {  // Found from outside scource... hehehe. to find how to detect first visit on page
       const firstVisitCheck = localStorage.getItem('firstVisit');
       if (!firstVisitCheck) {
         alert("Welcome to poop puncher! Just punch the poop and figure stuff out on your own. Blehhhhh. heehehehe. BYEEE!!!");
@@ -88,6 +88,7 @@ export default function SecretPage() {
 
   // Stuff
   const [isLottery, setIsLottery] = useState(false);
+  const [isPooperManAreYouSure, setIsPooperManAreYouSure] = useState(false);
 
   function save() {
     if (typeof window !== 'undefined') {  // Ensure this runs only on the client
@@ -107,6 +108,29 @@ export default function SecretPage() {
       localStorage.setItem('didExceedPoop', JSON.stringify(didExceedPoop));
       localStorage.setItem('costToBuyPoopsPerSecond', JSON.stringify(costToBuyPoopsPerSecond));
       localStorage.setItem('costToAddCostBuyPoopsPerSecond', JSON.stringify(costToAddCostBuyPoopsPerSecond));
+    }
+  }
+
+  function toggleIsPooperManSure() {
+    setIsPooperManAreYouSure((prevState) => !prevState);
+  }
+
+  function pooperManLotteryGo() {
+    toggleIsPooperManSure()
+    setCount(count - 100);
+    setPoopBarThing(poopBarThing - 100)
+    let winOrLose = Math.floor(Math.random() * 5);
+    if (count >= 100) {
+      if (winOrLose == 0) {
+        setCount(count + 500)
+        setPoopsClickedEver(poopsClickedEver + 500)
+        setPoopBarThing(poopBarThing + 500)
+        alert('You won!!! yayyy :)')
+      } else {
+      alert('You lost... :(') 
+      } 
+    } else {
+      alert("Stop GAMBLING YOU SICK ADDICTED DUMB AAA!!! GET SOME MORE POOPS, OR GET OUT!!!")
     }
   }
 
@@ -255,14 +279,27 @@ export default function SecretPage() {
       <div className={styles.stuff}>
         <div className={styles.stuffTitle}>Stuff</div>  <br />
 
+        {/* Lottery */}
+
         <div className={styles.lotteryPicGroup} onClick={toggleIsLottery}>
           <img className={styles.lotteryPic} src="lotteryTicket.png" alt="lotteryTicketPic" />
           <span className={styles.lotteryPicLabel}><strong>Lottery</strong></span>
         </div>
-        <div className={styles.lotteryScreen} style={{ opacity: isLottery ? 0.9 : 0, pointerEvents: isLottery ? 'all' : 'none'}}>
+
+        <div className={styles.lotteryScreen} style={{ opacity: isLottery ? 1 : 0, pointerEvents: isLottery ? 'all' : 'none'}}>
           <div className={styles.lotteryTitle}>Lottery</div>
           <button className={styles.lotteryXExit} onClick={toggleIsLottery}>&#10008;</button>
-          <img className={styles.pooperManLottery} src="pooperManLottery.png" alt="PooperManLottery" />
+
+
+          {/* PooperMan */}
+          <img onClick={toggleIsPooperManSure} className={styles.pooperManLottery} src="pooperManLottery.png" alt="PooperManLottery" />
+
+          <div className={styles.areYouSurePooperManBody} style={{ opacity: isPooperManAreYouSure ? 1 : 0, pointerEvents: isPooperManAreYouSure ? 'all' : 'none'}}>
+            <div className={styles.areYouSurePooperManBodyTitle}>Are you sure you want to buy Pooper Man? </div>
+            <div onClick={pooperManLotteryGo}className={styles.yesDoPooperMan}>Yes</div>
+            <div onClick={toggleIsPooperManSure}className={styles.noDoPooperMan}>No</div>
+          </div>
+
         </div>
       </div>
     </div>
