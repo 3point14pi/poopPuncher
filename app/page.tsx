@@ -145,7 +145,7 @@ export default function SecretPage() {
     if (count >= 500) {
       setCount(count - 500);
       setPoopBarThing(poopBarThing - 500)
-      const winOrLose = Math.floor(Math.random() * 30);
+      const winOrLose = Math.floor(Math.random() * 10);
       if (winOrLose == 0 || winOrLose == 1 || winOrLose == 2) {
         setCount(count + 1000)
         setPoopsClickedEver(poopsClickedEver + 1000)
@@ -179,7 +179,7 @@ export default function SecretPage() {
 
   function morePoopPerClick() {
     if (count >= costToBuyPoopClick) {
-      setPoopPerClick(PoopPerClick + 1);
+      setPoopPerClick(PoopPerClick + 10000);
       setCostToBuyPoopClick(costToBuyPoopClick + costToAddCostToBuyPoopClick);
       setCostToAddCostToBuyPoopClick(costToAddCostToBuyPoopClick + 5);
       setCount(count - costToBuyPoopClick);
@@ -218,6 +218,7 @@ export default function SecretPage() {
       setAddToAmountOfCookiesForLevelUp((prevAddAmount) => prevAddAmount + 50);
     }
   }, [poopBarThing, amountOfCookiesForLevelUp, addToAmountOfCookiesForLevelUp]);
+  
 
   useEffect(() => {
     if (typeof window !== 'undefined') {  // Ensure this runs only on the client
