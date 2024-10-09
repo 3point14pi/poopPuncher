@@ -349,3 +349,65 @@
   margin-top: 10px;
   font-size: 30px;
 }
+
+/* Omnipotent Poop*/
+
+.omnipotentPoopLottery {
+  /* position: fixed;
+  left: 100px; */
+  width: 300px;
+  opacity: 1;
+}
+
+.areYouSureOmnipotentPoopBody {
+  position: fixed;
+  width: 50vw;
+  height: 40vh;
+  left: 25vw;
+  top: 30vh;
+  background-color: rgb(152, 213, 20);
+  border-radius: 20px;
+  opacity: 1;
+  box-shadow: 4px 4px 6px rgba(0, 0, 0, 0.7);
+}
+
+.yesDoOmnipotentPoop {
+  position: fixed;
+  font-size: 25px;
+  left: 390px;
+  top: 310px;
+  width: 8vw;
+  background-color: rgb(163, 235, 7);
+  padding: 7vw;
+  border-radius: 20px;
+  box-shadow: 4px 4px 6px rgba(0, 0, 0, 0.7);
+}
+
+.yesDoOmnipotentPoop:hover {
+  box-shadow: 4px 4px 6px rgba(0, 0, 0, 0);
+  left: 391px;
+  top: 311px;
+}
+
+.noDoOmnipotentPoop {
+  position: fixed;
+  font-size: 25px;
+  right: 390px;
+  top: 310px;
+  width: 8vw;
+  background-color: rgb(163, 235, 7);
+  padding: 7vw;
+  border-radius: 20px;
+  box-shadow: 4px 4px 6px rgba(0, 0, 0, 0.7);
+}
+
+.noDoOmnipotentPoop:hover {
+  box-shadow: 4px 4px 6px rgba(0, 0, 0, 0);
+  right: 389px;
+  top: 311px;
+}
+
+.areYouSureOmnipotentPoopBodyTitle {
+  margin-top: 10px;
+  font-size: 30px;
+}

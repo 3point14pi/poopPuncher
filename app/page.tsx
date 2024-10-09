@@ -6,7 +6,7 @@ import styles from './index.module.css';
 export default function SecretPage() {
   // Check for first visit
   useEffect(() => {
-    if (typeof window !== 'undefined') {  // Found from outside scource... hehehe. to find how to detect first visit on page
+    // if (typeof window == 'undefined') {  // Found from outside scource... hehehe. to find how to detect first visit on page
       const firstVisitCheck = localStorage.getItem('firstVisit');
       if (!firstVisitCheck) {
         alert("Welcome to poop puncher! Just punch the poop and figure stuff out on your own. Blehhhhh. heehehehe. BYEEE!!!");
@@ -29,7 +29,7 @@ export default function SecretPage() {
         localStorage.setItem('costToBuyPoopsPerSecond', JSON.stringify(100));
         localStorage.setItem('costToAddCostBuyPoopsPerSecond', JSON.stringify(20));
       }
-    }
+    // }
   }, []);
 
   {/* VARIABLES */}
@@ -88,9 +88,12 @@ export default function SecretPage() {
 
   // Stuff
   const [isLottery, setIsLottery] = useState(false);
+
   const [isPooperManAreYouSure, setIsPooperManAreYouSure] = useState(false);
 
   const [isDogTurdAreYouSure, setIsDogTurdAreYouSure] = useState(false);
+
+  const [isOmnipotentPoopAreYouSure, setIsOmnipotentPoopAreYouSure] = useState(false);
 
   function save() {
     if (typeof window !== 'undefined') {  // Ensure this runs only on the client
@@ -121,11 +124,15 @@ export default function SecretPage() {
     setIsDogTurdAreYouSure((prevState) => !prevState);
   }
 
+  function toggleIsOmnipotentPoopSure() {
+    setIsOmnipotentPoopAreYouSure((prevState) => !prevState);
+  }
+  
+
   function pooperManLotteryGo() {
     toggleIsPooperManSure()
     if (count >= 100) {
       setCount(count - 100);
-      setPoopBarThing(poopBarThing - 100)
       const winOrLose = Math.floor(Math.random() * 5);
       if (winOrLose == 0) {
         setCount(count + 500)
@@ -144,12 +151,29 @@ export default function SecretPage() {
     toggleIsDogTurdSure()
     if (count >= 500) {
       setCount(count - 500);
-      setPoopBarThing(poopBarThing - 500)
-      const winOrLose = Math.floor(Math.random() * 10);
-      if (winOrLose == 0 || winOrLose == 1 || winOrLose == 2) {
+      const winOrLose = Math.floor(Math.random() * 3);
+      if (winOrLose == 0) {
         setCount(count + 1000)
         setPoopsClickedEver(poopsClickedEver + 1000)
         setPoopBarThing(poopBarThing + 1000)
+        alert('You won!!! yayyy :)')
+      } else {
+      alert('You lost... :(') 
+      } 
+    } else {
+      alert("Stop GAMBLING YOU SICK ADDICTED DUMB AAA!!! GET SOME MORE POOPS, OR GET OUT!!!")
+    }
+  }
+
+  function ominpotentPoopLotteryGo() {
+    toggleIsOmnipotentPoopSure()
+    if (count >= 500) {
+      setCount(count - 500);
+      const winOrLose = Math.floor(Math.random() * 10);
+      if (winOrLose == 0) {
+        setCount(count + 2000)
+        setPoopsClickedEver(poopsClickedEver + 2000)
+        setPoopBarThing(poopBarThing + 2000)
         alert('You won!!! yayyy :)')
       } else {
       alert('You lost... :(') 
@@ -335,6 +359,16 @@ export default function SecretPage() {
             <div className={styles.areYouSureDogTurdBodyTitle}>Are you sure you want to buy Dog Turd? </div>
             <div onClick={dogTurdLotteryGo}className={styles.yesDoDogTurd}>Yes</div>
             <div onClick={toggleIsDogTurdSure}className={styles.noDoDogTurd}>No</div>
+          </div>
+
+          {/* Omnipotent Poop */}
+
+          <img onClick={toggleIsOmnipotentPoopSure} className={styles.omnipotentPoopLottery} src="omnipotentPoopLottery.png" alt="OmnipotentPoopLottery" />
+
+          <div className={styles.areYouSureOmnipotentPoopBody} style={{ opacity: isOmnipotentPoopAreYouSure ? 1 : 0, pointerEvents: isOmnipotentPoopAreYouSure ? 'all' : 'none'}}>
+            <div className={styles.areYouSureOmnipotentPoopBodyTitle}>Are you sure you want to buy Dog Turd? </div>
+            <div onClick={ominpotentPoopLotteryGo}className={styles.yesDoOmnipotentPoop}>Yes</div>
+            <div onClick={toggleIsOmnipotentPoopSure}className={styles.noDoOmnipotentPoop}>No</div>
           </div>
 
           </div>
