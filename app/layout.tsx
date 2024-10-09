@@ -21,10 +21,10 @@ export default function RootLayout({
     <html lang="en">
       <head>
         <title>Next.js</title>
+        <Analytics />
       </head>
       <body className={inter.className}>
         {children}
-        <Analytics />
       </body>
     </html>
   );
