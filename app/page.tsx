@@ -90,6 +90,9 @@ export default function SecretPage() {
   const [isLottery, setIsLottery] = useState(false);
   const [isPooperManAreYouSure, setIsPooperManAreYouSure] = useState(false);
 
+  const [isDogTurd, setIsDogTurd] = useState(false);
+  const [isDogTurdAreYouSure, setIsDogTurdAreYouSure] = useState(false);
+
   function save() {
     if (typeof window !== 'undefined') {  // Ensure this runs only on the client
       localStorage.setItem('count', JSON.stringify(count));
@@ -115,16 +118,39 @@ export default function SecretPage() {
     setIsPooperManAreYouSure((prevState) => !prevState);
   }
 
+  function toggleIsDogTurdSure() {
+    setIsDogTurdAreYouSure((prevState) => !prevState);
+  }
+
   function pooperManLotteryGo() {
     toggleIsPooperManSure()
-    setCount(count - 100);
-    setPoopBarThing(poopBarThing - 100)
-    const winOrLose = Math.floor(Math.random() * 5);
     if (count >= 100) {
+      setCount(count - 100);
+      setPoopBarThing(poopBarThing - 100)
+      const winOrLose = Math.floor(Math.random() * 5);
       if (winOrLose == 0) {
         setCount(count + 500)
         setPoopsClickedEver(poopsClickedEver + 500)
         setPoopBarThing(poopBarThing + 500)
+        alert('You won!!! yayyy :)')
+      } else {
+      alert('You lost... :(') 
+      } 
+    } else {
+      alert("Stop GAMBLING YOU SICK ADDICTED DUMB AAA!!! GET SOME MORE POOPS, OR GET OUT!!!")
+    }
+  }
+
+  function dogTurdLotteryGo() {
+    toggleIsDogTurdSure()
+    if (count >= 100) {
+      setCount(count - 500);
+      setPoopBarThing(poopBarThing - 500)
+      const winOrLose = Math.floor(Math.random() * 30);
+      if (winOrLose == 0 || winOrLose == 1 || winOrLose == 2) {
+        setCount(count + 1000)
+        setPoopsClickedEver(poopsClickedEver + 1000)
+        setPoopBarThing(poopBarThing + 1000)
         alert('You won!!! yayyy :)')
       } else {
       alert('You lost... :(') 
@@ -291,6 +317,7 @@ export default function SecretPage() {
           <button className={styles.lotteryXExit} onClick={toggleIsLottery}>&#10008;</button>
 
 
+        <div className={styles.lotteryTickets}>
           {/* PooperMan */}
           <img onClick={toggleIsPooperManSure} className={styles.pooperManLottery} src="pooperManLottery.png" alt="PooperManLottery" />
 
@@ -300,6 +327,17 @@ export default function SecretPage() {
             <div onClick={toggleIsPooperManSure}className={styles.noDoPooperMan}>No</div>
           </div>
 
+          {/* Dog Turd */}
+
+          <img onClick={toggleIsDogTurdSure} className={styles.pooperManLottery} src="dogTurdLottery.png" alt="DogTurdLottery" />
+
+          <div className={styles.areYouSureDogTurdBody} style={{ opacity: isDogTurdAreYouSure ? 1 : 0, pointerEvents: isDogTurdAreYouSure ? 'all' : 'none'}}>
+            <div className={styles.areYouSureDogTurdBodyTitle}>Are you sure you want to buy Dog Turd? </div>
+            <div onClick={dogTurdLotteryGo}className={styles.yesDoDogTurd}>Yes</div>
+            <div onClick={toggleIsDogTurdSure}className={styles.noDoDogTurd}>No</div>
+          </div>
+
+          </div>
         </div>
       </div>
     </div>

@@ -222,10 +222,16 @@
   left: 5vw;
 }
 
+.lotteryTickets {
+  display: flex;
+}
+
+/* pooper man */
+
 .pooperManLottery {
-  position: fixed;
-  left: 100px;
-  width: 300px;
+  /* position: fixed;
+  left: 100px;*/
+  width: 300px; 
   opacity: 1;
 }
 
@@ -244,40 +250,102 @@
 .yesDoPooperMan {
   position: fixed;
   font-size: 25px;
-  left: 370px;
+  left: 390px;
   top: 310px;
   width: 8vw;
   background-color: rgb(163, 235, 7);
-  padding: 120px;
+  padding: 7vw;
   border-radius: 20px;
   box-shadow: 4px 4px 6px rgba(0, 0, 0, 0.7);
 }
 
 .yesDoPooperMan:hover {
   box-shadow: 4px 4px 6px rgba(0, 0, 0, 0);
-  left: 371px;
+  left: 391px;
   top: 311px;
 }
 
 .noDoPooperMan {
   position: fixed;
   font-size: 25px;
-  right: 370px;
+  right: 390px;
   top: 310px;
   width: 8vw;
   background-color: rgb(163, 235, 7);
-  padding: 120px;
+  padding: 7vw;
   border-radius: 20px;
   box-shadow: 4px 4px 6px rgba(0, 0, 0, 0.7);
 }
 
 .noDoPooperMan:hover {
   box-shadow: 4px 4px 6px rgba(0, 0, 0, 0);
-  right: 369px;
+  right: 389px;
   top: 311px;
 }
 
 .areYouSurePooperManBodyTitle {
+  margin-top: 10px;
+  font-size: 30px;
+}
+
+/* dogTurd */
+
+.dogTurdLottery {
+  /* position: fixed;
+  left: 100px; */
+  width: 300px;
+  opacity: 1;
+}
+
+.areYouSureDogTurdBody {
+  position: fixed;
+  width: 50vw;
+  height: 40vh;
+  left: 25vw;
+  top: 30vh;
+  background-color: rgb(152, 213, 20);
+  border-radius: 20px;
+  opacity: 1;
+  box-shadow: 4px 4px 6px rgba(0, 0, 0, 0.7);
+}
+
+.yesDoDogTurd {
+  position: fixed;
+  font-size: 25px;
+  left: 390px;
+  top: 310px;
+  width: 8vw;
+  background-color: rgb(163, 235, 7);
+  padding: 7vw;
+  border-radius: 20px;
+  box-shadow: 4px 4px 6px rgba(0, 0, 0, 0.7);
+}
+
+.yesDoDogTurd:hover {
+  box-shadow: 4px 4px 6px rgba(0, 0, 0, 0);
+  left: 391px;
+  top: 311px;
+}
+
+.noDoDogTurd {
+  position: fixed;
+  font-size: 25px;
+  right: 390px;
+  top: 310px;
+  width: 8vw;
+  background-color: rgb(163, 235, 7);
+  padding: 7vw;
+  border-radius: 20px;
+  box-shadow: 4px 4px 6px rgba(0, 0, 0, 0.7);
+}
+
+.noDoDogTurd:hover {
+  box-shadow: 4px 4px 6px rgba(0, 0, 0, 0);
+  right: 389px;
+  top: 311px;
+}
+
+.areYouSureDogTurdBodyTitle {
   margin-top: 10px;
   font-size: 30px;
 }
