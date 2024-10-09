@@ -6,7 +6,7 @@ import styles from './index.module.css';
 export default function SecretPage() {
   // Check for first visit
   useEffect(() => {
-    // if (typeof window == 'undefined') {  // Found from outside scource... hehehe. to find how to detect first visit on page
+    if (typeof window == 'undefined') {  // Found from outside scource... hehehe. to find how to detect first visit on page
       const firstVisitCheck = localStorage.getItem('firstVisit');
       if (firstVisitCheck) {
         alert("Welcome to poop puncher! Dis is made by Lucas Cheng. Just figure stuff out, soooo... okie byyeee");
@@ -29,7 +29,7 @@ export default function SecretPage() {
         localStorage.setItem('costToBuyPoopsPerSecond', JSON.stringify(100));
         localStorage.setItem('costToAddCostBuyPoopsPerSecond', JSON.stringify(20));
       }
-    // }
+    }
   }, []);
 
   {/* VARIABLES */}
