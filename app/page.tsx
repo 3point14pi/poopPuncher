@@ -378,7 +378,7 @@ export default function SecretPage() {
           <img onClick={toggleIsOmnipotentPoopSure} className={styles.omnipotentPoopLottery} src="omnipotentPoopLottery.png" alt="OmnipotentPoopLottery" />
 
           <div className={styles.areYouSureOmnipotentPoopBody} style={{ opacity: isOmnipotentPoopAreYouSure ? 1 : 0, pointerEvents: isOmnipotentPoopAreYouSure ? 'all' : 'none'}}>
-            <div className={styles.areYouSureOmnipotentPoopBodyTitle}>Are you sure you want to buy Dog Turd? </div>
+            <div className={styles.areYouSureOmnipotentPoopBodyTitle}>Are you sure you want to buy Omnipotent Poop?</div>
             <div onClick={ominpotentPoopLotteryGo}className={styles.yesDoOmnipotentPoop}>Yes</div>
             <div onClick={toggleIsOmnipotentPoopSure}className={styles.noDoOmnipotentPoop}>No</div>
           </div>
