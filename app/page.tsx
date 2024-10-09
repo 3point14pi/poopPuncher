@@ -161,8 +161,7 @@ export default function SecretPage() {
 
   {/* WHAT HAPPENS WHEN CLICKED POOP */}
   function clickPoop() {
-    // setCount(count + PoopPerClick);
-    setCount(count + 200);
+    setCount(count + PoopPerClick);
     setPoopsClickedEver(poopsClickedEver + PoopPerClick);
     setPoopBarThing(poopBarThing + PoopPerClick);
     save();
