@@ -8,8 +8,8 @@ export default function SecretPage() {
   useEffect(() => {
     // if (typeof window == 'undefined') {  // Found from outside scource... hehehe. to find how to detect first visit on page
       const firstVisitCheck = localStorage.getItem('firstVisit');
-      if (!firstVisitCheck) {
-        alert("Welcome to poop puncher! Just punch the poop and figure stuff out on your own. Blehhhhh. heehehehe. BYEEE!!!");
+      if (firstVisitCheck) {
+        alert("Welcome to poop puncher! Dis is made by Lucas Cheng. Just figure stuff out, soooo... okie byyeee");
         localStorage.setItem('firstVisit', 'no');
 
         localStorage.setItem('count', JSON.stringify(0));
@@ -87,6 +87,7 @@ export default function SecretPage() {
   const [costToAddCostBuyPoopsPerSecond, setCostToAddCostBuyPoopsPerSecond] = useState(savedCostToAddCostBuyPoopsPerSecond);
 
   // Stuff
+  const [isLotteryAvailable, setIsLotteryAvailable] = useState(false)
   const [isLottery, setIsLottery] = useState(false);
 
   const [isPooperManAreYouSure, setIsPooperManAreYouSure] = useState(false);
@@ -113,6 +114,21 @@ export default function SecretPage() {
       localStorage.setItem('didExceedPoop', JSON.stringify(didExceedPoop));
       localStorage.setItem('costToBuyPoopsPerSecond', JSON.stringify(costToBuyPoopsPerSecond));
       localStorage.setItem('costToAddCostBuyPoopsPerSecond', JSON.stringify(costToAddCostBuyPoopsPerSecond));
+    }
+  }
+
+  useEffect(() => { 
+    if (level >= 3) {
+      alert("Unlocked Lottery!");
+      setIsLotteryAvailable(true);
+    }
+  }, [level, isLotteryAvailable]);
+
+  function toggleIsLottery() {
+    if (isLotteryAvailable) {
+      setIsLottery((prevState) => !prevState);
+    } else {
+      alert("Get to level 3 first!")
     }
   }
 
@@ -210,10 +226,6 @@ export default function SecretPage() {
     } else {
       alert("You don't have enough poops you poop head!");
     }
-  }
-
-  function toggleIsLottery() {
-    setIsLottery((prevState) => !prevState);
   }
 
   const addMorePoopsPerSecond = () => {
@@ -332,7 +344,7 @@ export default function SecretPage() {
         {/* Lottery */}
 
         <div className={styles.lotteryPicGroup} onClick={toggleIsLottery}>
-          <img className={styles.lotteryPic} src="lotteryTicket.png" alt="lotteryTicketPic" />
+          <img className={styles.lotteryPic} src={isLotteryAvailable ? "lotteryTicket.png" : 'lotteryTicketHide.png' } alt="lotteryTicketPic" />
           <span className={styles.lotteryPicLabel}><strong>Lottery</strong></span>
         </div>
 
