@@ -179,7 +179,7 @@ export default function SecretPage() {
 
   function morePoopPerClick() {
     if (count >= costToBuyPoopClick) {
-      setPoopPerClick(PoopPerClick + 10000);
+      setPoopPerClick(PoopPerClick + 1);
       setCostToBuyPoopClick(costToBuyPoopClick + costToAddCostToBuyPoopClick);
       setCostToAddCostToBuyPoopClick(costToAddCostToBuyPoopClick + 5);
       setCount(count - costToBuyPoopClick);
