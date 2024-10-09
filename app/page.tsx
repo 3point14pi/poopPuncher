@@ -90,7 +90,6 @@ export default function SecretPage() {
   const [isLottery, setIsLottery] = useState(false);
   const [isPooperManAreYouSure, setIsPooperManAreYouSure] = useState(false);
 
-  const [isDogTurd, setIsDogTurd] = useState(false);
   const [isDogTurdAreYouSure, setIsDogTurdAreYouSure] = useState(false);
 
   function save() {
