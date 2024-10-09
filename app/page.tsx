@@ -142,7 +142,7 @@ export default function SecretPage() {
 
   function dogTurdLotteryGo() {
     toggleIsDogTurdSure()
-    if (count >= 100) {
+    if (count >= 500) {
       setCount(count - 500);
       setPoopBarThing(poopBarThing - 500)
       const winOrLose = Math.floor(Math.random() * 30);
