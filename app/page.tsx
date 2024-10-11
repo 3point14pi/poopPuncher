@@ -22,7 +22,7 @@ export default function SecretPage() {
         localStorage.setItem('addToAmountOfCookiesForLevelUp', JSON.stringify(100));
         localStorage.setItem('poopBarThing', JSON.stringify(0));
         localStorage.setItem('poopsClickedEver', JSON.stringify(0));
-        localStorage.setItem('poopsPerClick', JSON.stringify(0));
+        localStorage.setItem('poopsPerClick', JSON.stringify(1));
         localStorage.setItem('costToBuyPoopClick', JSON.stringify(100));
         localStorage.setItem('costToAddCostToBuyPoopClick', JSON.stringify(10));
         localStorage.setItem('amountOfPoopsPerSecond', JSON.stringify(0));
