@@ -135,8 +135,8 @@ export default function SecretPage() {
     return [500];
   });
 
-  const [currentPrice, setCurrentPrice] = useState(stockPrices[stockPrices.length - 1]);
-  const [time, setTime] = useState(0);
+  // const [currentPrice, setCurrentPrice] = useState(stockPrices[stockPrices.length - 1]);
+  // const [time, setTime] = useState(0);
 
   // Stock market modal toggle state
   const [isStockMarketOpen, setIsStockMarketOpen] = useState(false);
@@ -166,8 +166,8 @@ export default function SecretPage() {
       localStorage.setItem('stockPrices', JSON.stringify(updatedPrices));  // Save to localStorage
       return updatedPrices;
     });
-    setCurrentPrice(newPrice);
-    setTime((prevTime) => prevTime + 1);
+    // setCurrentPrice(newPrice);
+    // setTime((prevTime) => prevTime + 1);
   };
   
   useEffect(() => {
