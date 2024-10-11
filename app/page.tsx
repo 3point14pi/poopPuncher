@@ -562,7 +562,7 @@ export default function SecretPage() {
             pointerEvents: isStockMarketOpen ? 'all' : 'none',
           }}
         >
-          <div className={styles.lotteryTitle}>Stock Market (Doesn't do anything yet)</div>
+          <div className={styles.lotteryTitle}>Stock Market (Doesnt do anything yet)</div>
           <button className={styles.lotteryXExit} onClick={toggleStockMarket}>
             &#10008;
           </button>
