@@ -17,7 +17,7 @@ export default function SecretPage() {
         localStorage.setItem('firstVisit', 'no');
         // Initialize game values in localStorage
         localStorage.setItem('count', JSON.stringify(0));
-        localStorage.setItem('level', JSON.stringify(1));
+        localStorage.setItem('level', JSON.stringify(10));
         localStorage.setItem('amountOfCookiesForLevelUp', JSON.stringify(100));
         localStorage.setItem('addToAmountOfCookiesForLevelUp', JSON.stringify(100));
         localStorage.setItem('poopBarThing', JSON.stringify(0));
@@ -160,7 +160,11 @@ export default function SecretPage() {
   // Function to simulate stock price changes
   const updateStockPrices = () => {
     const lastPrice = stockPrices[stockPrices.length - 1];
-    const newPrice = lastPrice + (Math.random() * 10 - 5);  // Random fluctuation between -5 and +5
+    const subNewPrice = lastPrice + (Math.random() * 10 - 5);
+    if (subNewPrice <= 0){
+      const subNewPrice = lastPrice + (10)
+    }
+    const newPrice = subNewPrice
     setStockPrices((prevPrices: number[]) => {
       const updatedPrices = [...prevPrices, newPrice].slice(-MAX_SECONDS);  // Keep only the last MAX_SECONDS entries
       localStorage.setItem('stockPrices', JSON.stringify(updatedPrices));  // Save to localStorage
@@ -184,6 +188,7 @@ export default function SecretPage() {
         fill: true,
         borderColor: 'rgb(75, 192, 192)',
         tension: 0.1,
+        maintainAspectRatio: false,
       },
     ],
   };
@@ -462,6 +467,7 @@ export default function SecretPage() {
           style={{
             opacity: isLottery ? 1 : 0,
             pointerEvents: isLottery ? 'all' : 'none',
+            zIndex: 1
           }}
         >
           <div className={styles.lotteryTitle}>Lottery</div>
@@ -562,7 +568,7 @@ export default function SecretPage() {
             pointerEvents: isStockMarketOpen ? 'all' : 'none',
           }}
         >
-          <div className={styles.lotteryTitle}>Stock Market (Doesnt do anything yet)</div>
+          <div className={styles.lotteryTitle}>Stock Market</div>
           <button className={styles.lotteryXExit} onClick={toggleStockMarket}>
             &#10008;
           </button>
