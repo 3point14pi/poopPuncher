@@ -12,7 +12,7 @@ export default function SecretPage() {
   useEffect(() => {
     if (typeof window !== 'undefined') {  // Ensure this runs only on the client
       const firstVisitCheck = localStorage.getItem('firstVisit');
-      if (firstVisitCheck) {
+      if (!firstVisitCheck) {
         alert("Welcome to poop puncher! Dis is made by Lucas Cheng...");
         localStorage.setItem('firstVisit', 'no');
         // Initialize game values in localStorage
