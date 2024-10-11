@@ -1,24 +1,28 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import { Line } from 'react-chartjs-2';
 import styles from './index.module.css';
+import 'chart.js/auto';  // Automatically import everything needed for chart.js
 
 export default function SecretPage() {
-  // Check for first visit
+  const MAX_SECONDS = 30;  // Limit the number of seconds shown in the graph
+
+  // On first visit, set up localStorage values
   useEffect(() => {
-    if (typeof window == 'undefined') {  // Found from outside scource... hehehe. to find how to detect first visit on page
+    if (typeof window !== 'undefined') {  // Ensure this runs only on the client
       const firstVisitCheck = localStorage.getItem('firstVisit');
       if (firstVisitCheck) {
-        alert("Welcome to poop puncher! Dis is made by Lucas Cheng. Just figure stuff out, soooo... okie byyeee");
+        alert("Welcome to poop puncher! Dis is made by Lucas Cheng...");
         localStorage.setItem('firstVisit', 'no');
-
+        // Initialize game values in localStorage
         localStorage.setItem('count', JSON.stringify(0));
         localStorage.setItem('level', JSON.stringify(1));
         localStorage.setItem('amountOfCookiesForLevelUp', JSON.stringify(100));
         localStorage.setItem('addToAmountOfCookiesForLevelUp', JSON.stringify(100));
         localStorage.setItem('poopBarThing', JSON.stringify(0));
         localStorage.setItem('poopsClickedEver', JSON.stringify(0));
-        localStorage.setItem('poopsPerClick', JSON.stringify(1));
+        localStorage.setItem('poopsPerClick', JSON.stringify(0));
         localStorage.setItem('costToBuyPoopClick', JSON.stringify(100));
         localStorage.setItem('costToAddCostToBuyPoopClick', JSON.stringify(10));
         localStorage.setItem('amountOfPoopsPerSecond', JSON.stringify(0));
@@ -28,18 +32,20 @@ export default function SecretPage() {
         localStorage.setItem('didExceedPoop', JSON.stringify(false));
         localStorage.setItem('costToBuyPoopsPerSecond', JSON.stringify(100));
         localStorage.setItem('costToAddCostBuyPoopsPerSecond', JSON.stringify(20));
+        localStorage.setItem('stockPrices', JSON.stringify([100])); // Initialize stock prices
       }
     }
   }, []);
 
-  {/* VARIABLES */}
+
+  // Initialize state from localStorage
   const savedCount = typeof window !== 'undefined' ? parseInt(localStorage.getItem("count") || "0") : 0;
   const [count, setCount] = useState(savedCount);
 
   const savedLevel = typeof window !== 'undefined' ? parseInt(localStorage.getItem("level") || "1") : 1;
   const [level, setLevel] = useState(savedLevel);
 
-  // Level
+  // Level-related states
   const savedAmountOfCookiesForLevelUp = typeof window !== 'undefined' ? parseInt(localStorage.getItem("amountOfCookiesForLevelUp") || "100") : 100;
   const [amountOfCookiesForLevelUp, setAmountOfCookiesForLevelUp] = useState(savedAmountOfCookiesForLevelUp);
 
@@ -49,11 +55,11 @@ export default function SecretPage() {
   const savedPoopBarThing = typeof window !== 'undefined' ? parseInt(localStorage.getItem("poopBarThing") || "0") : 0;
   const [poopBarThing, setPoopBarThing] = useState(savedPoopBarThing);
 
-  // Poops clicked ever
+  // Track poops clicked ever
   const savedPoopsClickedEver = typeof window !== 'undefined' ? parseInt(localStorage.getItem("poopsClickedEver") || "0") : 0;
   const [poopsClickedEver, setPoopsClickedEver] = useState(savedPoopsClickedEver);
 
-  // Poops per click
+  // Poops per click states
   const savedPoopPerClick = typeof window !== 'undefined' ? parseInt(localStorage.getItem("poopsPerClick") || "1") : 1;
   const [PoopPerClick, setPoopPerClick] = useState(savedPoopPerClick);
 
@@ -63,7 +69,7 @@ export default function SecretPage() {
   const savedCostToAddCostToBuyPoopClick = typeof window !== 'undefined' ? parseInt(localStorage.getItem("costToAddCostToBuyPoopClick") || "10") : 10;
   const [costToAddCostToBuyPoopClick, setCostToAddCostToBuyPoopClick] = useState(savedCostToAddCostToBuyPoopClick);
 
-  // Poops per second
+  // Poops per second-related states
   const savedDivideAmountOfPoopsPerSecond = typeof window !== 'undefined' ? parseInt(localStorage.getItem("divideAmountOfPoopsPerSecond") || "0") : 0;
   const [divideAmountOfPoopsPerSecond, setDivideAmountOfPoopsPerSecond] = useState(savedDivideAmountOfPoopsPerSecond);
 
@@ -79,25 +85,28 @@ export default function SecretPage() {
   const savedDidExceedPoop = typeof window !== 'undefined' ? JSON.parse(localStorage.getItem("didExceedPoop") || "false") : false;
   const [didExceedPoop, setDidExceedPoop] = useState(savedDidExceedPoop);
 
-  // Shop
+  // Shop-related states
   const savedCostToBuyPoopsPerSecond = typeof window !== 'undefined' ? parseInt(localStorage.getItem("costToBuyPoopsPerSecond") || "100") : 100;
   const [costToBuyPoopsPerSecond, setCostToBuyPoopsPerSecond] = useState(savedCostToBuyPoopsPerSecond);
 
   const savedCostToAddCostBuyPoopsPerSecond = typeof window !== 'undefined' ? parseInt(localStorage.getItem("costToAddCostBuyPoopsPerSecond") || "20") : 20;
   const [costToAddCostBuyPoopsPerSecond, setCostToAddCostBuyPoopsPerSecond] = useState(savedCostToAddCostBuyPoopsPerSecond);
 
-  // Stuff
-  const [isLotteryAvailable, setIsLotteryAvailable] = useState(false)
+  // UI toggle states for special interactions
+  const [isLotteryAvailable, setIsLotteryAvailable] = useState(false);
   const [isLottery, setIsLottery] = useState(false);
 
   const [isPooperManAreYouSure, setIsPooperManAreYouSure] = useState(false);
-
   const [isDogTurdAreYouSure, setIsDogTurdAreYouSure] = useState(false);
-
   const [isOmnipotentPoopAreYouSure, setIsOmnipotentPoopAreYouSure] = useState(false);
 
+  // StockMarket
+
+  
+
+  // Function to save current game state to localStorage
   function save() {
-    if (typeof window !== 'undefined') {  // Ensure this runs only on the client
+    if (typeof window !== 'undefined') {
       localStorage.setItem('count', JSON.stringify(count));
       localStorage.setItem('level', JSON.stringify(level));
       localStorage.setItem('amountOfCookiesForLevelUp', JSON.stringify(amountOfCookiesForLevelUp));
@@ -117,18 +126,101 @@ export default function SecretPage() {
     }
   }
 
-  useEffect(() => { 
+  // Stock Market states
+  const [stockPrices, setStockPrices] = useState(() => {
+    // Retrieve stock prices from localStorage or default to [100]
+    if (typeof window !== 'undefined') {
+      return JSON.parse(localStorage.getItem('stockPrices') || '[100]');
+    }
+    return [500];
+  });
+
+  const [currentPrice, setCurrentPrice] = useState(stockPrices[stockPrices.length - 1]);
+  const [time, setTime] = useState(0);
+
+  // Stock market modal toggle state
+  const [isStockMarketOpen, setIsStockMarketOpen] = useState(false);
+  const [isStockMarketAvailable, setIsStockMarketAvailable] = useState(false)
+
+  useEffect(() => {
+    if (level >= 10) {
+      setIsStockMarketAvailable(true);
+    }
+  }, [level, isStockMarketAvailable]);
+
+  // Function to toggle the stock market modal
+  function toggleStockMarket() {
+    if (isStockMarketAvailable == true) {
+      setIsStockMarketOpen((prevState) => !prevState);
+    } else {
+      alert('Get to level 10 first!')
+    }
+  }
+
+  // Function to simulate stock price changes
+  const updateStockPrices = () => {
+    const lastPrice = stockPrices[stockPrices.length - 1];
+    const newPrice = lastPrice + (Math.random() * 10 - 5);  // Random fluctuation between -5 and +5
+    setStockPrices((prevPrices: number[]) => {
+      const updatedPrices = [...prevPrices, newPrice].slice(-MAX_SECONDS);  // Keep only the last MAX_SECONDS entries
+      localStorage.setItem('stockPrices', JSON.stringify(updatedPrices));  // Save to localStorage
+      return updatedPrices;
+    });
+    setCurrentPrice(newPrice);
+    setTime((prevTime) => prevTime + 1);
+  };
+  
+  useEffect(() => {
+    const interval = setInterval(updateStockPrices, 5000);  // Update stock price every second
+    return () => clearInterval(interval);
+  }, [stockPrices]);
+  
+  const stockMarketData = {
+    labels: stockPrices.map((_: number, index: number) => index),  // Specify type for both _ and index as number
+    datasets: [
+      {
+        label: 'Stock Price',
+        data: stockPrices,
+        fill: true,
+        borderColor: 'rgb(75, 192, 192)',
+        tension: 0.1,
+      },
+    ],
+  };
+  
+  
+  
+  const stockMarketOptions = {
+    scales: {
+      x: {
+        title: {
+          display: true,
+          text: 'Time (seconds)',
+        },
+      },
+      y: {
+        title: {
+          display: true,
+          text: 'Price ($)',
+        },
+      },
+    },
+  };
+
+
+  // Check level for unlocking Lottery
+  useEffect(() => {
     if (level >= 3) {
-      alert("Unlocked Lottery!");
       setIsLotteryAvailable(true);
     }
   }, [level, isLotteryAvailable]);
 
+  // Lottery toggle functions
   function toggleIsLottery() {
     if (isLotteryAvailable) {
       setIsLottery((prevState) => !prevState);
     } else {
-      alert("Get to level 3 first!")
+      alert("Get to level 3 first!");
     }
   }
 
@@ -143,63 +235,63 @@ export default function SecretPage() {
   function toggleIsOmnipotentPoopSure() {
     setIsOmnipotentPoopAreYouSure((prevState) => !prevState);
   }
-  
 
+  // Lottery interaction functions
   function pooperManLotteryGo() {
-    toggleIsPooperManSure()
+    toggleIsPooperManSure();
     if (count >= 100) {
       setCount(count - 100);
       const winOrLose = Math.floor(Math.random() * 5);
-      if (winOrLose == 0) {
-        setCount(count + 500)
-        setPoopsClickedEver(poopsClickedEver + 500)
-        setPoopBarThing(poopBarThing + 500)
-        alert('You won!!! yayyy :)')
+      if (winOrLose === 0) {
+        setCount(count + 500);
+        setPoopsClickedEver(poopsClickedEver + 500);
+        setPoopBarThing(poopBarThing + 500);
+        alert('You won!!! yayyy :)');
       } else {
-      alert('You lost... :(') 
-      } 
+        alert('You lost... :(');
+      }
     } else {
-      alert("Stop GAMBLING YOU SICK ADDICTED DUMB AAA!!! GET SOME MORE POOPS, OR GET OUT!!!")
+      alert("Stop GAMBLING... GET SOME MORE POOPS, OR GET OUT!!!");
     }
   }
 
   function dogTurdLotteryGo() {
-    toggleIsDogTurdSure()
+    toggleIsDogTurdSure();
     if (count >= 500) {
       setCount(count - 500);
       const winOrLose = Math.floor(Math.random() * 3);
-      if (winOrLose == 0) {
-        setCount(count + 1000)
-        setPoopsClickedEver(poopsClickedEver + 1000)
-        setPoopBarThing(poopBarThing + 1000)
-        alert('You won!!! yayyy :)')
+      if (winOrLose === 0) {
+        setCount(count + 1000);
+        setPoopsClickedEver(poopsClickedEver + 1000);
+        setPoopBarThing(poopBarThing + 1000);
+        alert('You won!!! yayyy :)');
       } else {
-      alert('You lost... :(') 
-      } 
+        alert('You lost... :(');
+      }
     } else {
-      alert("Stop GAMBLING YOU SICK ADDICTED DUMB AAA!!! GET SOME MORE POOPS, OR GET OUT!!!")
+      alert("Stop GAMBLING... GET SOME MORE POOPS, OR GET OUT!!!");
     }
   }
 
   function ominpotentPoopLotteryGo() {
-    toggleIsOmnipotentPoopSure()
+    toggleIsOmnipotentPoopSure();
     if (count >= 500) {
       setCount(count - 500);
       const winOrLose = Math.floor(Math.random() * 10);
-      if (winOrLose == 0) {
-        setCount(count + 2000)
-        setPoopsClickedEver(poopsClickedEver + 2000)
-        setPoopBarThing(poopBarThing + 2000)
-        alert('You won!!! yayyy :)')
+      if (winOrLose === 0) {
+        setCount(count + 2000);
+        setPoopsClickedEver(poopsClickedEver + 2000);
+        setPoopBarThing(poopBarThing + 2000);
+        alert('You won!!! yayyy :)');
       } else {
-      alert('You lost... :(') 
-      } 
+        alert('You lost... :(');
+      }
     } else {
-      alert("Stop GAMBLING YOU SICK ADDICTED DUMB AAA!!! GET SOME MORE POOPS, OR GET OUT!!!")
+      alert("Stop GAMBLING... GET SOME MORE POOPS, OR GET OUT!!!");
     }
   }
 
-  {/* WHAT HAPPENS WHEN CLICKED POOP */}
+  // Function for handling poop click
   function clickPoop() {
     setCount(count + PoopPerClick);
     setPoopsClickedEver(poopsClickedEver + PoopPerClick);
@@ -217,6 +309,7 @@ export default function SecretPage() {
     setPoopPressed(false);
   }
 
+  // Function to increase poops per click
   function morePoopPerClick() {
     if (count >= costToBuyPoopClick) {
       setPoopPerClick(PoopPerClick + 1);
@@ -228,6 +321,7 @@ export default function SecretPage() {
     }
   }
 
+  // Function to add more poops per second
   const addMorePoopsPerSecond = () => {
     if (count >= costToBuyPoopsPerSecond) {
       if (!didExceedPoop) {
@@ -246,6 +340,7 @@ export default function SecretPage() {
     }
   };
 
+  // Track progress for leveling up
   useEffect(() => {
     if (poopBarThing >= amountOfCookiesForLevelUp) {
       setLevel((prevLevel) => prevLevel + 1);
@@ -254,10 +349,10 @@ export default function SecretPage() {
       setAddToAmountOfCookiesForLevelUp((prevAddAmount) => prevAddAmount + 50);
     }
   }, [poopBarThing, amountOfCookiesForLevelUp, addToAmountOfCookiesForLevelUp]);
-  
 
+  // Handle poops per second logic
   useEffect(() => {
-    if (typeof window !== 'undefined') {  // Ensure this runs only on the client
+    if (typeof window !== 'undefined') {
       const interval = setInterval(() => {
         if (divideAmountOfPoopsPerSecond > 0) {
           if (divideAmountOfPoopsPerSecond > 100) {
@@ -278,47 +373,56 @@ export default function SecretPage() {
     }
   }, [realDivideAmountOfPoopsPerSecond, amountOfPoopsPerSecond, divideAmountOfPoopsPerSecond]);
 
+  // Update realDivideAmountOfPoopsPerSecond whenever divideAmountOfPoopsPerSecond changes
   useEffect(() => {
     setRealDivideAmountOfPoopsPerSecond(1000 / divideAmountOfPoopsPerSecond);
   }, [divideAmountOfPoopsPerSecond]);
 
   return (
     <div className={styles.body}>
-      {/* FONTS */}
-      {/* <link href="https://fonts.cdnfonts.com/css/jumbo-sale-trial" rel="stylesheet"></link>
-      <style>@import url('https://fonts.cdnfonts.com/css/jumbo-sale-trial');</style> */}
-      {/* BACKROUND */}
+      {/* BACKGROUND IMAGE */}
       <img className={styles.backround} src="toiletPaperBackround.png" alt="" />
+
       {/* LEFT MENU */}
       <span className={styles.leftMenu}>
         <p className={styles.poopMarket}>Poop Market</p>
-
         <br />
         <button className={styles.morePoopClicker} onClick={morePoopPerClick}>
           Click to add more poop per click ({costToBuyPoopClick} Poops)
-        </button> <br /> <br />
-
+        </button>
+        <br />
+        <br />
         <button onClick={addMorePoopsPerSecond} className={styles.addMorePoopsPerSecond}>
           Click to add more poop per second ({costToBuyPoopsPerSecond} Poops)
         </button>
       </span>
 
-      {/* RIGHT BAR */}
-
+      {/* RIGHT BAR (STATS) */}
       <div className={styles.rightBar}>
-        <div className={styles.stats}>Stats</div> <br />
-        <div className={styles.level}>Level: {level}
-          <div className={styles.levelBar} style={{ width: `${poopBarThing / amountOfCookiesForLevelUp * 100}%`, height: '20px', backgroundColor: 'green' }}></div>
-        </div> <br />
-        <div className={styles.statsPoop}>Poops clicked: {count}</div> <br />
-        <div className={styles.statsPoop}>Poops clicked ever: {poopsClickedEver}</div> <br />
-        <div className={styles.statsShop}>Poops per click: {PoopPerClick}</div> <br />
+        <div className={styles.stats}>Stats</div>
+        <br />
+        <div className={styles.level}>
+          Level: {level}
+          <div
+            className={styles.levelBar}
+            style={{
+              width: `${(poopBarThing / amountOfCookiesForLevelUp) * 100}%`,
+              height: '20px',
+              backgroundColor: 'green',
+            }}
+          ></div>
+        </div>
+        <br />
+        <div className={styles.statsPoop}>Poops clicked: {count}</div>
+        <br />
+        <div className={styles.statsPoop}>Poops clicked ever: {poopsClickedEver}</div>
+        <br />
+        <div className={styles.statsShop}>Poops per click: {PoopPerClick}</div>
+        <br />
         <div className={styles.statsShop}>Poops per second: {displayPoopPerSecond}</div>
       </div>
 
-      
-      {/* IMAGES */}
-
+      {/* IMAGES AND INTERACTIONS */}
       <img
         className={styles.stinkLines}
         src="stinkLines.png"
@@ -336,54 +440,139 @@ export default function SecretPage() {
         draggable="false"
       />
 
-      {/* STUFF */}
-
+      {/* STUFF SECTION */}
       <div className={styles.stuff}>
-        <div className={styles.stuffTitle}>Stuff</div>  <br />
+        <div className={styles.stuffTitle}>Stuff</div>
+        <br />
 
-        {/* Lottery */}
-
+        {/* Lottery Section */}
         <div className={styles.lotteryPicGroup} onClick={toggleIsLottery}>
-          <img className={styles.lotteryPic} src={isLotteryAvailable ? "lotteryTicket.png" : 'lotteryTicketHide.png' } alt="lotteryTicketPic" />
-          <span className={styles.lotteryPicLabel}><strong>Lottery</strong></span>
+          <img
+            className={styles.lotteryPic}
+            src={isLotteryAvailable ? "lotteryTicket.png" : "lotteryTicketHide.png"}
+            alt="lotteryTicketPic"
+          />
+          <span className={styles.lotteryPicLabel}>
+            <strong>Lottery</strong>
+          </span>
         </div>
 
-        <div className={styles.lotteryScreen} style={{ opacity: isLottery ? 1 : 0, pointerEvents: isLottery ? 'all' : 'none'}}>
+        <div
+          className={styles.lotteryScreen}
+          style={{
+            opacity: isLottery ? 1 : 0,
+            pointerEvents: isLottery ? 'all' : 'none',
+          }}
+        >
           <div className={styles.lotteryTitle}>Lottery</div>
-          <button className={styles.lotteryXExit} onClick={toggleIsLottery}>&#10008;</button>
+          <button className={styles.lotteryXExit} onClick={toggleIsLottery}>
+            &#10008;
+          </button>
 
+          <div className={styles.lotteryTickets}>
+            {/* PooperMan Lottery */}
+            <img
+              onClick={toggleIsPooperManSure}
+              className={styles.pooperManLottery}
+              src="pooperManLottery.png"
+              alt="PooperManLottery"
+            />
+            <div
+              className={styles.areYouSurePooperManBody}
+              style={{
+                opacity: isPooperManAreYouSure ? 1 : 0,
+                pointerEvents: isPooperManAreYouSure ? 'all' : 'none',
+              }}
+            >
+              <div className={styles.areYouSurePooperManBodyTitle}>
+                Are you sure you want to buy Pooper Man?
+              </div>
+              <div onClick={pooperManLotteryGo} className={styles.yesDoPooperMan}>
+                Yes
+              </div>
+              <div onClick={toggleIsPooperManSure} className={styles.noDoPooperMan}>
+                No
+              </div>
+            </div>
 
-        <div className={styles.lotteryTickets}>
-          {/* PooperMan */}
-          <img onClick={toggleIsPooperManSure} className={styles.pooperManLottery} src="pooperManLottery.png" alt="PooperManLottery" />
+            {/* Dog Turd Lottery */}
+            <img
+              onClick={toggleIsDogTurdSure}
+              className={styles.pooperManLottery}
+              src="dogTurdLottery.png"
+              alt="DogTurdLottery"
+            />
+            <div
+              className={styles.areYouSureDogTurdBody}
+              style={{
+                opacity: isDogTurdAreYouSure ? 1 : 0,
+                pointerEvents: isDogTurdAreYouSure ? 'all' : 'none',
+              }}
+            >
+              <div className={styles.areYouSureDogTurdBodyTitle}>
+                Are you sure you want to buy Dog Turd?
+              </div>
+              <div onClick={dogTurdLotteryGo} className={styles.yesDoDogTurd}>
+                Yes
+              </div>
+              <div onClick={toggleIsDogTurdSure} className={styles.noDoDogTurd}>
+                No
+              </div>
+            </div>
 
-          <div className={styles.areYouSurePooperManBody} style={{ opacity: isPooperManAreYouSure ? 1 : 0, pointerEvents: isPooperManAreYouSure ? 'all' : 'none'}}>
-            <div className={styles.areYouSurePooperManBodyTitle}>Are you sure you want to buy Pooper Man? </div>
-            <div onClick={pooperManLotteryGo}className={styles.yesDoPooperMan}>Yes</div>
-            <div onClick={toggleIsPooperManSure}className={styles.noDoPooperMan}>No</div>
+            {/* Omnipotent Poop Lottery */}
+            <img
+              onClick={toggleIsOmnipotentPoopSure}
+              className={styles.omnipotentPoopLottery}
+              src="omnipotentPoopLottery.png"
+              alt="OmnipotentPoopLottery"
+            />
+            <div
+              className={styles.areYouSureOmnipotentPoopBody}
+              style={{
+                opacity: isOmnipotentPoopAreYouSure ? 1 : 0,
+                pointerEvents: isOmnipotentPoopAreYouSure ? 'all' : 'none',
+              }}
+            >
+              <div className={styles.areYouSureOmnipotentPoopBodyTitle}>
+                Are you sure you want to buy Omnipotent Poop?
+              </div>
+              <div onClick={ominpotentPoopLotteryGo} className={styles.yesDoOmnipotentPoop}>
+                Yes
+              </div>
+              <div onClick={toggleIsOmnipotentPoopSure} className={styles.noDoOmnipotentPoop}>
+                No
+              </div>
+            </div>
+          </div>
+        </div>
+        <br />
+
+        {/* Stock Market Section */}
+        <div className={styles.lotteryPicGroup} onClick={toggleStockMarket}>
+          <img className={styles.stockMarketPic} src={isStockMarketAvailable ? "stockMarketPic.png":"stockMarketPicHide.png"} alt="stockMarketPic" />
+          <span className={styles.lotteryPicLabel}><strong>Stock Market</strong></span>
+        </div>
+
+        {/* Stock Market Modal */}
+        <div
+          className={styles.lotteryScreen}
+          style={{
+            opacity: isStockMarketOpen ? 1 : 0,
+            pointerEvents: isStockMarketOpen ? 'all' : 'none',
+          }}
+        >
+          <div className={styles.lotteryTitle}>Stock Market (Doesn't do anything yet)</div>
+          <button className={styles.lotteryXExit} onClick={toggleStockMarket}>
+            &#10008;
+          </button>
+          {/* Stock Market Graph */}
+          <div className={styles.stockMarketGraphContainer}>
+            <div className={styles.stockMarketGraph}>
+              <Line data={stockMarketData} options={stockMarketOptions} />
+            </div>
           </div>
 
-          {/* Dog Turd */}
-
-          <img onClick={toggleIsDogTurdSure} className={styles.pooperManLottery} src="dogTurdLottery.png" alt="DogTurdLottery" />
-
-          <div className={styles.areYouSureDogTurdBody} style={{ opacity: isDogTurdAreYouSure ? 1 : 0, pointerEvents: isDogTurdAreYouSure ? 'all' : 'none'}}>
-            <div className={styles.areYouSureDogTurdBodyTitle}>Are you sure you want to buy Dog Turd? </div>
-            <div onClick={dogTurdLotteryGo}className={styles.yesDoDogTurd}>Yes</div>
-            <div onClick={toggleIsDogTurdSure}className={styles.noDoDogTurd}>No</div>
-          </div>
-
-          {/* Omnipotent Poop */}
-
-          <img onClick={toggleIsOmnipotentPoopSure} className={styles.omnipotentPoopLottery} src="omnipotentPoopLottery.png" alt="OmnipotentPoopLottery" />
-
-          <div className={styles.areYouSureOmnipotentPoopBody} style={{ opacity: isOmnipotentPoopAreYouSure ? 1 : 0, pointerEvents: isOmnipotentPoopAreYouSure ? 'all' : 'none'}}>
-            <div className={styles.areYouSureOmnipotentPoopBodyTitle}>Are you sure you want to buy Omnipotent Poop?</div>
-            <div onClick={ominpotentPoopLotteryGo}className={styles.yesDoOmnipotentPoop}>Yes</div>
-            <div onClick={toggleIsOmnipotentPoopSure}className={styles.noDoOmnipotentPoop}>No</div>
-          </div>
-
-          </div>
         </div>
       </div>
     </div>

@@ -411,3 +411,20 @@
   margin-top: 10px;
   font-size: 30px;
 }
+
+.stockMarketPic {
+  margin-top: 20px;
+  width: 200px;  
+}
+
+.stockMarketGraphContainer {
+  display: flex;
+  justify-content: center;  /* Horizontally center */
+  align-items: center;      /* Vertically center */
+  height: 100vh;            /* Full viewport height */
+}
+
+.stockMarketGraph {
+    width: 85%;      /* Adjust the width to 60% of the container */
+    height: 90vh;    /* Adjust the height to 40% of the viewport height */  
+}
