@@ -164,9 +164,9 @@ export default function SecretPage() {
       setMoneyInStock(stockContained * subNewPrice)
 
       setBuyStockPrice(subNewPrice)
-      if (subNewPrice <= 0){
-        const subNewPrice = lastPrice + 10
-      }
+      // if (subNewPrice <= 0){
+      //   const subNewPrice = lastPrice + 10
+      // }
       const newPrice = subNewPrice
       setStockPrices((prevPrices: number[]) => {
         const updatedPrices = [...prevPrices, newPrice].slice(-MAX_SECONDS); 
