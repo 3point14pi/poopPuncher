@@ -12,7 +12,7 @@ export default function SecretPage() {
   useEffect(() => {
     if (typeof window !== 'undefined') {  // Ensure this runs only on the client
       const firstVisitCheck = localStorage.getItem('firstVisit');
-      if (firstVisitCheck) {
+      if (!firstVisitCheck) {
         alert("Welcome to poop puncher! Dis is made by Lucas Cheng...");
         localStorage.setItem('firstVisit', 'no');
         // Initialize game values in localStorage
@@ -32,6 +32,8 @@ export default function SecretPage() {
         localStorage.setItem('didExceedPoop', JSON.stringify(false));
         localStorage.setItem('costToBuyPoopsPerSecond', JSON.stringify(100));
         localStorage.setItem('costToAddCostBuyPoopsPerSecond', JSON.stringify(20));
+        localStorage.setItem('costToBuyTenPoopsPerSecond', JSON.stringify(100));
+        localStorage.setItem('costToAddCostBuyTenPoopsPerSecond', JSON.stringify(20));
         localStorage.setItem('stockPrices', JSON.stringify([100])); // Initialize stock prices
       }
     }
@@ -92,6 +94,12 @@ export default function SecretPage() {
   const savedCostToAddCostBuyPoopsPerSecond = typeof window !== 'undefined' ? parseInt(localStorage.getItem("costToAddCostBuyPoopsPerSecond") || "20") : 20;
   const [costToAddCostBuyPoopsPerSecond, setCostToAddCostBuyPoopsPerSecond] = useState(savedCostToAddCostBuyPoopsPerSecond);
 
+  const savedCostToBuyTenPoopsPerSecond = typeof window !== 'undefined' ? parseInt(localStorage.getItem("costToBuyTenPoopsPerSecond") || "900") : 900;
+  const [costToBuyTenPoopsPerSecond, setCostToBuyTenPoopsPerSecond] = useState(savedCostToBuyTenPoopsPerSecond);
+
+  const savedCostToAddCostBuyTenPoopsPerSecond = typeof window !== 'undefined' ? parseInt(localStorage.getItem("costToAddCostBuyTenPoopsPerSecond") || "20") : 20;
+  const [costToAddCostBuyTenPoopsPerSecond, setCostToAddCostBuyTenPoopsPerSecond] = useState(savedCostToAddCostBuyTenPoopsPerSecond);
+
   // UI toggle states for special interactions
   const [isLotteryAvailable, setIsLotteryAvailable] = useState(false);
   const [isLottery, setIsLottery] = useState(false);
@@ -102,6 +110,7 @@ export default function SecretPage() {
 
   // Function to save current game state to localStorage
   function save() {
+    console.log('saved')
     if (typeof window !== 'undefined') {
       localStorage.setItem('count', JSON.stringify(count));
       localStorage.setItem('level', JSON.stringify(level));
@@ -121,6 +130,7 @@ export default function SecretPage() {
       localStorage.setItem('costToAddCostBuyPoopsPerSecond', JSON.stringify(costToAddCostBuyPoopsPerSecond));
       localStorage.setItem('stockContained', JSON.stringify(stockContained));
       localStorage.setItem('buyStockPrice', JSON.stringify(buyStockPrice));
+      localStorage.setItem('priceOfStockLastBought', JSON.stringify(priceOfStockLastBought));
     }
   }
 
@@ -134,6 +144,11 @@ export default function SecretPage() {
 
     const savedBuyStockPrice = typeof window !== 'undefined' ? parseInt(localStorage.getItem("buyStockPrice") || "0") : 0;
     const [buyStockPrice, setBuyStockPrice] = useState(savedBuyStockPrice)
+
+    const savedPriceOfStockLastBought = typeof window !== 'undefined' ? parseInt(localStorage.getItem("priceOfStockLastBought") || "0") : 0;
+    const [priceOfStockLastBought, setPriceOfStockLastBought] = useState(savedPriceOfStockLastBought)
+
+    // const [stocksToBuy, setStocksToBuy] = useState(1)
     
 
     function toggleStockMarket() {
@@ -191,6 +206,7 @@ export default function SecretPage() {
     function buyStock() {
       if (count >= Math.round(buyStockPrice)) {
         setCount(count - Math.round(buyStockPrice))
+        setPriceOfStockLastBought(Math.round(buyStockPrice))
         setStockContained(stockContained + 1)
       } else {
         alert("You don't have enough poops poop head!")
@@ -214,7 +230,7 @@ export default function SecretPage() {
       labels: stockPrices.map((_: number, index: number) => index),  // Specify type for both _ and index as number
       datasets: [
         {
-          label: 'Stock Contained: ' + stockContained + '        Current Stock Price: ' + Math.round(buyStockPrice),
+          label: 'Stock Contained: ' + stockContained + '        Current Stock Price: ' + Math.round(buyStockPrice) + '        Price of stock last bought: ' + Math.round(priceOfStockLastBought),
           data: stockPrices,
           fill: true,
           borderColor: 'rgb(75, 192, 192)',
@@ -363,6 +379,25 @@ export default function SecretPage() {
       }
     };
 
+    function addTenMorePoopsPerSecond() {
+      if (count >= costToBuyTenPoopsPerSecond) {
+        if (!didExceedPoop) {
+          setDivideAmountOfPoopsPerSecond(divideAmountOfPoopsPerSecond + 10);
+          setDisplayPoopPerSecond(divideAmountOfPoopsPerSecond + 10);
+        } else {
+          setAmountOfPoopsPerSecond((prevCount) => prevCount + 10);
+          setDisplayPoopPerSecond(amountOfPoopsPerSecond + 10);
+        }
+        setRealDivideAmountOfPoopsPerSecond(1000 / divideAmountOfPoopsPerSecond);
+        setCount(count - costToBuyTenPoopsPerSecond);
+        setCostToBuyTenPoopsPerSecond(costToBuyTenPoopsPerSecond + costToAddCostBuyTenPoopsPerSecond);
+        setCostToAddCostBuyTenPoopsPerSecond(costToAddCostBuyTenPoopsPerSecond + 20); // Adjusted increment for bulk purchase
+      } else {
+        alert("You don't have enough poops you poop head!");
+      }
+    }
+    
+
     function clickPoop() {
       setCount(count + PoopPerClick);
       setPoopsClickedEver(poopsClickedEver + PoopPerClick);
@@ -436,7 +471,7 @@ export default function SecretPage() {
       {/* BACKGROUND IMAGE */}
       <img className={styles.backround} src="toiletPaperBackround.png" alt="" />
 
-      {/* LEFT MENU */}
+      {/* LEFT MENU (SHOP) */}
       <span className={styles.leftMenu}>
         <p className={styles.poopMarket}>Poop Market</p> <br />
 
@@ -448,9 +483,10 @@ export default function SecretPage() {
           Click to add more poop per second ({costToBuyPoopsPerSecond} Poops)
         </button> <br /> <br />
 
-        <button onClick={addMorePoopsPerSecond} className={styles.addTenPoopsPerSecond}>
-          Click to add 10 more poop per second ({costToBuyPoopsPerSecond} Poops)
+        <button onClick={addTenMorePoopsPerSecond} className={styles.addTenPoopsPerSecond}>
+          Click to add 10 more poop per second ({costToBuyTenPoopsPerSecond} Poops)
         </button>
+
       </span>
 
       {/* RIGHT BAR (STATS) */}
@@ -473,7 +509,7 @@ export default function SecretPage() {
         <div className={styles.statsPoop}>Poops clicked ever: {poopsClickedEver}</div> <br />
         <div className={styles.statsShop}>Poops per click: {PoopPerClick}</div> <br />
         <div className={styles.statsShop}>Poops per second: {displayPoopPerSecond}</div><br />
-        <div className={styles.statsStock}>Stocks contained: {stockContained}</div>
+
       </div>
 
       {/* IMAGES AND INTERACTIONS */}
@@ -619,7 +655,22 @@ export default function SecretPage() {
           }}
         >
           <div className={styles.stuffyTitle}>Stock Market</div>
-          <button onClick={buyStock} className={styles.buyStock}>Buy</button>
+          {/* <input
+            type="number"
+            min="0"
+            placeholder="Enter stocks to buy"
+            onChange={(e) => setStocksToBuy(Number(e.target.value))}
+            className={styles.inputField}
+          /> */}
+          <button onClick={buyStock} className={styles.buyStock}>Buy</button>  <br />
+
+          {/* <input
+            type="number"
+            min="0"
+            placeholder="Enter stocks to sell"
+            onChange={(e) => setStocksToBuy(Number(e.target.value))}
+            className={styles.inputField}
+          /> */}
           <button onClick={sellStock} className={styles.sellStock}>Sell</button>
           <button className={styles.stuffXExit} onClick={toggleStockMarket}>
             &#10008;

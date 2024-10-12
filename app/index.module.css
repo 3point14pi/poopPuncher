@@ -96,8 +96,26 @@
   padding: 15px;
   box-shadow: 4px 4px 6px rgba(0, 0, 0, 0.5);
 }
+
   /* Hover drop */
 .addMorePoopsPerSecond:hover {
+  box-shadow: 4px 4px 6px rgba(0, 0, 0, 0);
+  right: -3px;
+  top: 3px;
+}
+
+.addTenPoopsPerSecond {
+  position: relative;
+  background-color: rgb(196, 28, 171);
+  border-radius: 20px;
+  border: 0px;
+  font-size: 15px;
+  padding: 15px;
+  box-shadow: 4px 4px 6px rgba(0, 0, 0, 0.5);
+}
+
+  /* Hover drop */
+.addTenPoopsPerSecond:hover {
   box-shadow: 4px 4px 6px rgba(0, 0, 0, 0);
   right: -3px;
   top: 3px;
