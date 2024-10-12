@@ -12,7 +12,7 @@ export default function SecretPage() {
   useEffect(() => {
     if (typeof window !== 'undefined') {  // Ensure this runs only on the client
       const firstVisitCheck = localStorage.getItem('firstVisit');
-      if (!firstVisitCheck) {
+      if (firstVisitCheck) {
         alert("Welcome to poop puncher! Dis is made by Lucas Cheng...");
         localStorage.setItem('firstVisit', 'no');
         // Initialize game values in localStorage
@@ -166,20 +166,20 @@ export default function SecretPage() {
     const updateStockPrices = () => {
       const lastPrice = stockPrices[stockPrices.length - 1];
       const subNewPrice = lastPrice + (Math.random() * 10 - 5);
-
-      // setMoneyInStock(stockContained * subNewPrice)
-
-      setBuyStockPrice(subNewPrice)
-      // if (subNewPrice <= 0){
-      //   const subNewPrice = lastPrice + 10
-      // }
-      const newPrice = subNewPrice
+    
+      // Ensure stock price doesn't go negative
+      const newPrice = subNewPrice <= 0 ? 1 : subNewPrice; // Using a ternary operator to avoid negative prices
+    
+      setBuyStockPrice(newPrice);
+    
       setStockPrices((prevPrices: number[]) => {
-        const updatedPrices = [...prevPrices, newPrice].slice(-MAX_SECONDS); 
-        localStorage.setItem('stockPrices', JSON.stringify(updatedPrices)); 
-        return updatedPrices || subNewPrice;
+        const updatedPrices = [...prevPrices, newPrice].slice(-MAX_SECONDS);
+        localStorage.setItem('stockPrices', JSON.stringify(updatedPrices));
+        return updatedPrices;
       });
     };
+    
+    
     
     // Update stock price every second
     useEffect(() => {
@@ -438,15 +438,18 @@ export default function SecretPage() {
 
       {/* LEFT MENU */}
       <span className={styles.leftMenu}>
-        <p className={styles.poopMarket}>Poop Market</p>
-        <br />
+        <p className={styles.poopMarket}>Poop Market</p> <br />
+
         <button className={styles.morePoopClicker} onClick={morePoopPerClick}>
           Click to add more poop per click ({costToBuyPoopClick} Poops)
-        </button>
-        <br />
-        <br />
+        </button> <br /> <br />
+
         <button onClick={addMorePoopsPerSecond} className={styles.addMorePoopsPerSecond}>
           Click to add more poop per second ({costToBuyPoopsPerSecond} Poops)
+        </button> <br /> <br />
+
+        <button onClick={addMorePoopsPerSecond} className={styles.addTenPoopsPerSecond}>
+          Click to add 10 more poop per second ({costToBuyPoopsPerSecond} Poops)
         </button>
       </span>
 
