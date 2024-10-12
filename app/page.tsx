@@ -127,7 +127,7 @@ export default function SecretPage() {
     const [isStockMarketOpen, setIsStockMarketOpen] = useState(false);
     const [isStockMarketAvailable, setIsStockMarketAvailable] = useState(false)
     const [stockContained, setStockContained] = useState(0)
-    const [moneyInStock, setMoneyInStock] =  useState(0)
+    // const [moneyInStock, setMoneyInStock] =  useState(0)
     const [buyStockPrice, setBuyStockPrice] = useState(0)
 
     function toggleStockMarket() {
@@ -161,7 +161,7 @@ export default function SecretPage() {
       const lastPrice = stockPrices[stockPrices.length - 1];
       const subNewPrice = lastPrice + (Math.random() * 10 - 5);
 
-      setMoneyInStock(stockContained * subNewPrice)
+      // setMoneyInStock(stockContained * subNewPrice)
 
       setBuyStockPrice(subNewPrice)
       // if (subNewPrice <= 0){
