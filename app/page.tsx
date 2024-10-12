@@ -220,6 +220,10 @@ export default function SecretPage() {
     const stockMarketOptions = {
       responsive: true,
       maintainAspectRatio: false,  // Allow width and height to be set by container
+      animation: {
+        duration: 10, // Speed up the animation
+        easing: 'linear' as const, // Use a valid easing value from Chart.js
+      },
       scales: {
         x: {
           title: {
@@ -234,7 +238,9 @@ export default function SecretPage() {
           },
         },
       },
-    };
+    };    
+
+
 
   // LOTTERY
     // Check level for unlocking Lottery
