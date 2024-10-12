@@ -193,9 +193,13 @@ export default function SecretPage() {
 
     // Sell Stock
     function sellStock() {
-      setCount(count + Math.round(buyStockPrice))
-      setStockContained(stockContained - 1)
-      alert(Math.round(buyStockPrice))
+      if (stockContained > 0) {
+        setCount(count + Math.round(buyStockPrice))
+        setStockContained(stockContained - 1)
+        alert(Math.round(buyStockPrice))
+      } else {
+        alert("ya don't have no stocks to sell poopy!")
+      }
     }
 
 
