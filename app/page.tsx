@@ -141,6 +141,7 @@ export default function SecretPage() {
         localStorage.setItem('costToBuyPoopsPerSecond', JSON.stringify(costToBuyPoopsPerSecond));
         localStorage.setItem('costToAddCostBuyPoopsPerSecond', JSON.stringify(costToAddCostBuyPoopsPerSecond));
         localStorage.setItem('stockPrices', JSON.stringify(stockPrices));
+        localStorage.setItem('stockContained', JSON.stringify(stockContained));
         console.log('Data saved successfully');
       }
     } catch (error) {
