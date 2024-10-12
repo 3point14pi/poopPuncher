@@ -201,6 +201,7 @@ export default function SecretPage() {
     function sellStock() {
       if (stockContained > 0) {
         setCount(count + Math.round(buyStockPrice))
+        setPoopsClickedEver(poopsClickedEver + Math.round(buyStockPrice))
         setStockContained(stockContained - 1)
         alert(Math.round(buyStockPrice))
       } else {
