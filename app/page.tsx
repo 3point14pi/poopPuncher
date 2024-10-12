@@ -148,6 +148,12 @@ export default function SecretPage() {
     }
   }, [gameName]); 
 
+  useEffect(() => {
+    if (gameName == 'ben the great') {
+      alert('I see you are ben... I shall grant you stuf heheheh! but not until u tell me wut you need in the chat')
+    }
+  }, [gameName]); 
+
   // STOCK MARKET
     // Stock market modal toggle state
     const [isStockMarketOpen, setIsStockMarketOpen] = useState(false);
