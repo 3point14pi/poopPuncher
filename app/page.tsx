@@ -186,7 +186,6 @@ export default function SecretPage() {
       if (count >= Math.round(buyStockPrice)) {
         setCount(count - Math.round(buyStockPrice))
         setStockContained(stockContained + 1)
-        alert(moneyInStock)
       } else {
         alert("You don't have enough poops poop head!")
       }
