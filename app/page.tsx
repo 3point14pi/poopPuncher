@@ -119,6 +119,8 @@ export default function SecretPage() {
       localStorage.setItem('didExceedPoop', JSON.stringify(didExceedPoop));
       localStorage.setItem('costToBuyPoopsPerSecond', JSON.stringify(costToBuyPoopsPerSecond));
       localStorage.setItem('costToAddCostBuyPoopsPerSecond', JSON.stringify(costToAddCostBuyPoopsPerSecond));
+      localStorage.setItem('stockContained', JSON.stringify(stockContained));
+      localStorage.setItem('buyStockPrice', JSON.stringify(buyStockPrice));
     }
   }
 
@@ -126,9 +128,13 @@ export default function SecretPage() {
     // Stock market modal toggle state
     const [isStockMarketOpen, setIsStockMarketOpen] = useState(false);
     const [isStockMarketAvailable, setIsStockMarketAvailable] = useState(false)
-    const [stockContained, setStockContained] = useState(0)
-    // const [moneyInStock, setMoneyInStock] =  useState(0)
-    const [buyStockPrice, setBuyStockPrice] = useState(0)
+
+    const savedStockContained = typeof window !== 'undefined' ? parseInt(localStorage.getItem("stockContained") || "0") : 0;
+    const [stockContained, setStockContained] = useState(savedStockContained)
+
+    const savedBuyStockPrice = typeof window !== 'undefined' ? parseInt(localStorage.getItem("buyStockPrice") || "0") : 0;
+    const [buyStockPrice, setBuyStockPrice] = useState(savedBuyStockPrice)
+    
 
     function toggleStockMarket() {
       if (isStockMarketAvailable == true) {
