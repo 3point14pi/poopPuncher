@@ -466,13 +466,11 @@ export default function SecretPage() {
           ></div>
         </div>
         <br />
-        <div className={styles.statsPoop}>Poops clicked: {count}</div>
-        <br />
-        <div className={styles.statsPoop}>Poops clicked ever: {poopsClickedEver}</div>
-        <br />
-        <div className={styles.statsShop}>Poops per click: {PoopPerClick}</div>
-        <br />
-        <div className={styles.statsShop}>Poops per second: {displayPoopPerSecond}</div>
+        <div className={styles.statsPoop}>Poops clicked: {count}</div> <br />
+        <div className={styles.statsPoop}>Poops clicked ever: {poopsClickedEver}</div> <br />
+        <div className={styles.statsShop}>Poops per click: {PoopPerClick}</div> <br />
+        <div className={styles.statsShop}>Poops per second: {displayPoopPerSecond}</div><br />
+        <div className={styles.statsStock}>Stocks contained: {stockContained}</div>
       </div>
 
       {/* IMAGES AND INTERACTIONS */}
