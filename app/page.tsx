@@ -18,7 +18,7 @@ export default function SecretPage() {
         // Initialize game values in localStorage
         localStorage.setItem('count', JSON.stringify(0));
         localStorage.setItem('level', JSON.stringify(1));
-        localStorage.setItem('gameName', JSON.stringify('My Skibidi Toilet'));
+        localStorage.setItem('gameName', 'My Skibidi Toilet');
         localStorage.setItem('amountOfCookiesForLevelUp', JSON.stringify(100));
         localStorage.setItem('addToAmountOfCookiesForLevelUp', JSON.stringify(100));
         localStorage.setItem('poopBarThing', JSON.stringify(0));
@@ -48,7 +48,7 @@ export default function SecretPage() {
   const savedLevel = typeof window !== 'undefined' ? parseInt(localStorage.getItem("level") || "1") : 1;
   const [level, setLevel] = useState(savedLevel);
 
-  const savedGameName = typeof window !== 'undefined' ? (localStorage.getItem("gameName") || 'My Skibidi Toilet') : 'My Skibidi Toilet';
+  const savedGameName = localStorage.getItem('gameName') || 'My Skibidi Toilet';
   const [gameName, setGameName] = useState(savedGameName);
 
   // Level-related states
@@ -118,7 +118,7 @@ export default function SecretPage() {
     if (typeof window !== 'undefined') {
       localStorage.setItem('count', JSON.stringify(count));
       localStorage.setItem('level', JSON.stringify(level));
-      localStorage.setItem('gameName', JSON.stringify(gameName));
+      localStorage.setItem('gameName', gameName);
       localStorage.setItem('amountOfCookiesForLevelUp', JSON.stringify(amountOfCookiesForLevelUp));
       localStorage.setItem('addToAmountOfCookiesForLevelUp', JSON.stringify(addToAmountOfCookiesForLevelUp));
       localStorage.setItem('poopBarThing', JSON.stringify(poopBarThing));
@@ -142,7 +142,7 @@ export default function SecretPage() {
   // DEV MODE
 
   useEffect(() => {
-    if (gameName == 'Sacul Is The Best!') {
+    if (gameName == 'sacul is the best!') {
       alert('Dev Mode enabled! If you are not a dev, change your name immedietly, or you will be banned!')
       setPoopPerClick(1000)
     }
