@@ -22,7 +22,7 @@ export default function SecretPage() {
         localStorage.setItem('addToAmountOfCookiesForLevelUp', JSON.stringify(100));
         localStorage.setItem('poopBarThing', JSON.stringify(0));
         localStorage.setItem('poopsClickedEver', JSON.stringify(0));
-        localStorage.setItem('poopsPerClick', JSON.stringify(1));
+        localStorage.setItem('poopsPerClick', JSON.stringify(1000));
         localStorage.setItem('costToBuyPoopClick', JSON.stringify(100));
         localStorage.setItem('costToAddCostToBuyPoopClick', JSON.stringify(10));
         localStorage.setItem('amountOfPoopsPerSecond', JSON.stringify(0));
@@ -384,8 +384,15 @@ export default function SecretPage() {
     
   // BACKROUND STUFF
       useEffect(() => {
-      
-      save()
+        // Set an interval to call saveFunction every second (1000 ms)
+        const interval = setInterval(() => {
+          save();
+        }, 1000);
+
+        // Cleanup the interval on component unmount
+        return () => clearInterval(interval);
+      }, []); // Empty dependency array to run only once on mount
+          useEffect(() => {
 
       if (typeof window !== 'undefined') {
         const interval = setInterval(() => {
