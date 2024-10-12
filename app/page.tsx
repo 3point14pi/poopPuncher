@@ -6,6 +6,8 @@ import styles from './index.module.css';
 import 'chart.js/auto';  // Automatically import everything needed for chart.js
 
 export default function SecretPage() {
+
+
   const MAX_SECONDS = 30;  // Limit the number of seconds shown in the graph
 
   // On first visit, set up localStorage values
@@ -48,8 +50,14 @@ export default function SecretPage() {
   const savedLevel = typeof window !== 'undefined' ? parseInt(localStorage.getItem("level") || "1") : 1;
   const [level, setLevel] = useState(savedLevel);
 
-  const savedGameName = localStorage.getItem('gameName') || 'My Skibidi Toilet';
-  const [gameName, setGameName] = useState(savedGameName);
+  // Lazy initialization for gameName using localStorage
+  const [gameName, setGameName] = useState(() => {
+    if (typeof window !== 'undefined') {
+      const savedName = localStorage.getItem('gameName');
+      return savedName || 'My Skibidi Toilet'; // Default value if not found
+    }
+    return 'My Skibidi Toilet'; // Fallback value if window is not available
+  });
 
   // Level-related states
   const savedAmountOfCookiesForLevelUp = typeof window !== 'undefined' ? parseInt(localStorage.getItem("amountOfCookiesForLevelUp") || "100") : 100;
@@ -138,6 +146,34 @@ export default function SecretPage() {
       localStorage.setItem('priceOfStockLastBought', JSON.stringify(priceOfStockLastBought));
     }
   }
+
+  useEffect(() => {
+    console.log('saved')
+    if (typeof window !== 'undefined') {
+      localStorage.setItem('count', JSON.stringify(count));
+      localStorage.setItem('level', JSON.stringify(level));
+      localStorage.setItem('gameName', gameName);
+      console.log(localStorage.getItem('gameName'));
+      localStorage.setItem('amountOfCookiesForLevelUp', JSON.stringify(amountOfCookiesForLevelUp));
+      localStorage.setItem('addToAmountOfCookiesForLevelUp', JSON.stringify(addToAmountOfCookiesForLevelUp));
+      localStorage.setItem('poopBarThing', JSON.stringify(poopBarThing));
+      localStorage.setItem('poopsClickedEver', JSON.stringify(poopsClickedEver));
+      localStorage.setItem('poopsPerClick', JSON.stringify(PoopPerClick));
+      localStorage.setItem('costToBuyPoopClick', JSON.stringify(costToBuyPoopClick));
+      localStorage.setItem('costToAddCostToBuyPoopClick', JSON.stringify(costToAddCostToBuyPoopClick));
+      localStorage.setItem('amountOfPoopsPerSecond', JSON.stringify(amountOfPoopsPerSecond));
+      localStorage.setItem('divideAmountOfPoopsPerSecond', JSON.stringify(divideAmountOfPoopsPerSecond));
+      localStorage.setItem('realDivideAmountOfPoopsPerSecond', JSON.stringify(realDivideAmountOfPoopsPerSecond));
+      localStorage.setItem('displayPoopPerSecond', JSON.stringify(displayPoopPerSecond));
+      localStorage.setItem('didExceedPoop', JSON.stringify(didExceedPoop));
+      localStorage.setItem('costToBuyPoopsPerSecond', JSON.stringify(costToBuyPoopsPerSecond));
+      localStorage.setItem('costToAddCostBuyPoopsPerSecond', JSON.stringify(costToAddCostBuyPoopsPerSecond));
+      localStorage.setItem('stockContained', JSON.stringify(stockContained));
+      localStorage.setItem('buyStockPrice', JSON.stringify(buyStockPrice));
+      localStorage.setItem('priceOfStockLastBought', JSON.stringify(priceOfStockLastBought));
+    }
+  }, [gameName, count]); 
+  
 
   // DEV MODE
 
@@ -438,15 +474,16 @@ export default function SecretPage() {
     }
     
   // BACKROUND STUFF
-      useEffect(() => {
-        // Set an interval to call saveFunction every second (1000 ms)
-        const interval = setInterval(() => {
-          save();
-        }, 1000);
+    useEffect(() => {
+      // Set an interval to call saveFunction every second (1000 ms)
+      const interval = setInterval(() => {
+        save();  // Call the function
+      }, 1000);
+    
+      // Cleanup the interval when the component unmounts
+      return () => clearInterval(interval);
+    }, []);  
 
-        // Cleanup the interval on component unmount
-        return () => clearInterval(interval);
-      }, []); // Empty dependency array to run only once on mount
           useEffect(() => {
 
       if (typeof window !== 'undefined') {
@@ -489,7 +526,7 @@ export default function SecretPage() {
   return (
     <div className={styles.body}>
       <link href="https://fonts.cdnfonts.com/css/faith-hope" rel="stylesheet"/>
-      <style>@import url('https://fonts.cdnfonts.com/css/faith-hope');</style>
+      {/* <style>@import url('https://fonts.cdnfonts.com/css/faith-hope');</style> */}
 
       {/* BACKGROUND IMAGE */}
       <img className={styles.backround} src="toiletPaperBackround.png" alt="" />
