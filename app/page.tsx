@@ -18,6 +18,7 @@ export default function SecretPage() {
         // Initialize game values in localStorage
         localStorage.setItem('count', JSON.stringify(0));
         localStorage.setItem('level', JSON.stringify(1));
+        localStorage.setItem('gameName', JSON.stringify('My Skibidi Toilet'));
         localStorage.setItem('amountOfCookiesForLevelUp', JSON.stringify(100));
         localStorage.setItem('addToAmountOfCookiesForLevelUp', JSON.stringify(100));
         localStorage.setItem('poopBarThing', JSON.stringify(0));
@@ -46,6 +47,9 @@ export default function SecretPage() {
 
   const savedLevel = typeof window !== 'undefined' ? parseInt(localStorage.getItem("level") || "1") : 1;
   const [level, setLevel] = useState(savedLevel);
+
+  const savedGameName = typeof window !== 'undefined' ? (localStorage.getItem("gameName") || 'My Skibidi Toilet') : 'My Skibidi Toilet';
+  const [gameName, setGameName] = useState(savedGameName);
 
   // Level-related states
   const savedAmountOfCookiesForLevelUp = typeof window !== 'undefined' ? parseInt(localStorage.getItem("amountOfCookiesForLevelUp") || "100") : 100;
@@ -114,6 +118,7 @@ export default function SecretPage() {
     if (typeof window !== 'undefined') {
       localStorage.setItem('count', JSON.stringify(count));
       localStorage.setItem('level', JSON.stringify(level));
+      localStorage.setItem('gameName', JSON.stringify(gameName));
       localStorage.setItem('amountOfCookiesForLevelUp', JSON.stringify(amountOfCookiesForLevelUp));
       localStorage.setItem('addToAmountOfCookiesForLevelUp', JSON.stringify(addToAmountOfCookiesForLevelUp));
       localStorage.setItem('poopBarThing', JSON.stringify(poopBarThing));
@@ -133,6 +138,15 @@ export default function SecretPage() {
       localStorage.setItem('priceOfStockLastBought', JSON.stringify(priceOfStockLastBought));
     }
   }
+
+  // DEV MODE
+
+  useEffect(() => {
+    if (gameName == 'Sacul Is The Best!') {
+      alert('Dev Mode enabled! If you are not a dev, change your name immedietly, or you will be banned!')
+      setPoopPerClick(1000)
+    }
+  }, [gameName]); 
 
   // STOCK MARKET
     // Stock market modal toggle state
@@ -468,8 +482,23 @@ export default function SecretPage() {
   
   return (
     <div className={styles.body}>
+      <link href="https://fonts.cdnfonts.com/css/faith-hope" rel="stylesheet"/>
+      <style>@import url('https://fonts.cdnfonts.com/css/faith-hope');</style>
+
       {/* BACKGROUND IMAGE */}
       <img className={styles.backround} src="toiletPaperBackround.png" alt="" />
+
+      {/* TOP BAR */}
+
+      <div className={styles.topBar}>
+      <input
+        className={styles.gameName}
+        type="text"
+        value={gameName}
+        onChange={(e) => setGameName(e.target.value)}
+        maxLength={20}
+      />
+      </div>
 
       {/* LEFT MENU (SHOP) */}
       <span className={styles.leftMenu}>

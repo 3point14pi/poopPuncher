@@ -21,7 +21,7 @@
 
 .daPoop {
   position: fixed;
-  height: 90vh;
+  height: 85vh;
   width: 35vw;
   bottom: 0vh;
   right: 35vw;
@@ -42,6 +42,34 @@
 .daPoop:active {
   height: 88vh;
   top: 12vh;
+}
+
+/* TOP BAR */
+.topBar {
+  position: fixed;
+  height: 10vh;
+  width: 50vw;
+  background-color: rgb(214, 176, 52);
+  border-radius: 20px;
+  box-shadow: 4px 4px 6px rgba(0, 0, 0, 0.7);
+  right: 25vw;
+  top: 2vh;
+}
+
+.gameName {
+  position: relative;
+  left: 0vw;
+  top: 2vh;
+  box-sizing: border-box;
+  width: 45vw;
+  height: 7vh;
+  font-size: 4vw;
+  z-index: 10; /* Ensure it's on top of overlapping elements */
+  text-align: center;
+  padding: 10px;
+  background: transparent;
+  border: transparent;
+  font-family: 'Faith Hope', sans-serif;
 }
 
 /* LEFT MENU */
