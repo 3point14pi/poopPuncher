@@ -3,14 +3,16 @@
 import { useState, useEffect } from 'react';
 import { Line } from 'react-chartjs-2';
 import styles from './index.module.css';
-import 'chart.js/auto'; // Automatically import everything needed for chart.js
+import 'chart.js/auto';  // Automatically import everything needed for chart.js
 
 export default function SecretPage() {
-  const MAX_SECONDS = 30; // Limit the number of seconds shown in the graph
+
+
+  const MAX_SECONDS = 30;  // Limit the number of seconds shown in the graph
 
   // On first visit, set up localStorage values
   useEffect(() => {
-    if (typeof window !== 'undefined') { // Ensure this runs only on the client
+    if (typeof window !== 'undefined') {  // Ensure this runs only on the client
       const firstVisitCheck = localStorage.getItem('firstVisit');
       if (!firstVisitCheck) {
         alert("Welcome to poop puncher! Dis is made by Lucas Cheng...");
@@ -39,6 +41,7 @@ export default function SecretPage() {
       }
     }
   }, []);
+
 
   // Initialize state from localStorage
   const savedCount = typeof window !== 'undefined' ? parseInt(localStorage.getItem("count") || "0") : 0;
@@ -117,406 +120,392 @@ export default function SecretPage() {
   const [isDogTurdAreYouSure, setIsDogTurdAreYouSure] = useState(false);
   const [isOmnipotentPoopAreYouSure, setIsOmnipotentPoopAreYouSure] = useState(false);
 
-  // Function to save current game state to localStorage
   function save() {
-    if (typeof window !== 'undefined') {
-      console.log('saved')
-      localStorage.setItem('count', JSON.stringify(count));
-      localStorage.setItem('level', JSON.stringify(level));
-      localStorage.setItem('gameName', gameName);
-      localStorage.setItem('amountOfCookiesForLevelUp', JSON.stringify(amountOfCookiesForLevelUp));
-      localStorage.setItem('addToAmountOfCookiesForLevelUp', JSON.stringify(addToAmountOfCookiesForLevelUp));
-      localStorage.setItem('poopBarThing', JSON.stringify(poopBarThing));
-      localStorage.setItem('poopsClickedEver', JSON.stringify(poopsClickedEver));
-      localStorage.setItem('poopsPerClick', JSON.stringify(PoopPerClick));
-      localStorage.setItem('costToBuyPoopClick', JSON.stringify(costToBuyPoopClick));
-      localStorage.setItem('costToAddCostToBuyPoopClick', JSON.stringify(costToAddCostToBuyPoopClick));
-      localStorage.setItem('amountOfPoopsPerSecond', JSON.stringify(amountOfPoopsPerSecond));
-      localStorage.setItem('divideAmountOfPoopsPerSecond', JSON.stringify(divideAmountOfPoopsPerSecond));
-      localStorage.setItem('realDivideAmountOfPoopsPerSecond', JSON.stringify(realDivideAmountOfPoopsPerSecond));
-      localStorage.setItem('displayPoopPerSecond', JSON.stringify(displayPoopPerSecond));
-      localStorage.setItem('didExceedPoop', JSON.stringify(didExceedPoop));
-      localStorage.setItem('costToBuyPoopsPerSecond', JSON.stringify(costToBuyPoopsPerSecond));
-      localStorage.setItem('costToAddCostBuyPoopsPerSecond', JSON.stringify(costToAddCostBuyPoopsPerSecond));
-      localStorage.setItem('costToBuyTenPoopsPerSecond', JSON.stringify(costToBuyTenPoopsPerSecond));
-      localStorage.setItem('costToAddCostBuyTenPoopsPerSecond', JSON.stringify(costToAddCostBuyTenPoopsPerSecond));
-      localStorage.setItem('stockPrices', JSON.stringify(stockPrices));
+    try {
+      if (typeof window !== 'undefined') {
+        localStorage.setItem('count', JSON.stringify(count));
+        localStorage.setItem('level', JSON.stringify(level));
+        localStorage.setItem('gameName', gameName);
+        localStorage.setItem('amountOfCookiesForLevelUp', JSON.stringify(amountOfCookiesForLevelUp));
+        localStorage.setItem('addToAmountOfCookiesForLevelUp', JSON.stringify(addToAmountOfCookiesForLevelUp));
+        localStorage.setItem('poopBarThing', JSON.stringify(poopBarThing));
+        localStorage.setItem('poopsClickedEver', JSON.stringify(poopsClickedEver));
+        localStorage.setItem('poopsPerClick', JSON.stringify(PoopPerClick));
+        localStorage.setItem('costToBuyPoopClick', JSON.stringify(costToBuyPoopClick));
+        localStorage.setItem('costToAddCostToBuyPoopClick', JSON.stringify(costToAddCostToBuyPoopClick));
+        localStorage.setItem('amountOfPoopsPerSecond', JSON.stringify(amountOfPoopsPerSecond));
+        localStorage.setItem('divideAmountOfPoopsPerSecond', JSON.stringify(divideAmountOfPoopsPerSecond));
+        localStorage.setItem('realDivideAmountOfPoopsPerSecond', JSON.stringify(realDivideAmountOfPoopsPerSecond));
+        localStorage.setItem('displayPoopPerSecond', JSON.stringify(displayPoopPerSecond));
+        localStorage.setItem('didExceedPoop', JSON.stringify(didExceedPoop));
+        localStorage.setItem('costToBuyPoopsPerSecond', JSON.stringify(costToBuyPoopsPerSecond));
+        localStorage.setItem('costToAddCostBuyPoopsPerSecond', JSON.stringify(costToAddCostBuyPoopsPerSecond));
+        localStorage.setItem('stockPrices', JSON.stringify(stockPrices));
+        console.log('Data saved successfully');
+      }
+    } catch (error) {
+      console.error('Failed to save data to localStorage:', error);
     }
   }
+  
 
+// Add all the state variables that trigger save when changed
   useEffect(() => {
-    if (typeof window !== 'undefined') {
-      console.log('saved')
-      localStorage.setItem('count', JSON.stringify(count));
-      localStorage.setItem('level', JSON.stringify(level));
-      localStorage.setItem('gameName', gameName);
-      console.log(localStorage.getItem('gameName'));
-      localStorage.setItem('amountOfCookiesForLevelUp', JSON.stringify(amountOfCookiesForLevelUp));
-      localStorage.setItem('addToAmountOfCookiesForLevelUp', JSON.stringify(addToAmountOfCookiesForLevelUp));
-      localStorage.setItem('poopBarThing', JSON.stringify(poopBarThing));
-      localStorage.setItem('poopsClickedEver', JSON.stringify(poopsClickedEver));
-      localStorage.setItem('poopsPerClick', JSON.stringify(PoopPerClick));
-      localStorage.setItem('costToBuyPoopClick', JSON.stringify(costToBuyPoopClick));
-      localStorage.setItem('costToAddCostToBuyPoopClick', JSON.stringify(costToAddCostToBuyPoopClick));
-      localStorage.setItem('amountOfPoopsPerSecond', JSON.stringify(amountOfPoopsPerSecond));
-      localStorage.setItem('divideAmountOfPoopsPerSecond', JSON.stringify(divideAmountOfPoopsPerSecond));
-      localStorage.setItem('realDivideAmountOfPoopsPerSecond', JSON.stringify(realDivideAmountOfPoopsPerSecond));
-      localStorage.setItem('displayPoopPerSecond', JSON.stringify(displayPoopPerSecond));
-      localStorage.setItem('didExceedPoop', JSON.stringify(didExceedPoop));
-      localStorage.setItem('costToBuyPoopsPerSecond', JSON.stringify(costToBuyPoopsPerSecond));
-      localStorage.setItem('costToAddCostBuyPoopsPerSecond', JSON.stringify(costToAddCostBuyPoopsPerSecond));
-      localStorage.setItem('stockPrices', JSON.stringify(stockPrices));
-    }
-  }, [gameName, count]);
+    save();
+  }, [count, level, gameName, amountOfCookiesForLevelUp, addToAmountOfCookiesForLevelUp, poopBarThing, poopsClickedEver, PoopPerClick, costToBuyPoopClick, costToAddCostToBuyPoopClick, amountOfPoopsPerSecond, divideAmountOfPoopsPerSecond, realDivideAmountOfPoopsPerSecond, displayPoopPerSecond, didExceedPoop, costToBuyPoopsPerSecond, costToAddCostBuyPoopsPerSecond]);
+
+  
 
   // DEV MODE
 
   useEffect(() => {
     if (gameName == 'sacul is the best!') {
       alert('Dev Mode enabled! If you are not a dev, change your name immedietly, or you will be banned!')
-      setPoopPerClick(1000)
+      setPoopPerClick(100000)
     } else {
       setPoopPerClick(1)
     }
-  }, [gameName]);
+  }, [gameName]); 
 
   useEffect(() => {
     if (gameName == 'ben the great') {
       alert('I see you are ben... I shall grant you stuf heheheh! but not until u tell me wut you need in the chat')
     }
-  }, [gameName]);
+  }, [gameName]); 
 
   // STOCK MARKET
-  // Stock market modal toggle state
-  const [isStockMarketOpen, setIsStockMarketOpen] = useState(false);
-  const [isStockMarketAvailable, setIsStockMarketAvailable] = useState(false)
+    // Stock market modal toggle state
+    const [isStockMarketOpen, setIsStockMarketOpen] = useState(false);
+    const [isStockMarketAvailable, setIsStockMarketAvailable] = useState(false)
 
-  const savedStockContained = typeof window !== 'undefined' ? parseInt(localStorage.getItem("stockContained") || "0") : 0;
-  const [stockContained, setStockContained] = useState(savedStockContained)
+    const savedStockContained = typeof window !== 'undefined' ? parseInt(localStorage.getItem("stockContained") || "0") : 0;
+    const [stockContained, setStockContained] = useState(savedStockContained)
 
-  const savedBuyStockPrice = typeof window !== 'undefined' ? parseInt(localStorage.getItem("buyStockPrice") || "0") : 0;
-  const [buyStockPrice, setBuyStockPrice] = useState(savedBuyStockPrice)
+    const savedBuyStockPrice = typeof window !== 'undefined' ? parseInt(localStorage.getItem("buyStockPrice") || "0") : 0;
+    const [buyStockPrice, setBuyStockPrice] = useState(savedBuyStockPrice)
 
-  const savedPriceOfStockLastBought = typeof window !== 'undefined' ? parseInt(localStorage.getItem("priceOfStockLastBought") || "0") : 0;
-  const [priceOfStockLastBought, setPriceOfStockLastBought] = useState(savedPriceOfStockLastBought)
+    const savedPriceOfStockLastBought = typeof window !== 'undefined' ? parseInt(localStorage.getItem("priceOfStockLastBought") || "0") : 0;
+    const [priceOfStockLastBought, setPriceOfStockLastBought] = useState(savedPriceOfStockLastBought)
 
-  // const [stocksToBuy, setStocksToBuy] = useState(1)
+    // const [stocksToBuy, setStocksToBuy] = useState(1)
+    
 
-
-  function toggleStockMarket() {
-    if (isStockMarketAvailable == true) {
-      setIsStockMarketOpen((prevState) => !prevState);
-    } else {
-      alert('Get to level 10 first!')
+    function toggleStockMarket() {
+      if (isStockMarketAvailable == true) {
+        setIsStockMarketOpen((prevState) => !prevState);
+      } else {
+        alert('Get to level 10 first!')
+      }
     }
-  }
 
-  // Check is stock market is available
+    // Check is stock market is available
 
-  useEffect(() => {
-    if (level >= 10) {
-      setIsStockMarketAvailable(true);
-    }
-  }, [level, isStockMarketAvailable]);
+    useEffect(() => {
+      if (level >= 10) {
+        setIsStockMarketAvailable(true);
+      }
+    }, [level, isStockMarketAvailable]);
 
-  // Set new prices
+    // Set new prices
 
-  const [stockPrices, setStockPrices] = useState(() => {
-    if (typeof window !== 'undefined') {
-      return JSON.parse(localStorage.getItem('stockPrices') || '[100]');
-    }
-    return [500];
-  });
-
-
-  // Simulate stock price changes
-  const updateStockPrices = () => {
-    const lastPrice = stockPrices[stockPrices.length - 1];
-    const subNewPrice = lastPrice + (Math.random() * 10 - 5);
-
-    // Ensure stock price doesn't go negative
-    const newPrice = subNewPrice <= 0 ? 1 : subNewPrice; // Using a ternary operator to avoid negative prices
-
-    setBuyStockPrice(newPrice);
-
-    setStockPrices((prevPrices: number[]) => {
-      const updatedPrices = [...prevPrices, newPrice].slice(-MAX_SECONDS);
-      localStorage.setItem('stockPrices', JSON.stringify(updatedPrices));
-      return updatedPrices;
+    const [stockPrices, setStockPrices] = useState(() => {
+      if (typeof window !== 'undefined') {
+        return JSON.parse(localStorage.getItem('stockPrices') || '[100]');
+      }
+      return [500];
     });
-  };
 
 
-  // Update stock price every second
-  useEffect(() => {
-    const interval = setInterval(updateStockPrices, 5000);
-    return () => clearInterval(interval);
-  }, [stockPrices]);
+    // Simulate stock price changes
+    const updateStockPrices = () => {
+      const lastPrice = stockPrices[stockPrices.length - 1];
+      const subNewPrice = lastPrice + (Math.random() * 10 - 5);
+    
+      // Ensure stock price doesn't go negative
+      const newPrice = subNewPrice <= 0 ? 1 : subNewPrice; // Using a ternary operator to avoid negative prices
+    
+      setBuyStockPrice(newPrice);
+    
+      setStockPrices((prevPrices: number[]) => {
+        const updatedPrices = [...prevPrices, newPrice].slice(-MAX_SECONDS);
+        localStorage.setItem('stockPrices', JSON.stringify(updatedPrices));
+        return updatedPrices;
+      });
+    };
+    
+    
+    
+    // Update stock price every second
+    useEffect(() => {
+      const interval = setInterval(updateStockPrices, 5000); 
+      return () => clearInterval(interval);
+    }, [stockPrices]);
 
-  // Buy stock
-  function buyStock() {
-    if (count >= Math.round(buyStockPrice)) {
-      setCount(count - Math.round(buyStockPrice))
-      setPriceOfStockLastBought(Math.round(buyStockPrice))
-      setStockContained(stockContained + 1)
-    } else {
-      alert("You don't have enough poops poop head!")
+    // Buy stock
+    function buyStock() {
+      if (count >= Math.round(buyStockPrice)) {
+        setCount(count - Math.round(buyStockPrice))
+        setPriceOfStockLastBought(Math.round(buyStockPrice))
+        setStockContained(stockContained + 1)
+      } else {
+        alert("You don't have enough poops poop head!")
+      }
     }
-  }
 
-  // Sell Stock
-  function sellStock() {
-    if (stockContained > 0) {
-      setCount(count + Math.round(buyStockPrice))
-      setPoopsClickedEver(poopsClickedEver + Math.round(buyStockPrice))
-      setStockContained(stockContained - 1)
-      alert(Math.round(buyStockPrice))
-    } else {
-      alert("ya don't have no stocks to sell poopy!")
+    // Sell Stock
+    function sellStock() {
+      if (stockContained > 0) {
+        setCount(count + Math.round(buyStockPrice))
+        setPoopsClickedEver(poopsClickedEver + Math.round(buyStockPrice))
+        setStockContained(stockContained - 1)
+        alert(Math.round(buyStockPrice))
+      } else {
+        alert("ya don't have no stocks to sell poopy!")
+      }
     }
-  }
 
 
-  const stockMarketData = {
-    labels: stockPrices.map((_: number, index: number) => index), // Specify type for both _ and index as number
-    datasets: [
-      {
-        label: 'Stock Contained: ' + stockContained + '        Current Stock Price: ' + Math.round(buyStockPrice) + '        Price of stock last bought: ' + Math.round(priceOfStockLastBought),
-        data: stockPrices,
-        fill: true,
-        borderColor: 'rgb(75, 192, 192)',
-        tension: 0.1,
-        maintainAspectRatio: false,
+    const stockMarketData = {
+      labels: stockPrices.map((_: number, index: number) => index),  // Specify type for both _ and index as number
+      datasets: [
+        {
+          label: 'Stock Contained: ' + stockContained + '        Current Stock Price: ' + Math.round(buyStockPrice) + '        Price of stock last bought: ' + Math.round(priceOfStockLastBought),
+          data: stockPrices,
+          fill: true,
+          borderColor: 'rgb(75, 192, 192)',
+          tension: 0.1,
+          maintainAspectRatio: false,
+        },
+      ],
+    };
+    
+    const stockMarketOptions = {
+      responsive: true,
+      maintainAspectRatio: false,  // Allow width and height to be set by container
+      animation: {
+        duration: 10, // Speed up the animation
+        easing: 'linear' as const, // Use a valid easing value from Chart.js
       },
-    ],
-  };
-
-  const stockMarketOptions = {
-    responsive: true,
-    maintainAspectRatio: false, // Allow width and height to be set by container
-    animation: {
-      duration: 10, // Speed up the animation
-      easing: 'linear' as const, // Use a valid easing value from Chart.js
-    },
-    scales: {
-      x: {
-        title: {
-          display: true,
-          text: 'Time',
+      scales: {
+        x: {
+          title: {
+            display: true,
+            text: 'Time',
+          },
+        },
+        y: {
+          title: {
+            display: true,
+            text: 'Price ($)',
+          },
         },
       },
-      y: {
-        title: {
-          display: true,
-          text: 'Price ($)',
-        },
-      },
-    },
-  };
+    };    
+
 
 
   // LOTTERY
-  // Check level for unlocking Lottery
-  useEffect(() => {
-    if (level >= 3) {
-      setIsLotteryAvailable(true);
-    }
-  }, [level, isLotteryAvailable]);
-
-  // Lottery toggle functions
-  function toggleIsLottery() {
-    if (isLotteryAvailable) {
-      setIsLottery((prevState) => !prevState);
-    } else {
-      alert("Get to level 3 first!");
-    }
-  }
-
-  function toggleIsPooperManSure() {
-    setIsPooperManAreYouSure((prevState) => !prevState);
-  }
-
-  function toggleIsDogTurdSure() {
-    setIsDogTurdAreYouSure((prevState) => !prevState);
-  }
-
-  function toggleIsOmnipotentPoopSure() {
-    setIsOmnipotentPoopAreYouSure((prevState) => !prevState);
-  }
-
-  // Lottery interaction functions
-  function pooperManLotteryGo() {
-    toggleIsPooperManSure();
-    if (count >= 100) {
-      setCount(count - 100);
-      const winOrLose = Math.floor(Math.random() * 5);
-      if (winOrLose === 0) {
-        setCount(count + 500);
-        setPoopsClickedEver(poopsClickedEver + 500);
-        setPoopBarThing(poopBarThing + 500);
-        alert('You won!!! yayyy :)');
-      } else {
-        alert('You lost... :(');
+    // Check level for unlocking Lottery
+    useEffect(() => {
+      if (level >= 3) {
+        setIsLotteryAvailable(true);
       }
-    } else {
-      alert("Stop GAMBLING... GET SOME MORE POOPS, OR GET OUT!!!");
-    }
-  }
+    }, [level, isLotteryAvailable]);
 
-  function dogTurdLotteryGo() {
-    toggleIsDogTurdSure();
-    if (count >= 500) {
-      setCount(count - 500);
-      const winOrLose = Math.floor(Math.random() * 3);
-      if (winOrLose === 0) {
-        setCount(count + 1000);
-        setPoopsClickedEver(poopsClickedEver + 1000);
-        setPoopBarThing(poopBarThing + 1000);
-        alert('You won!!! yayyy :)');
+    // Lottery toggle functions
+    function toggleIsLottery() {
+      if (isLotteryAvailable) {
+        setIsLottery((prevState) => !prevState);
       } else {
-        alert('You lost... :(');
+        alert("Get to level 3 first!");
       }
-    } else {
-      alert("Stop GAMBLING... GET SOME MORE POOPS, OR GET OUT!!!");
     }
-  }
 
-  function ominpotentPoopLotteryGo() {
-    toggleIsOmnipotentPoopSure();
-    if (count >= 500) {
-      setCount(count - 500);
-      const winOrLose = Math.floor(Math.random() * 10);
-      if (winOrLose === 0) {
-        setCount(count + 2000);
-        setPoopsClickedEver(poopsClickedEver + 2000);
-        setPoopBarThing(poopBarThing + 2000);
-        alert('You won!!! yayyy :)');
-      } else {
-        alert('You lost... :(');
-      }
-    } else {
-      alert("Stop GAMBLING... GET SOME MORE POOPS, OR GET OUT!!!");
+    function toggleIsPooperManSure() {
+      setIsPooperManAreYouSure((prevState) => !prevState);
     }
-  }
+
+    function toggleIsDogTurdSure() {
+      setIsDogTurdAreYouSure((prevState) => !prevState);
+    }
+
+    function toggleIsOmnipotentPoopSure() {
+      setIsOmnipotentPoopAreYouSure((prevState) => !prevState);
+    }
+
+    // Lottery interaction functions
+    function pooperManLotteryGo() {
+      toggleIsPooperManSure();
+      if (count >= 100) {
+        setCount(count - 100);
+        const winOrLose = Math.floor(Math.random() * 5);
+        if (winOrLose === 0) {
+          setCount(count + 500);
+          setPoopsClickedEver(poopsClickedEver + 500);
+          setPoopBarThing(poopBarThing + 500);
+          alert('You won!!! yayyy :)');
+        } else {
+          alert('You lost... :(');
+        }
+      } else {
+        alert("Stop GAMBLING... GET SOME MORE POOPS, OR GET OUT!!!");
+      }
+    }
+
+    function dogTurdLotteryGo() {
+      toggleIsDogTurdSure();
+      if (count >= 500) {
+        setCount(count - 500);
+        const winOrLose = Math.floor(Math.random() * 3);
+        if (winOrLose === 0) {
+          setCount(count + 1000);
+          setPoopsClickedEver(poopsClickedEver + 1000);
+          setPoopBarThing(poopBarThing + 1000);
+          alert('You won!!! yayyy :)');
+        } else {
+          alert('You lost... :(');
+        }
+      } else {
+        alert("Stop GAMBLING... GET SOME MORE POOPS, OR GET OUT!!!");
+      }
+    }
+
+    function ominpotentPoopLotteryGo() {
+      toggleIsOmnipotentPoopSure();
+      if (count >= 500) {
+        setCount(count - 500);
+        const winOrLose = Math.floor(Math.random() * 10);
+        if (winOrLose === 0) {
+          setCount(count + 2000);
+          setPoopsClickedEver(poopsClickedEver + 2000);
+          setPoopBarThing(poopBarThing + 2000);
+          alert('You won!!! yayyy :)');
+        } else {
+          alert('You lost... :(');
+        }
+      } else {
+        alert("Stop GAMBLING... GET SOME MORE POOPS, OR GET OUT!!!");
+      }
+    }
 
   // SHOP
-  function morePoopPerClick() {
-    if (count >= costToBuyPoopClick) {
-      setPoopPerClick(PoopPerClick + 1);
-      setCostToBuyPoopClick(costToBuyPoopClick + costToAddCostToBuyPoopClick);
-      setCostToAddCostToBuyPoopClick(costToAddCostToBuyPoopClick + 5);
-      setCount(count - costToBuyPoopClick);
-    } else {
-      alert("You don't have enough poops you poop head!");
-    }
-  }
-
-  const addMorePoopsPerSecond = () => {
-    if (count >= costToBuyPoopsPerSecond) {
-      if (!didExceedPoop) {
-        setDivideAmountOfPoopsPerSecond(divideAmountOfPoopsPerSecond + 1);
-        setDisplayPoopPerSecond(divideAmountOfPoopsPerSecond + 1);
+    function morePoopPerClick() {
+      if (count >= costToBuyPoopClick) {
+        setPoopPerClick(PoopPerClick + 1);
+        setCostToBuyPoopClick(costToBuyPoopClick + costToAddCostToBuyPoopClick);
+        setCostToAddCostToBuyPoopClick(costToAddCostToBuyPoopClick + 5);
+        setCount(count - costToBuyPoopClick);
       } else {
-        setAmountOfPoopsPerSecond((prevCount) => prevCount + 1);
-        setDisplayPoopPerSecond(amountOfPoopsPerSecond + 1);
+        alert("You don't have enough poops you poop head!");
       }
-      setRealDivideAmountOfPoopsPerSecond(1000 / divideAmountOfPoopsPerSecond);
-      setCount(count - costToBuyPoopsPerSecond);
-      setCostToBuyPoopsPerSecond(costToBuyPoopsPerSecond + costToAddCostBuyPoopsPerSecond);
-      setCostToAddCostBuyPoopsPerSecond(costToAddCostBuyPoopsPerSecond + 20);
-    } else {
-      alert("You don't have enough poops you poop head!");
     }
-  };
 
-  function addTenMorePoopsPerSecond() {
-    if (count >= costToBuyTenPoopsPerSecond) {
-      if (!didExceedPoop) {
-        setDivideAmountOfPoopsPerSecond(divideAmountOfPoopsPerSecond + 10);
-        setDisplayPoopPerSecond(divideAmountOfPoopsPerSecond + 10);
+    const addMorePoopsPerSecond = () => {
+      if (count >= costToBuyPoopsPerSecond) {
+        if (!didExceedPoop) {
+          setDivideAmountOfPoopsPerSecond(divideAmountOfPoopsPerSecond + 1);
+          setDisplayPoopPerSecond(divideAmountOfPoopsPerSecond + 1);
+        } else {
+          setAmountOfPoopsPerSecond((prevCount) => prevCount + 1);
+          setDisplayPoopPerSecond(amountOfPoopsPerSecond + 1);
+        }
+        setRealDivideAmountOfPoopsPerSecond(1000 / divideAmountOfPoopsPerSecond);
+        setCount(count - costToBuyPoopsPerSecond);
+        setCostToBuyPoopsPerSecond(costToBuyPoopsPerSecond + costToAddCostBuyPoopsPerSecond);
+        setCostToAddCostBuyPoopsPerSecond(costToAddCostBuyPoopsPerSecond + 20);
       } else {
-        setAmountOfPoopsPerSecond((prevCount) => prevCount + 10);
-        setDisplayPoopPerSecond(amountOfPoopsPerSecond + 10);
+        alert("You don't have enough poops you poop head!");
       }
-      setRealDivideAmountOfPoopsPerSecond(1000 / divideAmountOfPoopsPerSecond);
-      setCount(count - costToBuyTenPoopsPerSecond);
-      setCostToBuyTenPoopsPerSecond(costToBuyTenPoopsPerSecond + costToAddCostBuyTenPoopsPerSecond);
-      setCostToAddCostBuyTenPoopsPerSecond(costToAddCostBuyTenPoopsPerSecond + 20); // Adjusted increment for bulk purchase
-    } else {
-      alert("You don't have enough poops you poop head!");
+    };
+
+    function addTenMorePoopsPerSecond() {
+      if (count >= costToBuyTenPoopsPerSecond) {
+        if (!didExceedPoop) {
+          setDivideAmountOfPoopsPerSecond(divideAmountOfPoopsPerSecond + 10);
+          setDisplayPoopPerSecond(divideAmountOfPoopsPerSecond + 10);
+        } else {
+          setAmountOfPoopsPerSecond((prevCount) => prevCount + 10);
+          setDisplayPoopPerSecond(amountOfPoopsPerSecond + 10);
+        }
+        setRealDivideAmountOfPoopsPerSecond(1000 / divideAmountOfPoopsPerSecond);
+        setCount(count - costToBuyTenPoopsPerSecond);
+        setCostToBuyTenPoopsPerSecond(costToBuyTenPoopsPerSecond + costToAddCostBuyTenPoopsPerSecond);
+        setCostToAddCostBuyTenPoopsPerSecond(costToAddCostBuyTenPoopsPerSecond + 20); // Adjusted increment for bulk purchase
+      } else {
+        alert("You don't have enough poops you poop head!");
+      }
     }
-  }
+    
 
-
-  function clickPoop() {
-    setCount(count + PoopPerClick);
-    setPoopsClickedEver(poopsClickedEver + PoopPerClick);
-    setPoopBarThing(poopBarThing + PoopPerClick);
-    save();
-  }
+    function clickPoop() {
+      setCount(count + PoopPerClick);
+      setPoopsClickedEver(poopsClickedEver + PoopPerClick);
+      setPoopBarThing(poopBarThing + PoopPerClick);
+      save();
+    }
 
   // WHAT HAPPENS WHEN POOP PRESSED
 
-  const [poopPressed, setPoopPressed] = useState(false);
+    const [poopPressed, setPoopPressed] = useState(false);
 
-  function handlePoopPress() {
-    setPoopPressed(true);
-  }
-
-  function handlePoopRelease() {
-    setPoopPressed(false);
-  }
-
-  // BACKGROUND STUFF
-  useEffect(() => {
-    // Set an interval to call saveFunction every second (1000 ms)
-    const interval = setInterval(() => {
-      save(); // Call the function
-    }, 1000);
-
-    // Cleanup the interval when the component unmounts
-    return () => clearInterval(interval);
-  }, []);
-
-  useEffect(() => {
-
-    if (typeof window !== 'undefined') {
-      const interval = setInterval(() => {
-        if (divideAmountOfPoopsPerSecond > 0) {
-          if (divideAmountOfPoopsPerSecond > 100) {
-            setRealDivideAmountOfPoopsPerSecond(1000);
-            setDidExceedPoop(true);
-            setCount((prevCount) => prevCount + amountOfPoopsPerSecond);
-            setPoopsClickedEver((prevPoops) => prevPoops + amountOfPoopsPerSecond);
-            setPoopBarThing((prevPoopBar) => prevPoopBar + amountOfPoopsPerSecond);
-          } else {
-            setCount((prevCount) => prevCount + 1);
-            setPoopsClickedEver((prevPoops) => prevPoops + 1);
-            setPoopBarThing((prevPoopBar) => prevPoopBar + 1);
-          }
-        }
-      }, realDivideAmountOfPoopsPerSecond);
-
-      return () => clearInterval(interval);
+    function handlePoopPress() {
+      setPoopPressed(true);
     }
-  }, [realDivideAmountOfPoopsPerSecond, amountOfPoopsPerSecond, divideAmountOfPoopsPerSecond]);
+
+    function handlePoopRelease() {
+      setPoopPressed(false);
+    }
+    
+  // BACKROUND STUFF
+    useEffect(() => {
+      // Set an interval to call saveFunction every second (1000 ms)
+      const interval = setInterval(() => {
+        save();  // Call the function
+      }, 1000);
+    
+      // Cleanup the interval when the component unmounts
+      return () => clearInterval(interval);
+    }, []);  
+
+          useEffect(() => {
+
+      if (typeof window !== 'undefined') {
+        const interval = setInterval(() => {
+          if (divideAmountOfPoopsPerSecond > 0) {
+            if (divideAmountOfPoopsPerSecond > 100) {
+              setRealDivideAmountOfPoopsPerSecond(1000);
+              setDidExceedPoop(true);
+              setCount((prevCount) => prevCount + amountOfPoopsPerSecond);
+              setPoopsClickedEver((prevPoops) => prevPoops + amountOfPoopsPerSecond);
+              setPoopBarThing((prevPoopBar) => prevPoopBar + amountOfPoopsPerSecond);
+            } else {
+              setCount((prevCount) => prevCount + 1);
+              setPoopsClickedEver((prevPoops) => prevPoops + 1);
+              setPoopBarThing((prevPoopBar) => prevPoopBar + 1);
+            }
+          }
+        }, realDivideAmountOfPoopsPerSecond);
+        
+        return () => clearInterval(interval);
+      }
+    }, [realDivideAmountOfPoopsPerSecond, amountOfPoopsPerSecond, divideAmountOfPoopsPerSecond]);
 
 
-  useEffect(() => {
-    setRealDivideAmountOfPoopsPerSecond(1000 / divideAmountOfPoopsPerSecond);
-  }, [divideAmountOfPoopsPerSecond]);
+    useEffect(() => {
+      setRealDivideAmountOfPoopsPerSecond(1000 / divideAmountOfPoopsPerSecond);
+    }, [divideAmountOfPoopsPerSecond]);
 
   // CHECK FOR LEVEL
 
-  useEffect(() => {
-    if (poopBarThing >= amountOfCookiesForLevelUp) {
-      setLevel((prevLevel) => prevLevel + 1);
-      setPoopBarThing((prevPoopBarThing) => prevPoopBarThing - amountOfCookiesForLevelUp);
-      setAmountOfCookiesForLevelUp((prevAmount) => prevAmount + addToAmountOfCookiesForLevelUp);
-      setAddToAmountOfCookiesForLevelUp((prevAddAmount) => prevAddAmount + 50);
-    }
-  }, [poopBarThing, amountOfCookiesForLevelUp, addToAmountOfCookiesForLevelUp]);
-
+    useEffect(() => {
+      if (poopBarThing >= amountOfCookiesForLevelUp) {
+        setLevel((prevLevel) => prevLevel + 1);
+        setPoopBarThing((prevPoopBarThing) => prevPoopBarThing - amountOfCookiesForLevelUp);
+        setAmountOfCookiesForLevelUp((prevAmount) => prevAmount + addToAmountOfCookiesForLevelUp);
+        setAddToAmountOfCookiesForLevelUp((prevAddAmount) => prevAddAmount + 50);
+      }
+    }, [poopBarThing, amountOfCookiesForLevelUp, addToAmountOfCookiesForLevelUp]);
+  
   return (
     <div className={styles.body}>
       <link href="https://fonts.cdnfonts.com/css/faith-hope" rel="stylesheet"/>
@@ -528,13 +517,13 @@ export default function SecretPage() {
       {/* TOP BAR */}
 
       <div className={styles.topBar}>
-        <input
-          className={styles.gameName}
-          type="text"
-          value={gameName}
-          onChange={(e) => setGameName(e.target.value)}
-          maxLength={20}
-        />
+      <input
+        className={styles.gameName}
+        type="text"
+        value={gameName}
+        onChange={(e) => setGameName(e.target.value)}
+        maxLength={20}
+      />
       </div>
 
       {/* LEFT MENU (SHOP) */}
@@ -707,7 +696,7 @@ export default function SecretPage() {
 
         {/* STOCK MARKET */}
         <div className={styles.stuffPicGroup} onClick={toggleStockMarket}>
-          <img className={styles.stockMarketPic} src={isStockMarketAvailable ? "stockMarketPic.png" : "stockMarketPicHide.png"} alt="stockMarketPic" />
+          <img className={styles.stockMarketPic} src={isStockMarketAvailable ? "stockMarketPic.png":"stockMarketPicHide.png"} alt="stockMarketPic" />
           <span className={styles.stuffPicLabel}><strong>Stock Market</strong></span>
         </div>
 
@@ -728,7 +717,7 @@ export default function SecretPage() {
             onChange={(e) => setStocksToBuy(Number(e.target.value))}
             className={styles.inputField}
           /> */}
-          <button onClick={buyStock} className={styles.buyStock}>Buy</button> <br />
+          <button onClick={buyStock} className={styles.buyStock}>Buy</button>  <br />
 
           {/* <input
             type="number"
