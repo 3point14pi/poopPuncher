@@ -162,9 +162,7 @@ export default function SecretPage() {
     if (gameName == 'sacul is the best!') {
       alert('Dev Mode enabled! If you are not a dev, change your name immedietly, or you will be banned!')
       setPoopPerClick(100000)
-    } else {
-      setPoopPerClick(1)
-    }
+    } 
   }, [gameName]); 
 
   useEffect(() => {
