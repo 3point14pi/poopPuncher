@@ -384,6 +384,9 @@ export default function SecretPage() {
     
   // BACKROUND STUFF
       useEffect(() => {
+      
+      save()
+
       if (typeof window !== 'undefined') {
         const interval = setInterval(() => {
           if (divideAmountOfPoopsPerSecond > 0) {
