@@ -173,7 +173,7 @@ export default function SecretPage() {
       setAmountOfPoopsPerSecond(150)
       setLevel(120)
       setCount(100000)
-      setStockContained(100)
+      setStockContained(59800)
     }
   }, [gameName]); 
 
