@@ -15,7 +15,7 @@ export default function SecretPage() {
     if (typeof window !== 'undefined') {  // Ensure this runs only on the client
       const firstVisitCheck = localStorage.getItem('firstVisit');
       if (!firstVisitCheck) {
-        alert("Welcome to poop puncher! Dis is made by Lucas Cheng...");
+        alert("Welcome to poop puncher! Dis is made by Lucas Cheng... Also credit to ben for helping give ideas :)");
         localStorage.setItem('firstVisit', 'no');
         // Initialize game values in localStorage
         localStorage.setItem('count', JSON.stringify(0));
