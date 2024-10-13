@@ -141,6 +141,7 @@ export default function SecretPage() {
         localStorage.setItem('costToAddCostBuyPoopsPerSecond', JSON.stringify(costToAddCostBuyPoopsPerSecond));
         localStorage.setItem('stockPrices', JSON.stringify(stockPrices));
         localStorage.setItem('stockContained', JSON.stringify(stockContained));
+        localStorage.setItem('isDoublePoop', JSON.stringify(stockContained));
         console.log('Data saved successfully');
       }
     } catch (error) {
@@ -259,7 +260,7 @@ export default function SecretPage() {
     // Simulate stock price changes
     const updateStockPrices = () => {
       const lastPrice = stockPrices[stockPrices.length - 1];
-      const subNewPrice = lastPrice + (Math.random() * 10 - 500);
+      const subNewPrice = lastPrice + (Math.random() * 10 - 5);
     
       // Ensure stock price doesn't go negative
       const newPrice = subNewPrice <= 0 ? 1 : subNewPrice; // Using a ternary operator to avoid negative prices
@@ -479,9 +480,15 @@ export default function SecretPage() {
 
     
     // Daily Deals
-    const dayOfWeek = new Date().getDay();
+    // const dayOfWeek = new Date().getDay();
+    const dayOfWeek = new Date("July 5, 1983 01:15:00").getDay();
+  
     const saveIsDoubleCount = typeof window !== 'undefined' ? (localStorage.getItem("isDoubleCount") || "false") : false;
     const [isDoubleCount, setIsDoubleCount] = useState(saveIsDoubleCount)
+
+    const saveIsDoubleClickPerSecond = typeof window !== 'undefined' ? (localStorage.getItem("isDoubleCount") || "false") : false;
+    const [isDoubleClickPerSecond, setIsDoubleClickPerSecond] = useState(saveIsDoubleClickPerSecond)
+
     const [dailyDealOneMessage, setDailyDealOneMessage] = useState('Nothing')
     // const saveIsNextDay = typeof window !== 'undefined' ? (localStorage.getItem("isNextDay") || "false") : false;
     // const [isNextDay, setIsNextDay] = useState(saveIsNextDay)
@@ -500,16 +507,20 @@ export default function SecretPage() {
         } else {
           alert('You already bought this poop head!')
         }
-      }
-
-      if (dayOfWeek == 2) {
-
+      } if (dayOfWeek == 2) {
+        if (isDoubleClickPerSecond == false) {
+          setIsDoubleClickPerSecond(true)
+        } else {
+          alert('You already bought this poop head!')
+        }
       }
     }
     
     useEffect(() => {
       if (dayOfWeek !== 1) {
         setIsDoubleCount(false)
+      } if (dayOfWeek !== 2) {
+        setIsDoubleClickPerSecond(false)
       }
     }, [dayOfWeek]);
 
@@ -529,20 +540,20 @@ export default function SecretPage() {
       } if (dayOfWeek !== 0) {
         setDailyDealOneMessage('Click to get double poops per click the whole day! (10,000 poops)')
       }
-      // if (dayOfWeek !== 1) {
+      // if (dayOfWeek == 1) {
       //   setDailyDealOneMessage('Click to get double poops per click the whole day! (10,000 poops)')
-      // } if (dayOfWeek !== 2) {
+      // } if (dayOfWeek == 2) {
       //   setDailyDealOneMessage('Click to get double poops per second the whole day! (10,000 poops)')
-      // } if (dayOfWeek !== 3) {
+      // } if (dayOfWeek == 3) {
       //   setDailyDealOneMessage('Click to halve price of poop shop the whole day! (50,000 poops)')
-      // } if (dayOfWeek !== 4) {
-      //   setDailyDealOneMessage('Click to get double poops per click the whole day! (10,000 poops)')
-      // } if (dayOfWeek !== 5) {
-      //   setDailyDealOneMessage('Click to get double poops per click the whole day! (10,000 poops)')
-      // } if (dayOfWeek !== 6) {
-      //   setDailyDealOneMessage('Click to get double poops per click the whole day! (10,000 poops)')
-      // } if (dayOfWeek !== 0) {
-      //   setDailyDealOneMessage('Click to get double poops per click the whole day! (10,000 poops)')
+      // } if (dayOfWeek == 4) {
+      //   setDailyDealOneMessage('Click to get 10 free stocks! (1,000 poops)')
+      // } if (dayOfWeek == 5) {
+      //   setDailyDealOneMessage('Click to halve stock BUYING PRICE by 50% (10,000 poops)')
+      // } if (dayOfWeek == 6) {
+      //   setDailyDealOneMessage('Click to dieeeeeeeeeeee! (609 poops)')
+      // } if (dayOfWeek == 0) {
+      //   setDailyDealOneMessage("Click to increase lottery chances by 50% (10,000 poops)")
       // }
     }, [dayOfWeek]);
     
@@ -583,20 +594,31 @@ export default function SecretPage() {
     // }, []);  
 
     useEffect(() => {
-
       if (typeof window !== 'undefined') {
         const interval = setInterval(() => {
           if (divideAmountOfPoopsPerSecond > 0) {
             if (divideAmountOfPoopsPerSecond > 100) {
               setRealDivideAmountOfPoopsPerSecond(1000);
               setDidExceedPoop(true);
-              setCount((prevCount) => prevCount + amountOfPoopsPerSecond);
-              setPoopsClickedEver((prevPoops) => prevPoops + amountOfPoopsPerSecond);
-              setPoopBarThing((prevPoopBar) => prevPoopBar + amountOfPoopsPerSecond);
+              if (isDoubleClickPerSecond) {
+                setCount((prevCount) => prevCount + 2 * amountOfPoopsPerSecond);
+                setPoopsClickedEver((prevPoops) => prevPoops + 2 * amountOfPoopsPerSecond);
+                setPoopBarThing((prevPoopBar) => prevPoopBar + amountOfPoopsPerSecond);
+              } else{
+                setCount((prevCount) => prevCount + amountOfPoopsPerSecond);
+                setPoopsClickedEver((prevPoops) => prevPoops + 2 * amountOfPoopsPerSecond);
+                setPoopBarThing((prevPoopBar) => prevPoopBar + 2 * amountOfPoopsPerSecond);
+            }
             } else {
+              if (isDoubleClickPerSecond) {
+                setCount((prevCount) => prevCount + 2);
+                setPoopsClickedEver((prevPoops) => prevPoops + 2);
+                setPoopBarThing((prevPoopBar) => prevPoopBar + 2);
+              } else {
               setCount((prevCount) => prevCount + 1);
               setPoopsClickedEver((prevPoops) => prevPoops + 1);
               setPoopBarThing((prevPoopBar) => prevPoopBar + 1);
+              }
             }
           }
         }, realDivideAmountOfPoopsPerSecond);
@@ -684,7 +706,7 @@ export default function SecretPage() {
         <div className={styles.statsPoop}>Poops clicked: {count}</div> <br />
         <div className={styles.statsPoop}>Poops clicked ever: {poopsClickedEver}</div> <br />
         <div className={styles.statsShop}>Poops per click: {PoopPerClick}{isDoubleCount ? '=>(2x)' : ''}</div> <br />
-        <div className={styles.statsShop}>Poops per second: {displayPoopPerSecond}</div><br />
+        <div className={styles.statsShop}>Poops per second: {displayPoopPerSecond}{isDoubleClickPerSecond ? '=>(2x)' : ''}</div><br />
 
       </div>
 
