@@ -207,7 +207,7 @@ useEffect(() => {
       alert('I see you are ben... I shall grant you stuf heheheh! but not until u tell me wut you need in the chat')
       setPoopPerClick(215)
       setAmountOfPoopsPerSecond(150)
-      setLevel(130)
+      setLevel(200)
       setCount(100000)
       setStockContained(59800)
     }
