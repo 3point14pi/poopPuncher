@@ -166,16 +166,16 @@ export default function SecretPage() {
     } 
   }, [gameName]); 
 
-  useEffect(() => {
-    if (gameName == 'ben the great') {
-      alert('I see you are ben... I shall grant you stuf heheheh! but not until u tell me wut you need in the chat')
-      setPoopPerClick(215)
-      setAmountOfPoopsPerSecond(150)
-      setLevel(120)
-      setCount(100000)
-      setStockContained(59800)
-    }
-  }, [gameName]); 
+  // useEffect(() => {
+  //   if (gameName == 'ben the great') {
+  //     alert('I see you are ben... I shall grant you stuf heheheh! but not until u tell me wut you need in the chat')
+  //     setPoopPerClick(215)
+  //     setAmountOfPoopsPerSecond(150)
+  //     setLevel(120)
+  //     setCount(100000)
+  //     setStockContained(59800)
+  //   }
+  // }, [gameName]); 
 
   // STOCK MARKET
     // Stock market modal toggle state
