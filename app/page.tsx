@@ -170,6 +170,7 @@ export default function SecretPage() {
       alert('The game is being restarted!');
       localStorage.clear(); // This will clear the entire localStorage
       // Reset all state hooks here
+      setIsDoubleCount(false)
       setCount(0);
       setLevel(1);
       setGameName('My Skibidi Toilet');
@@ -481,19 +482,68 @@ export default function SecretPage() {
     const dayOfWeek = new Date().getDay();
     const saveIsDoubleCount = typeof window !== 'undefined' ? (localStorage.getItem("isDoubleCount") || "false") : false;
     const [isDoubleCount, setIsDoubleCount] = useState(saveIsDoubleCount)
+    const [dailyDealOneMessage, setDailyDealOneMessage] = useState('Nothing')
     // const saveIsNextDay = typeof window !== 'undefined' ? (localStorage.getItem("isNextDay") || "false") : false;
     // const [isNextDay, setIsNextDay] = useState(saveIsNextDay)
     // const saveTheSavedDay = typeof window !== 'undefined' ? (localStorage.getItem("theSavedDay") || "0") : 0;
     // const [theSavedDay, setTheSavedDay] = useState(saveTheSavedDay)
     
-    function superCount() {
-      setIsDoubleCount(true)
+    function dailyDealOne() {
+      if (dayOfWeek == 1) {
+        if (isDoubleCount !== true) {
+          if (count >= 10000) {
+            setCount(count - 10000)
+            setIsDoubleCount(true)
+          } else {
+            alert("You don't have enough poops poop head!")
+          }
+        } else {
+          alert('You already bought this poop head!')
+        }
+      }
+
+      if (dayOfWeek == 2) {
+
+      }
     }
     
     useEffect(() => {
       if (dayOfWeek !== 1) {
         setIsDoubleCount(false)
       }
+    }, [dayOfWeek]);
+
+    useEffect(() => {
+      if (dayOfWeek !== 1) {
+        setDailyDealOneMessage('Click to get double poops per click the whole day! (10,000 poops)')
+      } if (dayOfWeek !== 2) {
+        setDailyDealOneMessage('Click to get double poops per click the whole day! (10,000 poops)')
+      } if (dayOfWeek !== 3) {
+        setDailyDealOneMessage('Click to get double poops per click the whole day! (10,000 poops)')
+      } if (dayOfWeek !== 4) {
+        setDailyDealOneMessage('Click to get double poops per click the whole day! (10,000 poops)')
+      } if (dayOfWeek !== 5) {
+        setDailyDealOneMessage('Click to get double poops per click the whole day! (10,000 poops)')
+      } if (dayOfWeek !== 6) {
+        setDailyDealOneMessage('Click to get double poops per click the whole day! (10,000 poops)')
+      } if (dayOfWeek !== 0) {
+        setDailyDealOneMessage('Click to get double poops per click the whole day! (10,000 poops)')
+      }
+      // if (dayOfWeek !== 1) {
+      //   setDailyDealOneMessage('Click to get double poops per click the whole day! (10,000 poops)')
+      // } if (dayOfWeek !== 2) {
+      //   setDailyDealOneMessage('Click to get double poops per second the whole day! (10,000 poops)')
+      // } if (dayOfWeek !== 3) {
+      //   setDailyDealOneMessage('Click to halve price of poop shop the whole day! (50,000 poops)')
+      // } if (dayOfWeek !== 4) {
+      //   setDailyDealOneMessage('Click to get double poops per click the whole day! (10,000 poops)')
+      // } if (dayOfWeek !== 5) {
+      //   setDailyDealOneMessage('Click to get double poops per click the whole day! (10,000 poops)')
+      // } if (dayOfWeek !== 6) {
+      //   setDailyDealOneMessage('Click to get double poops per click the whole day! (10,000 poops)')
+      // } if (dayOfWeek !== 0) {
+      //   setDailyDealOneMessage('Click to get double poops per click the whole day! (10,000 poops)')
+      // }
     }, [dayOfWeek]);
     
     // WHAT HAPPENS WHEN POOP PRESSED
@@ -502,9 +552,9 @@ export default function SecretPage() {
     
     function clickPoop() {
       if (isDoubleCount) {
-        setCount(2 * (count + PoopPerClick));
-        setPoopsClickedEver(2 * (poopsClickedEver + PoopPerClick));
-        setPoopBarThing(2 * (poopBarThing + PoopPerClick));
+        setCount(count + 2 * (PoopPerClick));
+        setPoopsClickedEver(poopsClickedEver + 2 * (PoopPerClick));
+        setPoopBarThing(poopBarThing + 2 * (PoopPerClick));
       } else {
         setCount(count + PoopPerClick);
         setPoopsClickedEver(poopsClickedEver + PoopPerClick);
@@ -607,10 +657,10 @@ export default function SecretPage() {
           Click to add 10 more poop per second ({costToBuyTenPoopsPerSecond} Poops)
         </button> <br /><br />
 
-        <div className={styles.poopMarket}>Daily Deals</div>
+        <div className={styles.poopMarket}>Daily Deals</div> <br />
 
-        <button onClick={superCount} className={styles.addTenPoopsPerSecond}>
-          Click to get double clicks for the whole day (10,000 Poops)
+        <button onClick={dailyDealOne} className={styles.doublePoop}>
+          {dailyDealOneMessage}
         </button> <br /><br />
 
       </span>
@@ -633,7 +683,7 @@ export default function SecretPage() {
         <br />
         <div className={styles.statsPoop}>Poops clicked: {count}</div> <br />
         <div className={styles.statsPoop}>Poops clicked ever: {poopsClickedEver}</div> <br />
-        <div className={styles.statsShop}>Poops per click: {PoopPerClick}</div> <br />
+        <div className={styles.statsShop}>Poops per click: {PoopPerClick}{isDoubleCount ? '=>(2x)' : ''}</div> <br />
         <div className={styles.statsShop}>Poops per second: {displayPoopPerSecond}</div><br />
 
       </div>
