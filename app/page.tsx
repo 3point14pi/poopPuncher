@@ -525,36 +525,36 @@ export default function SecretPage() {
     }, [dayOfWeek]);
 
     useEffect(() => {
-      if (dayOfWeek !== 1) {
-        setDailyDealOneMessage('Click to get double poops per click the whole day! (10,000 poops)')
-      } if (dayOfWeek !== 2) {
-        setDailyDealOneMessage('Click to get double poops per click the whole day! (10,000 poops)')
-      } if (dayOfWeek !== 3) {
-        setDailyDealOneMessage('Click to get double poops per click the whole day! (10,000 poops)')
-      } if (dayOfWeek !== 4) {
-        setDailyDealOneMessage('Click to get double poops per click the whole day! (10,000 poops)')
-      } if (dayOfWeek !== 5) {
-        setDailyDealOneMessage('Click to get double poops per click the whole day! (10,000 poops)')
-      } if (dayOfWeek !== 6) {
-        setDailyDealOneMessage('Click to get double poops per click the whole day! (10,000 poops)')
-      } if (dayOfWeek !== 0) {
-        setDailyDealOneMessage('Click to get double poops per click the whole day! (10,000 poops)')
-      }
-      // if (dayOfWeek == 1) {
+      // if (dayOfWeek !== 1) {
       //   setDailyDealOneMessage('Click to get double poops per click the whole day! (10,000 poops)')
-      // } if (dayOfWeek == 2) {
-      //   setDailyDealOneMessage('Click to get double poops per second the whole day! (10,000 poops)')
-      // } if (dayOfWeek == 3) {
-      //   setDailyDealOneMessage('Click to halve price of poop shop the whole day! (50,000 poops)')
-      // } if (dayOfWeek == 4) {
-      //   setDailyDealOneMessage('Click to get 10 free stocks! (1,000 poops)')
-      // } if (dayOfWeek == 5) {
-      //   setDailyDealOneMessage('Click to halve stock BUYING PRICE by 50% (10,000 poops)')
-      // } if (dayOfWeek == 6) {
-      //   setDailyDealOneMessage('Click to dieeeeeeeeeeee! (609 poops)')
-      // } if (dayOfWeek == 0) {
-      //   setDailyDealOneMessage("Click to increase lottery chances by 50% (10,000 poops)")
+      // } if (dayOfWeek !== 2) {
+      //   setDailyDealOneMessage('Click to get double poops per click the whole day! (10,000 poops)')
+      // } if (dayOfWeek !== 3) {
+      //   setDailyDealOneMessage('Click to get double poops per click the whole day! (10,000 poops)')
+      // } if (dayOfWeek !== 4) {
+      //   setDailyDealOneMessage('Click to get double poops per click the whole day! (10,000 poops)')
+      // } if (dayOfWeek !== 5) {
+      //   setDailyDealOneMessage('Click to get double poops per click the whole day! (10,000 poops)')
+      // } if (dayOfWeek !== 6) {
+      //   setDailyDealOneMessage('Click to get double poops per click the whole day! (10,000 poops)')
+      // } if (dayOfWeek !== 0) {
+      //   setDailyDealOneMessage('Click to get double poops per click the whole day! (10,000 poops)')
       // }
+      if (dayOfWeek == 1) {
+        setDailyDealOneMessage('Click to get double poops per click the whole day! (10,000 poops)')
+      } if (dayOfWeek == 2) {
+        setDailyDealOneMessage('Click to get double poops per second the whole day! (10,000 poops)')
+      } if (dayOfWeek == 3) {
+        setDailyDealOneMessage('Click to halve price of poop shop the whole day! (50,000 poops)')
+      } if (dayOfWeek == 4) {
+        setDailyDealOneMessage('Click to get 10 free stocks! (1,000 poops)')
+      } if (dayOfWeek == 5) {
+        setDailyDealOneMessage('Click to halve stock BUYING PRICE by 50% (10,000 poops)')
+      } if (dayOfWeek == 6) {
+        setDailyDealOneMessage('Click to dieeeeeeeeeeee! (609 poops)')
+      } if (dayOfWeek == 0) {
+        setDailyDealOneMessage("Click to increase lottery chances by 50% (10,000 poops)")
+      }
     }, [dayOfWeek]);
     
     // WHAT HAPPENS WHEN POOP PRESSED
@@ -606,8 +606,8 @@ export default function SecretPage() {
                 setPoopBarThing((prevPoopBar) => prevPoopBar + amountOfPoopsPerSecond);
               } else{
                 setCount((prevCount) => prevCount + amountOfPoopsPerSecond);
-                setPoopsClickedEver((prevPoops) => prevPoops + 2 * amountOfPoopsPerSecond);
-                setPoopBarThing((prevPoopBar) => prevPoopBar + 2 * amountOfPoopsPerSecond);
+                setPoopsClickedEver((prevPoops) => prevPoops + amountOfPoopsPerSecond);
+                setPoopBarThing((prevPoopBar) => prevPoopBar +  amountOfPoopsPerSecond);
             }
             } else {
               if (isDoubleClickPerSecond) {
