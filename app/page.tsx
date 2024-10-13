@@ -7,7 +7,6 @@ import 'chart.js/auto';  // Automatically import everything needed for chart.js
 
 export default function SecretPage() {
 
-
   const MAX_SECONDS = 30;  // Limit the number of seconds shown in the graph
 
   // On first visit, set up localStorage values
@@ -166,40 +165,40 @@ export default function SecretPage() {
     } 
   }, [gameName]); 
 // Add this useEffect hook to your component
-useEffect(() => {
-  if (gameName.toLowerCase() === 'restart the game') {
-    alert('The game is being restarted!');
-    localStorage.clear(); // This will clear the entire localStorage
-    // Reset all state hooks here
-    setCount(0);
-    setLevel(1);
-    setGameName('My Skibidi Toilet');
-    setAmountOfCookiesForLevelUp(100);
-    setAddToAmountOfCookiesForLevelUp(100);
-    setPoopBarThing(0);
-    setPoopsClickedEver(0);
-    setPoopPerClick(1);
-    setCostToBuyPoopClick(100);
-    setCostToAddCostToBuyPoopClick(10);
-    setAmountOfPoopsPerSecond(0);
-    setDivideAmountOfPoopsPerSecond(0);
-    setRealDivideAmountOfPoopsPerSecond(100);
-    setDisplayPoopPerSecond(0);
-    setDidExceedPoop(false);
-    setCostToBuyPoopsPerSecond(100);
-    setCostToAddCostBuyPoopsPerSecond(20);
-    setCostToBuyTenPoopsPerSecond(900);
-    setCostToAddCostBuyTenPoopsPerSecond(20);
-    setStockPrices([100]);
-    setStockContained(0);
-    setIsLotteryAvailable(false);
-    setIsPooperManAreYouSure(false);
-    setIsDogTurdAreYouSure(false);
-    setIsOmnipotentPoopAreYouSure(false);
-    setIsStockMarketAvailable(false);
-    setIsStockMarketOpen(false);
-  }
-}, [gameName]);
+  useEffect(() => {
+    if (gameName.toLowerCase() === 'restart the game') {
+      alert('The game is being restarted!');
+      localStorage.clear(); // This will clear the entire localStorage
+      // Reset all state hooks here
+      setCount(0);
+      setLevel(1);
+      setGameName('My Skibidi Toilet');
+      setAmountOfCookiesForLevelUp(100);
+      setAddToAmountOfCookiesForLevelUp(100);
+      setPoopBarThing(0);
+      setPoopsClickedEver(0);
+      setPoopPerClick(1);
+      setCostToBuyPoopClick(100);
+      setCostToAddCostToBuyPoopClick(10);
+      setAmountOfPoopsPerSecond(0);
+      setDivideAmountOfPoopsPerSecond(0);
+      setRealDivideAmountOfPoopsPerSecond(100);
+      setDisplayPoopPerSecond(0);
+      setDidExceedPoop(false);
+      setCostToBuyPoopsPerSecond(100);
+      setCostToAddCostBuyPoopsPerSecond(20);
+      setCostToBuyTenPoopsPerSecond(900);
+      setCostToAddCostBuyTenPoopsPerSecond(20);
+      setStockPrices([100]);
+      setStockContained(0);
+      setIsLotteryAvailable(false);
+      setIsPooperManAreYouSure(false);
+      setIsDogTurdAreYouSure(false);
+      setIsOmnipotentPoopAreYouSure(false);
+      setIsStockMarketAvailable(false);
+      setIsStockMarketOpen(false);
+    }
+  }, [gameName]);
 
 
   useEffect(() => {
@@ -259,7 +258,7 @@ useEffect(() => {
     // Simulate stock price changes
     const updateStockPrices = () => {
       const lastPrice = stockPrices[stockPrices.length - 1];
-      const subNewPrice = lastPrice + (Math.random() * 10 - 5);
+      const subNewPrice = lastPrice + (Math.random() * 10 - 500);
     
       // Ensure stock price doesn't go negative
       const newPrice = subNewPrice <= 0 ? 1 : subNewPrice; // Using a ternary operator to avoid negative prices
@@ -477,16 +476,42 @@ useEffect(() => {
     }
     
 
+    
+    // Daily Deals
+    const dayOfWeek = new Date().getDay();
+    const saveIsDoubleCount = typeof window !== 'undefined' ? (localStorage.getItem("isDoubleCount") || "false") : false;
+    const [isDoubleCount, setIsDoubleCount] = useState(saveIsDoubleCount)
+    // const saveIsNextDay = typeof window !== 'undefined' ? (localStorage.getItem("isNextDay") || "false") : false;
+    // const [isNextDay, setIsNextDay] = useState(saveIsNextDay)
+    // const saveTheSavedDay = typeof window !== 'undefined' ? (localStorage.getItem("theSavedDay") || "0") : 0;
+    // const [theSavedDay, setTheSavedDay] = useState(saveTheSavedDay)
+    
+    function superCount() {
+      setIsDoubleCount(true)
+    }
+    
+    useEffect(() => {
+      if (dayOfWeek !== 1) {
+        setIsDoubleCount(false)
+      }
+    }, [dayOfWeek]);
+    
+    // WHAT HAPPENS WHEN POOP PRESSED
+    
+    const [poopPressed, setPoopPressed] = useState(false);
+    
     function clickPoop() {
-      setCount(count + PoopPerClick);
-      setPoopsClickedEver(poopsClickedEver + PoopPerClick);
-      setPoopBarThing(poopBarThing + PoopPerClick);
+      if (isDoubleCount) {
+        setCount(2 * (count + PoopPerClick));
+        setPoopsClickedEver(2 * (poopsClickedEver + PoopPerClick));
+        setPoopBarThing(2 * (poopBarThing + PoopPerClick));
+      } else {
+        setCount(count + PoopPerClick);
+        setPoopsClickedEver(poopsClickedEver + PoopPerClick);
+        setPoopBarThing(poopBarThing + PoopPerClick);
+      }
       save();
     }
-
-  // WHAT HAPPENS WHEN POOP PRESSED
-
-    const [poopPressed, setPoopPressed] = useState(false);
 
     function handlePoopPress() {
       setPoopPressed(true);
@@ -497,17 +522,17 @@ useEffect(() => {
     }
     
   // BACKROUND STUFF
-    useEffect(() => {
-      // Set an interval to call saveFunction every second (1000 ms)
-      const interval = setInterval(() => {
-        save();  // Call the function
-      }, 1000);
+    // useEffect(() => {
+    //   // Set an interval to call saveFunction every second (1000 ms)
+    //   const interval = setInterval(() => {
+    //     save();  // Call the function
+    //   }, 1000);
     
-      // Cleanup the interval when the component unmounts
-      return () => clearInterval(interval);
-    }, []);  
+    //   // Cleanup the interval when the component unmounts
+    //   return () => clearInterval(interval);
+    // }, []);  
 
-          useEffect(() => {
+    useEffect(() => {
 
       if (typeof window !== 'undefined') {
         const interval = setInterval(() => {
@@ -580,7 +605,13 @@ useEffect(() => {
 
         <button onClick={addTenMorePoopsPerSecond} className={styles.addTenPoopsPerSecond}>
           Click to add 10 more poop per second ({costToBuyTenPoopsPerSecond} Poops)
-        </button>
+        </button> <br /><br />
+
+        <div className={styles.poopMarket}>Daily Deals</div>
+
+        <button onClick={superCount} className={styles.addTenPoopsPerSecond}>
+          Click to get double clicks for the whole day (10,000 Poops)
+        </button> <br /><br />
 
       </span>
 
