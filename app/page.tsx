@@ -165,17 +165,53 @@ export default function SecretPage() {
       setPoopPerClick(100000)
     } 
   }, [gameName]); 
+// Add this useEffect hook to your component
+useEffect(() => {
+  if (gameName.toLowerCase() === 'restart the game') {
+    alert('The game is being restarted!');
+    localStorage.clear(); // This will clear the entire localStorage
+    // Reset all state hooks here
+    setCount(0);
+    setLevel(1);
+    setGameName('My Skibidi Toilet');
+    setAmountOfCookiesForLevelUp(100);
+    setAddToAmountOfCookiesForLevelUp(100);
+    setPoopBarThing(0);
+    setPoopsClickedEver(0);
+    setPoopPerClick(1);
+    setCostToBuyPoopClick(100);
+    setCostToAddCostToBuyPoopClick(10);
+    setAmountOfPoopsPerSecond(0);
+    setDivideAmountOfPoopsPerSecond(0);
+    setRealDivideAmountOfPoopsPerSecond(100);
+    setDisplayPoopPerSecond(0);
+    setDidExceedPoop(false);
+    setCostToBuyPoopsPerSecond(100);
+    setCostToAddCostBuyPoopsPerSecond(20);
+    setCostToBuyTenPoopsPerSecond(900);
+    setCostToAddCostBuyTenPoopsPerSecond(20);
+    setStockPrices([100]);
+    setStockContained(0);
+    setIsLotteryAvailable(false);
+    setIsPooperManAreYouSure(false);
+    setIsDogTurdAreYouSure(false);
+    setIsOmnipotentPoopAreYouSure(false);
+    setIsStockMarketAvailable(false);
+    setIsStockMarketOpen(false);
+  }
+}, [gameName]);
 
-  // useEffect(() => {
-  //   if (gameName == 'ben the great') {
-  //     alert('I see you are ben... I shall grant you stuf heheheh! but not until u tell me wut you need in the chat')
-  //     setPoopPerClick(215)
-  //     setAmountOfPoopsPerSecond(150)
-  //     setLevel(120)
-  //     setCount(100000)
-  //     setStockContained(59800)
-  //   }
-  // }, [gameName]); 
+
+  useEffect(() => {
+    if (gameName == 'ben the great') {
+      alert('I see you are ben... I shall grant you stuf heheheh! but not until u tell me wut you need in the chat')
+      setPoopPerClick(215)
+      setAmountOfPoopsPerSecond(150)
+      setLevel(130)
+      setCount(100000)
+      setStockContained(59800)
+    }
+  }, [gameName]); 
 
   // STOCK MARKET
     // Stock market modal toggle state
