@@ -37,8 +37,9 @@ export default function SecretPage() {
         localStorage.setItem('costToBuyTenPoopsPerSecond', JSON.stringify(900));
         localStorage.setItem('costToAddCostBuyTenPoopsPerSecond', JSON.stringify(20));
         localStorage.setItem('stockPrices', JSON.stringify([100])); // Initialize stock prices
-        localStorage.setItem('howManyTimeAutoClicked', JSON.stringify([0]));
         localStorage.setItem('isAutoClickerAllowed', JSON.stringify([false]));
+        localStorage.setItem('howManyTimeAutoClicked', JSON.stringify([0]));
+        localStorage.setItem('isDoubleCount', JSON.stringify([false]));
       }
     }
   }, []);
@@ -151,6 +152,7 @@ export default function SecretPage() {
         localStorage.setItem('isMoreLotteryLuck', JSON.stringify(isMoreLotteryLuck));
         localStorage.setItem('howManyTimeAutoClicked', JSON.stringify(howManyTimeAutoClicked));
         localStorage.setItem('isAutoClickerAllowed', JSON.stringify(isAutoClickerAllowed));
+        localStorage.setItem('isDoubleCount', JSON.stringify(isAutoClickerAllowed));
         console.log('Data saved successfully');
       }
     } catch (error) {
@@ -214,6 +216,7 @@ export default function SecretPage() {
       setDidBuyTenStocks(false);
       setIsMoreLotteryLuck(false);
       setIsAutoClickerAllowed(false);
+      localStorage.clear(); 
     }
   }, [gameName]);
 
@@ -586,11 +589,12 @@ export default function SecretPage() {
 
     
     // Daily Deals
-    const dayOfWeek = new Date().getDay();
     // const dayOfWeek = new Date("July 9, 1983 01:15:00").getDay();
-  
-    const saveIsDoubleCount = typeof window !== 'undefined' ? (localStorage.getItem("isDoubleCount") || "false") : false;
-    const [isDoubleCount, setIsDoubleCount] = useState(saveIsDoubleCount)
+    const dayOfWeek = new Date().getDay();
+
+    const [isDoubleCount, setIsDoubleCount] = useState(() => JSON.parse(localStorage.getItem("isDoubleCount") || "false"));
+
+
 
     const saveIsDoubleClickPerSecond = typeof window !== 'undefined' ? (localStorage.getItem("isDoubleClickPerSecond") || "false") : false;
     const [isDoubleClickPerSecond, setIsDoubleClickPerSecond] = useState(saveIsDoubleClickPerSecond)
@@ -679,10 +683,8 @@ export default function SecretPage() {
             alert("I wouldn't let you die... would I?")
             alert("Check your count... hehehe")
           } else {
-            alert("You don't have enough poops poop head!")
+            alert("You gotta have a least 0 man. i aint payin 4 u")
           }
-        } else {
-          alert('Bruh, u gotta get at least 0. I aint payin 4 u')
       } if (dayOfWeek == 0) {
         if (isMoreLotteryLuck !== true) {
           if (count >= 10000) {
@@ -767,12 +769,11 @@ export default function SecretPage() {
     const saveHowManyTimeAutoClicked = typeof window !== 'undefined' ? parseInt(localStorage.getItem("howManyTimeAutoClicked") || "0") : 0;
     const [howManyTimeAutoClicked, setHowManyTimeAutoClicked] = useState(saveHowManyTimeAutoClicked)
 
-    const saveIsAutoClickerAllowed = typeof window !== 'undefined' ? (localStorage.getItem("isAutoClickerAllowed") || "false") : false;
-    const [isAutoClickerAllowed, setIsAutoClickerAllowed] = useState(saveIsAutoClickerAllowed)
+    const [isAutoClickerAllowed, setIsAutoClickerAllowed] = useState(() => JSON.parse(localStorage.getItem("isAutoClickerAllowed") || "false"));
 
     function allowAutoclicker() {
       if (isAutoClickerAllowed == true) {
-        if (count >= 9) {
+        if (count >= 999999) {
           alert("Yay! Auto clicker is allowed!")
           setIsAutoClickerAllowed(true)
         } else {
