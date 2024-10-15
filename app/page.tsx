@@ -774,7 +774,7 @@ export default function SecretPage() {
     const [howManyTimeAutoClicked, setHowManyTimeAutoClicked] = useState(saveHowManyTimeAutoClicked)
 
     const saveIsAutoClickerAllowed = typeof window !== 'undefined' ? JSON.parse(localStorage.getItem("isAutoClickerAllowed") || "false") : false;
-    const [isAutoClickerAllowed, setIsAutoClickerAllowed] = useState(saveIsAutoClickerAllowed);
+    const [isAutoClickerAllowed, setIsAutoClickerAllowed] = useState(false);
 
     function allowAutoclicker() {
       if (isAutoClickerAllowed == false) {
@@ -791,7 +791,7 @@ export default function SecretPage() {
     
     useEffect(() => {
       const interval = setInterval(() => {
-        if (isAutoClickerAllowed !== true) {
+        if (isAutoClickerAllowed == false) {
           setIsOneSecond((prev) => prev + 1); 
           if (howManyTimesClicked >= 20) {
             setHowManyTimeAutoClicked(howManyTimeAutoClicked + 1)
