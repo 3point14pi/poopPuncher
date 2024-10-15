@@ -152,7 +152,6 @@ export default function SecretPage() {
         localStorage.setItem('isMoreLotteryLuck', JSON.stringify(isMoreLotteryLuck));
         localStorage.setItem('howManyTimeAutoClicked', JSON.stringify(howManyTimeAutoClicked));
         localStorage.setItem('isAutoClickerAllowed', JSON.stringify(isAutoClickerAllowed));
-        localStorage.setItem('isDoubleCount', JSON.stringify(isAutoClickerAllowed));
         console.log('Data saved successfully');
       }
     } catch (error) {
@@ -216,7 +215,7 @@ export default function SecretPage() {
       setDidBuyTenStocks(false);
       setIsMoreLotteryLuck(false);
       setIsAutoClickerAllowed(false);
-      localStorage.clear(); 
+      localStorage.clear(); // Clear everything
     }
   }, [gameName]);
 
@@ -591,10 +590,9 @@ export default function SecretPage() {
     // Daily Deals
     // const dayOfWeek = new Date("July 9, 1983 01:15:00").getDay();
     const dayOfWeek = new Date().getDay();
-
-    const [isDoubleCount, setIsDoubleCount] = useState(() => JSON.parse(localStorage.getItem("isDoubleCount") || "false"));
-
-
+  
+    const saveIsDoubleCount = typeof window !== 'undefined' ? (localStorage.getItem("isDoubleCount") || "false") : false;
+    const [isDoubleCount, setIsDoubleCount] = useState(saveIsDoubleCount)
 
     const saveIsDoubleClickPerSecond = typeof window !== 'undefined' ? (localStorage.getItem("isDoubleClickPerSecond") || "false") : false;
     const [isDoubleClickPerSecond, setIsDoubleClickPerSecond] = useState(saveIsDoubleClickPerSecond)
@@ -769,7 +767,8 @@ export default function SecretPage() {
     const saveHowManyTimeAutoClicked = typeof window !== 'undefined' ? parseInt(localStorage.getItem("howManyTimeAutoClicked") || "0") : 0;
     const [howManyTimeAutoClicked, setHowManyTimeAutoClicked] = useState(saveHowManyTimeAutoClicked)
 
-    const [isAutoClickerAllowed, setIsAutoClickerAllowed] = useState(() => JSON.parse(localStorage.getItem("isAutoClickerAllowed") || "false"));
+    const saveIsAutoClickerAllowed = typeof window !== 'undefined' ? (localStorage.getItem("isAutoClickerAllowed") || "false") : false;
+    const [isAutoClickerAllowed, setIsAutoClickerAllowed] = useState(saveIsAutoClickerAllowed)
 
     function allowAutoclicker() {
       if (isAutoClickerAllowed == true) {
