@@ -619,10 +619,13 @@ export default function SecretPage() {
 
     const [dailyDealOneMessage, setDailyDealOneMessage] = useState('Nothing')
     
+
+    const [isDailyDealOneBought, setIsDailyDealOneBought] = useState(false)
     function dailyDealOne() {
       if (dayOfWeek == 1) {
         if (isDoubleCount == false) {
           if (count >= 10000) {
+            setIsDailyDealOneBought(true)
             setCount(count - 10000)
             setIsDoubleCount(true)
             alert("You now have double poops per click!")
@@ -635,6 +638,7 @@ export default function SecretPage() {
       } if (dayOfWeek == 2) {
         if (isDoubleClickPerSecond == false) {
           if (count >= 10000) {
+            setIsDailyDealOneBought(true)
             setCount(count - 10000)
             setIsDoubleClickPerSecond(true)
             alert("You now have double poops per second!")
@@ -647,6 +651,7 @@ export default function SecretPage() {
       } if (dayOfWeek == 3) {
         if (isHalvePrice == false) {
           if (count >= 50000) {
+            setIsDailyDealOneBought(true)
             setCount(count - 50000)
             setIsHalvePrice(true)
             alert("All market prices are half price")
@@ -659,6 +664,7 @@ export default function SecretPage() {
       } if (dayOfWeek == 4) {
         if (didBuyTenStocks == false) {
           if (count >= 1000) {
+            setIsDailyDealOneBought(true)
             setCount(count - 1000)
             setDidBuyTenStocks(true)
             setStockContained(stockContained + 10)
@@ -671,10 +677,11 @@ export default function SecretPage() {
         }
       } if (dayOfWeek == 5) {
         if (isHalveStockPrice == false) {
-          if (count >= 10000) {
-            setCount(count - 10000)
+          if (count >= 100000) {
+            setIsDailyDealOneBought(true)
+            setCount(count - 100000)
             setIsHalveStockPrice(true)
-            alert("Stocks are now half price!")
+            alert("Stocks are now less price!")
           } else {
             alert("You don't have enough poops poop head!")
           }
@@ -683,6 +690,7 @@ export default function SecretPage() {
         }
       } if (dayOfWeek == 6) {
           if (count >= 0) {
+            setIsDailyDealOneBought(true)
             setPrankPoop(true)
             alert("I wouldn't let you die... would I?")
             alert("Check your count... hehehe")
@@ -692,6 +700,7 @@ export default function SecretPage() {
       } if (dayOfWeek == 0) {
         if (isMoreLotteryLuck == false) {
           if (count >= 10000) {
+            setIsDailyDealOneBought(true)
             setCount(count - 10000)
             setIsMoreLotteryLuck(true)
             alert("You now have 50% more luck in lotteries")
@@ -720,6 +729,24 @@ export default function SecretPage() {
 
     useEffect(() => {
       if (dayOfWeek == 1) {
+        setIsDailyDealOneBought(true)
+      } if (dayOfWeek == 2) {
+        setIsDailyDealOneBought(true)
+      } if (dayOfWeek == 3) {
+        setIsDailyDealOneBought(true)
+      } if (dayOfWeek == 4) {
+        setIsDailyDealOneBought(true)
+      } if (dayOfWeek == 5) {
+        setIsDailyDealOneBought(true)
+      } if (dayOfWeek == 6) {
+        setIsDailyDealOneBought(true)
+      } if (dayOfWeek == 0) {
+        setIsDailyDealOneBought(true)
+      }
+    }, [dayOfWeek])
+
+    useEffect(() => {
+      if (dayOfWeek == 1) {
         setDailyDealOneMessage('Click to get double poops per click the whole day! (10,000 poops)')
       } if (dayOfWeek == 2) {
         setDailyDealOneMessage('Click to get double poops per second the whole day! (10,000 poops)')
@@ -728,7 +755,7 @@ export default function SecretPage() {
       } if (dayOfWeek == 4) {
         setDailyDealOneMessage('Click to get 10 free stocks! (1,000 poops) --- hehehe')
       } if (dayOfWeek == 5) {
-        setDailyDealOneMessage('Click to cut stock BUYING PRICE by 25% (10,000 poops)')
+        setDailyDealOneMessage('Click to cut stock BUYING PRICE by 25% (100,000 poops)')
       } if (dayOfWeek == 6) {
         setDailyDealOneMessage('Click to dieeeeeeeeeeee! (free)')
       } if (dayOfWeek == 0) {
@@ -913,7 +940,7 @@ export default function SecretPage() {
         <div className={styles.poopMarket}>Daily Deals</div> <br />
 
         <button onClick={dailyDealOne} className={styles.doublePoop}>
-          {dailyDealOneMessage}
+          {dailyDealOneMessage} { isDailyDealOneBought ? '✅' : ''}
         </button> <br /><br />
 
         <div className={styles.poopMarket}>Da stuff you shall need</div> <br />
