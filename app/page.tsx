@@ -4,7 +4,6 @@ import { useState, useEffect } from 'react';
 import { Line } from 'react-chartjs-2';
 import styles from './index.module.css';
 import 'chart.js/auto';  // Automatically import everything needed for chart.js
-import { Anek_Gujarati, Anek_Gurmukhi } from 'next/font/google';
 
 export default function SecretPage() {
 
