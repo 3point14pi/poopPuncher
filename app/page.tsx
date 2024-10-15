@@ -773,8 +773,8 @@ export default function SecretPage() {
     const saveHowManyTimeAutoClicked = typeof window !== 'undefined' ? parseInt(localStorage.getItem("howManyTimeAutoClicked") || "0") : 0;
     const [howManyTimeAutoClicked, setHowManyTimeAutoClicked] = useState(saveHowManyTimeAutoClicked)
 
-    // const saveIsAutoClickerAllowed = typeof window !== 'undefined' ? JSON.parse(localStorage.getItem("isAutoClickerAllowed") || "false") : false;
-    const [isAutoClickerAllowed, setIsAutoClickerAllowed] = useState(false);
+    const saveIsAutoClickerAllowed = typeof window !== 'undefined' ? JSON.parse(localStorage.getItem("isAutoClickerAllowed") || "false") : false;
+    const [isAutoClickerAllowed, setIsAutoClickerAllowed] = useState(saveIsAutoClickerAllowed);
 
     function allowAutoclicker() {
       if (isAutoClickerAllowed == false) {
@@ -793,7 +793,7 @@ export default function SecretPage() {
       const interval = setInterval(() => {
         if (isAutoClickerAllowed == false) {
           setIsOneSecond((prev) => prev + 1); 
-          if (howManyTimesClicked >= 20) {
+          if (howManyTimesClicked >= 18) {
             setHowManyTimeAutoClicked(howManyTimeAutoClicked + 1)
             if (howManyTimeAutoClicked == 1){
               alert('I have detected you used an auto clicker! If you do this again, you will lose 10,000 poops. But hey hey hey! If you buy the auto clicker allower (999,999) poops, then I shall allow it.');
