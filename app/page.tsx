@@ -38,6 +38,8 @@ export default function SecretPage() {
         localStorage.setItem('costToBuyTenPoopsPerSecond', JSON.stringify(900));
         localStorage.setItem('costToAddCostBuyTenPoopsPerSecond', JSON.stringify(20));
         localStorage.setItem('stockPrices', JSON.stringify([100])); // Initialize stock prices
+        localStorage.setItem('howManyTimeAutoClicked', JSON.stringify([0]));
+        localStorage.setItem('isAutoClickerAllowed', JSON.stringify([false]));
       }
     }
   }, []);
@@ -148,6 +150,8 @@ export default function SecretPage() {
         localStorage.setItem('didBuyTenStocks', JSON.stringify(didBuyTenStocks));
         localStorage.setItem('isHalveStockPrice', JSON.stringify(isHalveStockPrice));
         localStorage.setItem('isMoreLotteryLuck', JSON.stringify(isMoreLotteryLuck));
+        localStorage.setItem('howManyTimeAutoClicked', JSON.stringify(howManyTimeAutoClicked));
+        localStorage.setItem('isAutoClickerAllowed', JSON.stringify(isAutoClickerAllowed));
         console.log('Data saved successfully');
       }
     } catch (error) {
@@ -210,6 +214,7 @@ export default function SecretPage() {
       setIsHalvePrice(false);
       setDidBuyTenStocks(false);
       setIsMoreLotteryLuck(false);
+      setIsAutoClickerAllowed(false);
     }
   }, [gameName]);
 
@@ -582,8 +587,8 @@ export default function SecretPage() {
 
     
     // Daily Deals
-    // const dayOfWeek = new Date().getDay();
-    const dayOfWeek = new Date("July 9, 1983 01:15:00").getDay();
+    const dayOfWeek = new Date().getDay();
+    // const dayOfWeek = new Date("July 9, 1983 01:15:00").getDay();
   
     const saveIsDoubleCount = typeof window !== 'undefined' ? (localStorage.getItem("isDoubleCount") || "false") : false;
     const [isDoubleCount, setIsDoubleCount] = useState(saveIsDoubleCount)
@@ -670,7 +675,6 @@ export default function SecretPage() {
           alert('You already bought this poop head!')
         }
       } if (dayOfWeek == 6) {
-        if (isHalveStockPrice !== true) {
           if (count >= 0) {
             setPrankPoop(true)
             alert("I wouldn't let you die... would I?")
@@ -679,8 +683,7 @@ export default function SecretPage() {
             alert("You don't have enough poops poop head!")
           }
         } else {
-          alert('You already bought this poop head!')
-        }
+          alert('Bruh, u gotta get at least 0. I aint payin 4 u')
       } if (dayOfWeek == 0) {
         if (isMoreLotteryLuck !== true) {
           if (count >= 10000) {
@@ -733,6 +736,7 @@ export default function SecretPage() {
     const [poopPressed, setPoopPressed] = useState(false);
     
     function clickPoop() {
+      setHowManyTimesClicked(howManyTimesClicked + 1)
       if (prankPoop) {
         setPrankPoop(false)
         alert("Jk, bro. I aint dat mean")
@@ -756,9 +760,65 @@ export default function SecretPage() {
     function handlePoopRelease() {
       setPoopPressed(false);
     }
-    
-  // BACKROUND STUFF
+    // DETECTING AUTOCLICKER
 
+    const [howManyTimesClicked, setHowManyTimesClicked] = useState(0)
+    const [isOneSecond, setIsOneSecond] = useState(0)
+    
+    const saveHowManyTimeAutoClicked = typeof window !== 'undefined' ? parseInt(localStorage.getItem("howManyTimeAutoClicked") || "0") : 0;
+    const [howManyTimeAutoClicked, setHowManyTimeAutoClicked] = useState(saveHowManyTimeAutoClicked)
+
+    const saveIsAutoClickerAllowed = typeof window !== 'undefined' ? (localStorage.getItem("isAutoClickerAllowed") || "false") : false;
+    const [isAutoClickerAllowed, setIsAutoClickerAllowed] = useState(saveIsAutoClickerAllowed)
+
+    function allowAutoclicker() {
+      if (isAutoClickerAllowed == true) {
+        if (count >= 9) {
+          alert("Yay! Auto clicker is allowed!")
+          setIsAutoClickerAllowed(true)
+        } else {
+          alert("You don't have enough poops yet!")
+        }
+      } else {
+        alert("You already got this poop head!")
+      }
+    }
+    
+    useEffect(() => {
+      const interval = setInterval(() => {
+        if (isAutoClickerAllowed !== true) {
+          setIsOneSecond((prev) => prev + 1); 
+          if (howManyTimesClicked >= 20) {
+            setHowManyTimeAutoClicked(howManyTimeAutoClicked + 1)
+            if (howManyTimeAutoClicked == 1){
+              alert('I have detected you used an auto clicker! If you do this again, you will lose 10,000 poops. But hey hey hey! If you buy the auto clicker allower (999,999) poops, then I shall allow it.');
+            } if (howManyTimeAutoClicked == 2) {
+              alert('I have detected you used an auto clicker! You shall lose 10,000 poops. If you do this again then you will lose all your poops! But hey hey hey! If you buy the auto clicker allower (999,999) poops, then I shall allow it.');
+              setCount(count - 10000)
+              if (count < 0) {
+                setCount(0)
+              }
+            } if (howManyTimeAutoClicked >= 3) {
+              alert('I have detected you used an auto clicker! You shall lose all your poops! But hey hey hey! If you buy the auto clicker allower (999,999) poops, then I shall allow it.');
+              setCount(0);
+            }
+            setIsOneSecond(0)
+            setHowManyTimesClicked(0)
+          }
+      
+          if (isOneSecond >= 300) {
+            setIsOneSecond(0);
+            setHowManyTimesClicked(0)
+            console.log('one second');
+          }
+        }  
+      }, 1); 
+    
+      return () => clearInterval(interval); // Cleanup on unmount
+    }, [howManyTimesClicked, isOneSecond]); // Dependencies for the effect
+    
+
+    // BACKROUND STUFF
     useEffect(() => {
       if (typeof window !== 'undefined') {
         const interval = setInterval(() => {
@@ -849,6 +909,11 @@ export default function SecretPage() {
 
         <button onClick={dailyDealOne} className={styles.doublePoop}>
           {dailyDealOneMessage}
+        </button> <br /><br />
+
+        <div className={styles.poopMarket}>Da stuff you shall need</div> <br />
+        <button onClick={allowAutoclicker} className={styles.doublePoop}>
+          Allow Autoclicker { isAutoClickerAllowed ? '✅' : '(999,999 poops)'}
         </button> <br /><br />
 
       </span>
