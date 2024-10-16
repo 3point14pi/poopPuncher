@@ -88,20 +88,9 @@ export default function SecretPage() {
   const [costToAddCostToBuyPoopClick, setCostToAddCostToBuyPoopClick] = useState(savedCostToAddCostToBuyPoopClick);
 
   // Poops per second-related states
-  const savedDivideAmountOfPoopsPerSecond = typeof window !== 'undefined' ? parseInt(localStorage.getItem("divideAmountOfPoopsPerSecond") || "0") : 0;
-  const [divideAmountOfPoopsPerSecond, setDivideAmountOfPoopsPerSecond] = useState(savedDivideAmountOfPoopsPerSecond);
-
-  const savedDisplayPoopPerSecond = typeof window !== 'undefined' ? parseInt(localStorage.getItem("displayPoopPerSecond") || "0") : 0;
-  const [displayPoopPerSecond, setDisplayPoopPerSecond] = useState(savedDisplayPoopPerSecond);
-
-  const savedRealDivideAmountOfPoopsPerSecond = typeof window !== 'undefined' ? parseInt(localStorage.getItem("realDivideAmountOfPoopsPerSecond") || "100") : 100;
-  const [realDivideAmountOfPoopsPerSecond, setRealDivideAmountOfPoopsPerSecond] = useState(savedRealDivideAmountOfPoopsPerSecond);
 
   const savedAmountOfPoopsPerSecond = typeof window !== 'undefined' ? parseInt(localStorage.getItem("amountOfPoopsPerSecond") || "0") : 0;
   const [amountOfPoopsPerSecond, setAmountOfPoopsPerSecond] = useState(savedAmountOfPoopsPerSecond);
-
-  const savedDidExceedPoop = typeof window !== 'undefined' ? JSON.parse(localStorage.getItem("didExceedPoop") || "false") : false;
-  const [didExceedPoop, setDidExceedPoop] = useState(savedDidExceedPoop);
 
   // Shop-related states
   const savedCostToBuyPoopsPerSecond = typeof window !== 'undefined' ? parseInt(localStorage.getItem("costToBuyPoopsPerSecond") || "100") : 100;
@@ -138,10 +127,6 @@ export default function SecretPage() {
         localStorage.setItem('costToBuyPoopClick', JSON.stringify(costToBuyPoopClick));
         localStorage.setItem('costToAddCostToBuyPoopClick', JSON.stringify(costToAddCostToBuyPoopClick));
         localStorage.setItem('amountOfPoopsPerSecond', JSON.stringify(amountOfPoopsPerSecond));
-        localStorage.setItem('divideAmountOfPoopsPerSecond', JSON.stringify(divideAmountOfPoopsPerSecond));
-        localStorage.setItem('realDivideAmountOfPoopsPerSecond', JSON.stringify(realDivideAmountOfPoopsPerSecond));
-        localStorage.setItem('displayPoopPerSecond', JSON.stringify(displayPoopPerSecond));
-        localStorage.setItem('didExceedPoop', JSON.stringify(didExceedPoop));
         localStorage.setItem('costToBuyPoopsPerSecond', JSON.stringify(costToBuyPoopsPerSecond));
         localStorage.setItem('costToAddCostBuyPoopsPerSecond', JSON.stringify(costToAddCostBuyPoopsPerSecond));
         localStorage.setItem('stockPrices', JSON.stringify(stockPrices));
@@ -165,7 +150,7 @@ export default function SecretPage() {
 // Add all the state variables that trigger save when changed
   useEffect(() => {
     save();
-  }, [count, level, gameName, amountOfCookiesForLevelUp, addToAmountOfCookiesForLevelUp, poopBarThing, poopsClickedEver, PoopPerClick, costToBuyPoopClick, costToAddCostToBuyPoopClick, amountOfPoopsPerSecond, divideAmountOfPoopsPerSecond, realDivideAmountOfPoopsPerSecond, displayPoopPerSecond, didExceedPoop, costToBuyPoopsPerSecond, costToAddCostBuyPoopsPerSecond]);
+  }, [count, level, gameName, amountOfCookiesForLevelUp, addToAmountOfCookiesForLevelUp, poopBarThing, poopsClickedEver, PoopPerClick, costToBuyPoopClick, costToAddCostToBuyPoopClick, amountOfPoopsPerSecond, costToBuyPoopsPerSecond, costToAddCostBuyPoopsPerSecond]);
 
   
 
@@ -195,10 +180,6 @@ export default function SecretPage() {
       setCostToBuyPoopClick(100);
       setCostToAddCostToBuyPoopClick(10);
       setAmountOfPoopsPerSecond(0);
-      setDivideAmountOfPoopsPerSecond(0);
-      setRealDivideAmountOfPoopsPerSecond(100);
-      setDisplayPoopPerSecond(0);
-      setDidExceedPoop(false);
       setCostToBuyPoopsPerSecond(100);
       setCostToAddCostBuyPoopsPerSecond(20);
       setCostToBuyTenPoopsPerSecond(900);
@@ -518,33 +499,19 @@ export default function SecretPage() {
     const addMorePoopsPerSecond = () => {
       if (isHalvePrice == true){
         if (count >= costToBuyPoopsPerSecond/2) {
-          if (!didExceedPoop) {
-            setDivideAmountOfPoopsPerSecond(divideAmountOfPoopsPerSecond + 1);
-            setDisplayPoopPerSecond(divideAmountOfPoopsPerSecond + 1);
-          } else {
-            setAmountOfPoopsPerSecond((prevCount) => prevCount + 1);
-            setDisplayPoopPerSecond(amountOfPoopsPerSecond + 1);
-          }
-          setRealDivideAmountOfPoopsPerSecond(1000 / divideAmountOfPoopsPerSecond);
           setCount(count - costToBuyPoopsPerSecond/2);
           setCostToBuyPoopsPerSecond(costToBuyPoopsPerSecond + costToAddCostBuyPoopsPerSecond);
           setCostToAddCostBuyPoopsPerSecond(costToAddCostBuyPoopsPerSecond + 20);
+          setAmountOfPoopsPerSecond(amountOfPoopsPerSecond + 1)
         } else {
           alert("You don't have enough poops you poop head!");
         }
       } else {
         if (count >= costToBuyPoopsPerSecond) {
-          if (!didExceedPoop) {
-            setDivideAmountOfPoopsPerSecond(divideAmountOfPoopsPerSecond + 1);
-            setDisplayPoopPerSecond(divideAmountOfPoopsPerSecond + 1);
-          } else {
-            setAmountOfPoopsPerSecond((prevCount) => prevCount + 1);
-            setDisplayPoopPerSecond(amountOfPoopsPerSecond + 1);
-          }
-          setRealDivideAmountOfPoopsPerSecond(1000 / divideAmountOfPoopsPerSecond);
           setCount(count - costToBuyPoopsPerSecond);
           setCostToBuyPoopsPerSecond(costToBuyPoopsPerSecond + costToAddCostBuyPoopsPerSecond);
           setCostToAddCostBuyPoopsPerSecond(costToAddCostBuyPoopsPerSecond + 20);
+          setAmountOfPoopsPerSecond(amountOfPoopsPerSecond + 1)
         } else {
           alert("You don't have enough poops you poop head!");
         }
@@ -554,33 +521,19 @@ export default function SecretPage() {
     function addTenMorePoopsPerSecond() {
       if (isHalvePrice == true) {
         if (count >= costToBuyTenPoopsPerSecond/2) {
-          if (!didExceedPoop) {
-            setDivideAmountOfPoopsPerSecond(divideAmountOfPoopsPerSecond + 10);
-            setDisplayPoopPerSecond(divideAmountOfPoopsPerSecond + 10);
-          } else {
-            setAmountOfPoopsPerSecond((prevCount) => prevCount + 10);
-            setDisplayPoopPerSecond(amountOfPoopsPerSecond + 10);
-          }
-          setRealDivideAmountOfPoopsPerSecond(1000 / divideAmountOfPoopsPerSecond);
-          setCount(count - costToBuyTenPoopsPerSecond/2);
+          setCount(count - costToBuyTenPoopsPerSecond/2)
           setCostToBuyTenPoopsPerSecond(costToBuyTenPoopsPerSecond + costToAddCostBuyTenPoopsPerSecond);
           setCostToAddCostBuyTenPoopsPerSecond(costToAddCostBuyTenPoopsPerSecond + 20); // Adjusted increment for bulk purchase
+          setAmountOfPoopsPerSecond(amountOfPoopsPerSecond + 10)
         } else {
           alert("You don't have enough poops you poop head!");
         }
       } else {
         if (count >= costToBuyTenPoopsPerSecond) {
-          if (!didExceedPoop) {
-            setDivideAmountOfPoopsPerSecond(divideAmountOfPoopsPerSecond + 10);
-            setDisplayPoopPerSecond(divideAmountOfPoopsPerSecond + 10);
-          } else {
-            setAmountOfPoopsPerSecond((prevCount) => prevCount + 10);
-            setDisplayPoopPerSecond(amountOfPoopsPerSecond + 10);
-          }
-          setRealDivideAmountOfPoopsPerSecond(1000 / divideAmountOfPoopsPerSecond);
           setCount(count - costToBuyTenPoopsPerSecond);
           setCostToBuyTenPoopsPerSecond(costToBuyTenPoopsPerSecond + costToAddCostBuyTenPoopsPerSecond);
           setCostToAddCostBuyTenPoopsPerSecond(costToAddCostBuyTenPoopsPerSecond + 20); // Adjusted increment for bulk purchase
+          setAmountOfPoopsPerSecond(amountOfPoopsPerSecond + 10)
         } else {
           alert("You don't have enough poops you poop head!");
         }
@@ -720,6 +673,7 @@ export default function SecretPage() {
         setIsDoubleClickPerSecond(false)
       } if (dayOfWeek !== 3) {
         setIsHalvePrice(false)
+        alert('idk')
       } if (dayOfWeek !== 4) {
         setDidBuyTenStocks(false)
       } if (dayOfWeek !== 5) {
@@ -728,39 +682,39 @@ export default function SecretPage() {
     }, [dayOfWeek]);
 
     useEffect(() => {
-      if (dayOfWeek == 1) {
+      if (isDoubleCount == true) {
         setIsDailyDealOneBought(true)
-      } if (dayOfWeek == 2) {
+      } else if (isDoubleClickPerSecond == true) {
         setIsDailyDealOneBought(true)
-      } if (dayOfWeek == 3) {
+      } else if (isHalvePrice == true) {
         setIsDailyDealOneBought(true)
-      } if (dayOfWeek == 4) {
+      } else if (didBuyTenStocks == true) {
         setIsDailyDealOneBought(true)
-      } if (dayOfWeek == 5) {
+      } else if (isHalveStockPrice == true) {
         setIsDailyDealOneBought(true)
-      } if (dayOfWeek == 6) {
+      } else if (isMoreLotteryLuck == true) {
         setIsDailyDealOneBought(true)
-      } if (dayOfWeek == 0) {
-        setIsDailyDealOneBought(true)
+      } else {
+        setIsDailyDealOneBought(false)
       }
     }, [dayOfWeek])
 
     useEffect(() => {
       if (dayOfWeek == 1) {
         setDailyDealOneMessage('Click to get double poops per click the whole day! (10,000 poops)')
-      } if (dayOfWeek == 2) {
+      } else if (dayOfWeek == 2) {
         setDailyDealOneMessage('Click to get double poops per second the whole day! (10,000 poops)')
-      } if (dayOfWeek == 3) {
+      } else if (dayOfWeek == 3) {
         setDailyDealOneMessage('Click to halve price of poop shop the whole day! (50,000 poops)')
-      } if (dayOfWeek == 4) {
+      } else if (dayOfWeek == 4) {
         setDailyDealOneMessage('Click to get 10 free stocks! (1,000 poops) --- hehehe')
-      } if (dayOfWeek == 5) {
+      } else if (dayOfWeek == 5) {
         setDailyDealOneMessage('Click to cut stock BUYING PRICE by 25% (100,000 poops)')
-      } if (dayOfWeek == 6) {
+      } else if (dayOfWeek == 6) {
         setDailyDealOneMessage('Click to dieeeeeeeeeeee! (free)')
-      } if (dayOfWeek == 0) {
+      } else if (dayOfWeek == 0) {
         setDailyDealOneMessage("Click to increase lottery chances by 50% (10,000 poops)")
-      }
+      } 
     }, [dayOfWeek]);
     
     // WHAT HAPPENS WHEN POOP PRESSED
@@ -852,43 +806,14 @@ export default function SecretPage() {
 
     // BACKROUND STUFF
     useEffect(() => {
-      if (typeof window !== 'undefined') {
-        const interval = setInterval(() => {
-          if (divideAmountOfPoopsPerSecond > 0) {
-            if (divideAmountOfPoopsPerSecond > 100) {
-              setRealDivideAmountOfPoopsPerSecond(1000);
-              setDidExceedPoop(true);
-              if (isDoubleClickPerSecond) {
-                setCount((prevCount) => prevCount + 2 * amountOfPoopsPerSecond);
-                setPoopsClickedEver((prevPoops) => prevPoops + 2 * amountOfPoopsPerSecond);
-                setPoopBarThing((prevPoopBar) => prevPoopBar + 2 * amountOfPoopsPerSecond);
-              } else{
-                setCount((prevCount) => prevCount + amountOfPoopsPerSecond);
-                setPoopsClickedEver((prevPoops) => prevPoops + amountOfPoopsPerSecond);
-                setPoopBarThing((prevPoopBar) => prevPoopBar +  amountOfPoopsPerSecond);
-            }
-            } else {
-              if (isDoubleClickPerSecond) {
-                setCount((prevCount) => prevCount + 2);
-                setPoopsClickedEver((prevPoops) => prevPoops + 2);
-                setPoopBarThing((prevPoopBar) => prevPoopBar + 2);
-              } else {
-              setCount((prevCount) => prevCount + 1);
-              setPoopsClickedEver((prevPoops) => prevPoops + 1);
-              setPoopBarThing((prevPoopBar) => prevPoopBar + 1);
-              }
-            }
-          }
-        }, realDivideAmountOfPoopsPerSecond);
-        
-        return () => clearInterval(interval);
-      }
-    }, [realDivideAmountOfPoopsPerSecond, amountOfPoopsPerSecond, divideAmountOfPoopsPerSecond]);
+      const interval = setInterval(() => {
+        console.log(amountOfPoopsPerSecond)
+        setCount((prev) => prev + amountOfPoopsPerSecond); 
+      }, 1000); 
+    
+      return () => clearInterval(interval); // Cleanup on unmount
+    }, [amountOfPoopsPerSecond, count]); // Dependencies for the effect
 
-
-    useEffect(() => {
-      setRealDivideAmountOfPoopsPerSecond(1000 / divideAmountOfPoopsPerSecond);
-    }, [divideAmountOfPoopsPerSecond]);
 
   // CHECK FOR LEVEL
 
@@ -969,7 +894,7 @@ export default function SecretPage() {
         <div className={styles.statsPoop}>Poops clicked: { prankPoop ? 0 : count}</div> <br />
         <div className={styles.statsPoop}>Poops clicked ever: {poopsClickedEver}</div> <br />
         <div className={styles.statsShop}>Poops per click: {PoopPerClick}{isDoubleCount ? '=>(2x)' : ''}</div> <br />
-        <div className={styles.statsShop}>Poops per second: {displayPoopPerSecond}{isDoubleClickPerSecond ? '=>(2x)' : ''}</div><br />
+        <div className={styles.statsShop}>Poops per second: {amountOfPoopsPerSecond}{isDoubleClickPerSecond ? '=>(2x)' : ''}</div><br />
 
       </div>
 
