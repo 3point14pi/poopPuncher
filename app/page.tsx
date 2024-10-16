@@ -129,6 +129,8 @@ export default function SecretPage() {
         localStorage.setItem('amountOfPoopsPerSecond', JSON.stringify(amountOfPoopsPerSecond));
         localStorage.setItem('costToBuyPoopsPerSecond', JSON.stringify(costToBuyPoopsPerSecond));
         localStorage.setItem('costToAddCostBuyPoopsPerSecond', JSON.stringify(costToAddCostBuyPoopsPerSecond));
+        localStorage.setItem('costToBuyTenPoopsPerSecond', JSON.stringify(costToBuyTenPoopsPerSecond));
+        localStorage.setItem('costToAddCostBuyTenPoopsPerSecond', JSON.stringify(costToAddCostBuyTenPoopsPerSecond));
         localStorage.setItem('stockPrices', JSON.stringify(stockPrices));
         localStorage.setItem('stockContained', JSON.stringify(stockContained));
         localStorage.setItem('isDoubleCount', JSON.stringify(stockContained));
