@@ -275,6 +275,7 @@
   background-color: rgb(24, 198, 59);
   pointer-events: none;
   border-radius: 20px;
+  /* z-index: 100000; */
 }
 
 .stuffyTitle {
@@ -288,6 +289,7 @@
   font-size: 50px;
   top: 50px;
   left: 5vw;
+  /* z-index: 10; */
 }
 
 .lotteryTickets {
@@ -478,6 +480,12 @@
 .areYouSureOmnipotentPoopBodyTitle {
   margin-top: 10px;
   font-size: 30px;
+}
+
+.theFrogToilet {
+  position: absolute;
+  top: 0px;
+  left: -500px;
 }
 
 .stockMarketPic {

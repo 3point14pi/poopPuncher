@@ -475,6 +475,14 @@ export default function SecretPage() {
       }
     }
 
+  // Frog Turd
+
+  const [isFrogTurdOpen, setIsFrogTurdOpen] = useState(false)
+
+  function topenIsFrogTurdOpen() {
+    setIsFrogTurdOpen((prevState) => !prevState);
+  }
+
   // SHOP
     function morePoopPerClick() {
       if (isHalvePrice == true) {
@@ -810,7 +818,15 @@ export default function SecretPage() {
     useEffect(() => {
       const interval = setInterval(() => {
         console.log(amountOfPoopsPerSecond)
-        setCount((prev) => prev + amountOfPoopsPerSecond); 
+        if (isDoubleClickPerSecond) {
+          setCount((prev) => prev + amountOfPoopsPerSecond*2)
+          setPoopBarThing((prev) => prev + amountOfPoopsPerSecond*2)
+          setPoopsClickedEver(((prev) => prev + amountOfPoopsPerSecond*2))
+        } else {
+          setCount((prev) => prev + amountOfPoopsPerSecond)
+          setPoopBarThing((prev) => prev + amountOfPoopsPerSecond)
+          setPoopsClickedEver(((prev) => prev + amountOfPoopsPerSecond))
+        }
       }, 1000); 
     
       return () => clearInterval(interval); // Cleanup on unmount
@@ -1070,8 +1086,25 @@ export default function SecretPage() {
             </div>
           </div>
 
+
+        </div> <br />
+
+        {/* CRAFTING TABLE */}
+        <div className={styles.stuffPicGroup} onClick={topenIsFrogTurdOpen}>
+          <img className={styles.stockMarketPic} src={isStockMarketAvailable ? "frogTurdPic.png":"frogTurdPic.png"} alt="stockMarketPic" />
+          <span className={styles.stuffPicLabel}><strong>Frog Turd (coming Soon)</strong></span>
+        </div>
+
+        <div style = {{ opacity: isFrogTurdOpen ? 1 : 0, pointerEvents: isFrogTurdOpen ? 'all' : 'none',}}>
+          <div className={styles.stuffyScreen}>
+            <img className={styles.theFrogToilet} src="theFrogToilet.png" alt="TheFrogToilet" />
+          </div>
+          <button className={styles.stuffXExit} onClick={topenIsFrogTurdOpen}>
+              &#10008;
+          </button>
         </div>
       </div>
+
     </div>
   );
 }
