@@ -58,7 +58,7 @@ export default function SecretPage() {
   const [gameName, setGameName] = useState(() => {
     if (typeof window !== 'undefined') {
       const savedName = localStorage.getItem('gameName');
-      return savedName || 'My Skibidi Toilet'; // Default value if not found
+      return savedName || 'My Skibidi Toilet (changable)'; // Default value if not found
     }
     return 'My Skibidi Toilet'; // Fallback value if window is not available
   });
