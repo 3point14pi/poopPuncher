@@ -200,6 +200,7 @@ export default function SecretPage() {
       setDidBuyTenStocks(false);
       setIsMoreLotteryLuck(false);
       setIsAutoClickerAllowed(false);
+      setIsFrogTurdAvailable(false);
       localStorage.clear(); // Clear everything
     }
   }, [gameName]);
