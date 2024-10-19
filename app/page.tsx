@@ -677,13 +677,13 @@ export default function SecretPage() {
 
   useEffect(() => {
     const interval = setInterval(() => {
-      if (isFrogTurdAvailable){
+      if (isFrogTurdAvailable && isFrogTurdOpen) {
         createFrog(); // Create a new frog every second when isFrogTurdOpen is true
       }
-    }, 1000/frogsPerSecond);
-
+    }, 1000 / frogsPerSecond);
+  
     return () => clearInterval(interval); // Cleanup on unmount
-  }, [isFrogTurdOpen]);
+  }, [isFrogTurdOpen, frogsPerSecond, isFrogTurdAvailable]); // Add isFrogTurdOpen and frogsPerSecond as dependencies  
   
 
 
