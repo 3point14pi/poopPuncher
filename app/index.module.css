@@ -484,8 +484,10 @@
 
 .theFrogToilet {
   position: absolute;
-  top: 0px;
-  left: -500px;
+  bottom: 0;
+  right: 0vw;
+  width: 200px;
+  height: 200px;
 }
 
 .stockMarketPic {

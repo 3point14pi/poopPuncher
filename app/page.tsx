@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Line } from 'react-chartjs-2';
 import styles from './index.module.css';
 import 'chart.js/auto';  // Automatically import everything needed for chart.js
@@ -477,11 +477,151 @@ export default function SecretPage() {
 
   // Frog Turd
 
-  const [isFrogTurdOpen, setIsFrogTurdOpen] = useState(false)
+  const [isFrogTurdOpen, setIsFrogTurdOpen] = useState(false);
+  const [isFrogTurdAvailable, setIsFrogTurdAvailable] = useState(false);
+  const isFrogTurdOpenRef = useRef(isFrogTurdOpen); // Ref to track isFrogTurdOpen
 
-  function topenIsFrogTurdOpen() {
-    setIsFrogTurdOpen((prevState) => !prevState);
+  // Keep the ref in sync with the state
+  useEffect(() => {
+    isFrogTurdOpenRef.current = isFrogTurdOpen;
+  }, [isFrogTurdOpen]);
+
+  useEffect(() => {
+    if (level >= 50) {
+      setIsFrogTurdAvailable(true)
+    }
+  }, [level]);
+
+  // Function to increment the count when a frog is clicked
+  function incrementCount() {
+    setCount(prevCount => prevCount + 100)
+    setPoopsClickedEver(prevCount => prevCount + 100);
+    setPoopBarThing(prevCount => prevCount + 100);
   }
+
+  function toggleIsFrogTurdOpen() {
+    if (isFrogTurdAvailable) {
+      setIsFrogTurdOpen((prevState) => !prevState);
+    } else {
+      alert('You need to get to level 50 first!')
+    }
+  }
+
+  // Frog class definition
+  class Frog {
+    private element: HTMLImageElement;
+    private positionX: number = 0;
+    private positionY: number = 0;
+    public jumpingUp: boolean = true;
+    public isJumpingToToilet: boolean = false;
+    public isOnToilet: boolean = false;
+    private screenWidth: number = window.innerWidth;
+    private removed: boolean = false;
+
+    constructor(isFrogTurdOpenRef: React.MutableRefObject<boolean>) {
+      this.element = document.createElement('img');
+      this.element.src = 'daFrog.png'; // Replace with your frog image path
+      this.element.classList.add('frog');
+      this.element.style.width = '100px';
+      this.element.style.position = 'absolute';
+      this.element.style.bottom = '30px'; // Start at a reasonable vertical position
+      this.element.style.left = '0px'; // Start at the left side of the screen
+      document.body.appendChild(this.element);
+
+      // Add an event listener to the frog element
+      this.element.addEventListener('click', this.handleClick.bind(this));
+
+      // Start moving and jumping
+      setInterval(() => this.move(isFrogTurdOpenRef), 16); // Smooth forward movement
+      setInterval(() => this.jump(isFrogTurdOpenRef), 50); // Smooth jumping
+    }
+
+    // Method to handle the click event
+    handleClick() {
+      if (!this.removed) {
+        this.remove(); // Optionally remove the frog after the click
+      }
+    }
+
+    // Method to move the frog forward
+    move(isFrogTurdOpenRef: React.MutableRefObject<boolean>) {
+      if (!this.removed) {
+        // Check if isFrogTurdOpen is false and set visibility accordingly
+        this.element.style.opacity = isFrogTurdOpenRef.current ? '1' : '0';
+
+
+        this.positionX += 1;
+        this.updateTransform();
+
+        if (this.positionX > this.screenWidth - 200) {
+          this.remove(); // Remove frog if it reaches the right side of the screen
+        }
+
+        if (this.positionX >= this.screenWidth - 300) {
+          if (this.jumpingUp) {
+            this.isJumpingToToilet = true;
+            this.positionY -= 2; // Jumping up
+            if (this.positionY <= -100) {
+              this.jumpingUp = false; // Start falling down
+            }
+          }
+        }
+
+        if (this.positionX > this.screenWidth) {
+          this.isOnToilet = true;
+        }
+      }
+    }
+
+    // Method to handle the frog's jumping up and down
+    jump(isFrogTurdOpenRef: React.MutableRefObject<boolean>) {
+      if (!this.removed && !this.isJumpingToToilet && isFrogTurdOpenRef.current) {
+        if (this.jumpingUp) {
+          this.positionY -= 2; // Jumping up
+          if (this.positionY <= -10) {
+            this.jumpingUp = false; // Start falling down
+          }
+        } else {
+          this.positionY += 2; // Falling down
+          if (this.positionY >= 0) {
+            this.jumpingUp = true; // Start jumping up again
+          }
+        }
+        this.updateTransform();
+      }
+    }
+
+    // Method to remove the frog from the DOM
+    remove() {
+      if (!this.removed) {
+        this.element.remove(); // Remove the frog's HTML element
+        incrementCount(); // Increment the count when the frog is removed
+        this.removed = true; // Mark as removed to prevent further updates
+      }
+    }
+
+    // Method to update the transformation (position + flipping)
+    updateTransform() {
+      this.element.style.transform = `translate(${this.positionX}px, ${this.positionY}px)`;
+    }
+  }
+
+  // Function to create new frogs
+  function createFrog() {
+    new Frog(isFrogTurdOpenRef); // Pass the isFrogTurdOpenRef to each new Frog instance
+  }
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      if (isFrogTurdAvailable){
+        createFrog(); // Create a new frog every second when isFrogTurdOpen is true
+      }
+    }, 2000);
+
+    return () => clearInterval(interval); // Cleanup on unmount
+  }, [isFrogTurdOpen]);
+  
+
 
   // SHOP
     function morePoopPerClick() {
@@ -683,7 +823,6 @@ export default function SecretPage() {
         setIsDoubleClickPerSecond(false)
       } if (dayOfWeek !== 3) {
         setIsHalvePrice(false)
-        alert('idk')
       } if (dayOfWeek !== 4) {
         setDidBuyTenStocks(false)
       } if (dayOfWeek !== 5) {
@@ -769,7 +908,7 @@ export default function SecretPage() {
 
     function allowAutoclicker() {
       if (isAutoClickerAllowed == false) {
-        if (count >= 999999) {
+        if (count >= 999999999) {
           alert("Yay! Auto clicker is allowed!")
           setIsAutoClickerAllowed(true)
         } else {
@@ -787,15 +926,15 @@ export default function SecretPage() {
           if (howManyTimesClicked >= 18) {
             setHowManyTimeAutoClicked(howManyTimeAutoClicked + 1)
             if (howManyTimeAutoClicked == 1){
-              alert('I have detected you used an auto clicker! If you do this again, you will lose 10,000 poops. But hey hey hey! If you buy the auto clicker allower (999,999) poops, then I shall allow it.');
+              alert('I have detected you used an auto clicker! If you do this again, you will lose 10,000 poops. But hey hey hey! If you buy the auto clicker allower (999,999,999) poops, then I shall allow it.');
             } if (howManyTimeAutoClicked == 2) {
-              alert('I have detected you used an auto clicker! You shall lose 10,000 poops. If you do this again then you will lose all your poops! But hey hey hey! If you buy the auto clicker allower (999,999) poops, then I shall allow it.');
+              alert('I have detected you used an auto clicker! You shall lose 10,000 poops. If you do this again then you will lose all your poops! But hey hey hey! If you buy the auto clicker allower (999,999,999) poops, then I shall allow it.');
               setCount(count - 10000)
               if (count < 0) {
                 setCount(0)
               }
             } if (howManyTimeAutoClicked >= 3) {
-              alert('I have detected you used an auto clicker! You shall lose all your poops! But hey hey hey! If you buy the auto clicker allower (999,999) poops, then I shall allow it.');
+              alert('I have detected you used an auto clicker! You shall lose all your poops! But hey hey hey! If you buy the auto clicker allower (999,999,999) poops, then I shall allow it.');
               setCount(0);
             }
             setIsOneSecond(0)
@@ -1090,16 +1229,17 @@ export default function SecretPage() {
         </div> <br />
 
         {/* CRAFTING TABLE */}
-        <div className={styles.stuffPicGroup} onClick={topenIsFrogTurdOpen}>
-          <img className={styles.stockMarketPic} src={isStockMarketAvailable ? "frogTurdPic.png":"frogTurdPic.png"} alt="stockMarketPic" />
-          <span className={styles.stuffPicLabel}><strong>Frog Turd (coming Soon)</strong></span>
+        <div className={styles.stuffPicGroup} onClick={toggleIsFrogTurdOpen}>
+          <img className={styles.stockMarketPic} src={isFrogTurdAvailable ? "frogTurdPic.png" : "frogTurdPicHide.png"} alt="stockMarketPic" />
+          <span className={styles.stuffPicLabel}><strong>Frog Feces Factory</strong></span>
         </div>
 
         <div style = {{ opacity: isFrogTurdOpen ? 1 : 0, pointerEvents: isFrogTurdOpen ? 'all' : 'none',}}>
           <div className={styles.stuffyScreen}>
+          <div className={styles.stuffyTitle}>Frog Feces Factory</div>
             <img className={styles.theFrogToilet} src="theFrogToilet.png" alt="TheFrogToilet" />
           </div>
-          <button className={styles.stuffXExit} onClick={topenIsFrogTurdOpen}>
+          <button className={styles.stuffXExit} onClick={toggleIsFrogTurdOpen}>
               &#10008;
           </button>
         </div>
