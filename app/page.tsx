@@ -533,7 +533,7 @@ export default function SecretPage() {
 
   function addFrogsPerSecond() {
     if (count >= costToBuyFrogsPerSecond) {
-      setFrogsPerSecond(frogsPerSecond + 0.25)
+      setFrogsPerSecond(frogsPerSecond + 0.1)
       setCount(count - costToBuyFrogsPerSecond)
       setCostToBuyFrogsPerSecond(costToBuyFrogsPerSecond + addToCostFrogsPerSecond)
       setAddToCostFrogsPerSecond(addToCostFrogsPerSecond + 10)
