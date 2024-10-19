@@ -132,6 +132,21 @@
   top: 3px;
 }
 
+.addTenPoopsPerClick {
+  position: relative;
+  background-color: rgb(100, 209, 234);
+  border-radius: 20px;
+  border: 0px;
+  font-size: 15px;
+  padding: 15px;
+  box-shadow: 4px 4px 6px rgba(0, 0, 0, 0.5);
+}
+
+.addTenPoopsPerClick:hover {
+  box-shadow: 4px 4px 6px rgba(0, 0, 0, 0);
+  right: -3px;
+  top: 3px;
+}
 
 .addTenPoopsPerSecond {
   position: relative;
@@ -524,3 +539,226 @@
   border-radius: 10px;
   top: 100px;
 }
+
+.frogTurdStats {
+  overflow-y: auto;
+  position: absolute;
+  background-color: gray;
+  bottom: 30vh;
+  width: 30vw;
+  height: 30vh;
+  font-size: 60px;
+  text-align: left;
+  text-indent: 10px;
+  font-family: 'Earwig Factory', sans-serif;
+  box-shadow: 4px 4px 6px rgba(0, 0, 0, 0.7);
+}
+
+.frogStatWords {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 50px;
+  background-color: rgb(77, 74, 74);
+  margin-top: 10px;
+}
+
+.buyMorePoopPerFrog {
+  margin-left: 10px;
+}
+
+.buyMoreFrogsPerSecond {
+  margin-left: 10px;
+}
+
+@media (max-width: 768px) {
+.background {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
+}
+
+/* POOP OBJECTS */
+.daPoop {
+  position: fixed;
+  height: 50vh; /* Reduced height for mobile */
+  width: 25vw;  /* Reduced width for mobile */
+  bottom: 0vh;
+  right: 37.5vw; /* Centered */
+}
+
+.stinkLines {
+  position: absolute;
+  opacity: 1;
+  top: 5vh;
+  right: 28vw;
+  width: 30vw;
+  height: 30vh;
+  transition: 0.2s; 
+}
+
+/* TOP BAR */
+.topBar {
+  position: fixed;
+  height: 8vh; /* Smaller height */
+  width: 80vw; /* Wider bar for mobile */
+  background-color: rgb(214, 176, 52);
+  border-radius: 20px;
+  box-shadow: 4px 4px 6px rgba(0, 0, 0, 0.7);
+  right: 10vw; /* Centered */
+  top: 2vh;
+}
+
+.gameName {
+  position: relative;
+  left: 0;
+  top: 1vh;
+  width: 70vw; /* Adjusted for mobile */
+  height: 6vh;
+  font-size: 4vw; /* Adjusted for mobile */
+  z-index: 10;
+  text-align: center;
+  padding: 10px;
+  background: transparent;
+  border: transparent;
+  font-family: 'Faith Hope', sans-serif;
+}
+
+/* LEFT MENU */
+.leftMenu {
+  position: fixed;
+  background-color: rgb(246, 48, 8);
+  top: 2vh;
+  left: 1vw;
+  height: 90vh;
+  width: 15vw; /* Thinner for mobile */
+  border-radius: 15px;
+  padding: 10px;
+  box-shadow: 3px 3px 4px rgba(0, 0, 0, 0.7);
+  overflow-y: auto; 
+}
+
+.poopMarket {
+  display: flex;
+  justify-content: center;
+  background-color: rgb(220, 42, 6);
+  font-size: 3vw; /* Smaller text for mobile */
+  border-radius: 15px;
+  padding: 10px;
+}
+
+/* Buttons */
+.morePoopClicker, .addMorePoopsPerSecond, .addTenPoopsPerSecond, .doublePoop {
+  position: relative;
+  background-color: rgb(12, 197, 178);
+  border-radius: 15px;
+  padding: 2vw; /* Smaller padding for mobile */
+  border: 0;
+  font-size: 3vw; /* Smaller text */
+  box-shadow: 3px 3px 4px rgba(0, 0, 0, 0.5);
+  margin-top: 1vh;
+}
+
+.morePoopClicker:hover, .addMorePoopsPerSecond:hover, .addTenPoopsPerSecond:hover, .doublePoop:hover {
+  box-shadow: 3px 3px 4px rgba(0, 0, 0, 0);
+  right: -1vw;
+  top: 1vh;
+}
+
+/* RIGHT BAR */
+.rightBar, .stuff {
+  position: fixed;
+  background-color: rgb(0, 255, 157);
+  top: 2vh;
+  right: 1vw;
+  height: 40vh; /* Reduced height for mobile */
+  width: 15vw; /* Thinner for mobile */
+  border-radius: 15px;
+  padding: 10px;
+  box-shadow: 3px 3px 4px rgba(0, 0, 0, 0.7);
+  overflow-y: auto; 
+}
+
+.stats {
+  display: flex;
+  justify-content: center;
+  font-size: 3vw; /* Smaller font for mobile */
+  background-color: rgb(11, 233, 148);
+  border-radius: 15px;
+}
+
+.level, .statsPoop, .statsShop, .statsStock {
+  background-color: rgb(127, 255, 127);
+  border-radius: 15px;
+  padding: 2vw; /* Adjusted padding */
+}
+
+/* STUFF (lower section) */
+.stuff {
+  top: 45vh;
+  height: 50vh; /* Adjusted for mobile */
+}
+
+.stuffTitle {
+  display: flex;
+  justify-content: center;
+  font-size: 4vw; /* Adjusted size */
+  background-color: rgb(233, 126, 11);
+  border-radius: 15px;
+}
+
+.stuffPicGroup {
+  position: relative;
+  background-color: red;
+  border-radius: 15px;
+  padding: 1vw;
+  box-shadow: 3px 3px 4px rgba(0, 0, 0, 0.7);
+}
+
+.stuffPicGroup:hover {
+  box-shadow: 3px 3px 4px rgba(0, 0, 0, 0);
+  right: -1vw;
+  top: 1vh;
+}
+
+/* Stock Market Section */
+.stockMarketGraph {
+  width: 90%;  /* 90% of the parent's width */
+  height: 40vh; /* Adjusted height for mobile */
+}
+
+.buyStock, .sellStock {
+  position: fixed;
+  background-color: rgb(0, 0, 255);
+  padding: 2vw;
+  border-radius: 15px;
+  font-size: 3vw; /* Adjusted for mobile */
+}
+
+.buyStock {
+  left: 5vw;
+  top: 20vh;
+}
+
+.sellStock {
+  right: 5vw;
+  top: 20vh;
+}
+
+/* Are You Sure Popups */
+.areYouSurePooperManBody, .areYouSureDogTurdBody, .areYouSureOmnipotentPoopBody {
+  width: 80vw;
+  height: 30vh;
+  left: 10vw;
+  top: 35vh;
+  border-radius: 15px;
+  padding: 5vw;
+}
+
+.yesDoPooperMan, .noDoPooperMan, .yesDoDogTurd, .noDoDogTurd, .yesDoOmnipotentPoop, .noDoOmnipotentPoop {
+  font-size: 4vw;
+  padding: 5vw;
+  border-radius: 15px;
+}
+
+  }

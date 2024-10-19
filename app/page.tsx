@@ -42,6 +42,10 @@ export default function SecretPage() {
         localStorage.setItem('isDoubleCount', JSON.stringify([false]));
         localStorage.setItem('isDoubleClickPerSecond', JSON.stringify([false]));
         localStorage.setItem('isHalvePrice', JSON.stringify([false]));
+        localStorage.setItem('costToBuyTenPoopsPerClick', JSON.stringify([900]));
+        localStorage.setItem('costToAddCostBuyTenPoopsPerClick', JSON.stringify([20]));
+        localStorage.setItem('poopPerFrog', JSON.stringify([10]));
+        localStorage.setItem('frogsPerSecond', JSON.stringify(0.25));
       }
     }
   }, []);
@@ -105,6 +109,12 @@ export default function SecretPage() {
   const savedCostToAddCostBuyTenPoopsPerSecond = typeof window !== 'undefined' ? parseInt(localStorage.getItem("costToAddCostBuyTenPoopsPerSecond") || "20") : 20;
   const [costToAddCostBuyTenPoopsPerSecond, setCostToAddCostBuyTenPoopsPerSecond] = useState(savedCostToAddCostBuyTenPoopsPerSecond);
 
+  const savedCostToBuyTenPoopsPerClick = typeof window !== 'undefined' ? parseInt(localStorage.getItem("costToBuyTenPoopsPerClick") || "900") : 900;
+  const [costToBuyTenPoopsPerClick, setCostToBuyTenPoopsPerClick] = useState(savedCostToBuyTenPoopsPerClick);
+
+  const savedCostToAddCostBuyTenPoopsPerClick = typeof window !== 'undefined' ? parseInt(localStorage.getItem("costToAddCostBuyTenPoopsPerClick") || "20") : 20;
+  const [costToAddCostBuyTenPoopsPerClick, setCostToAddCostBuyTenPoopsPerClick] = useState(savedCostToAddCostBuyTenPoopsPerClick);
+
   // UI toggle states for special interactions
   const [isLotteryAvailable, setIsLotteryAvailable] = useState(false);
   const [isLottery, setIsLottery] = useState(false);
@@ -131,6 +141,8 @@ export default function SecretPage() {
         localStorage.setItem('costToAddCostBuyPoopsPerSecond', JSON.stringify(costToAddCostBuyPoopsPerSecond));
         localStorage.setItem('costToBuyTenPoopsPerSecond', JSON.stringify(costToBuyTenPoopsPerSecond));
         localStorage.setItem('costToAddCostBuyTenPoopsPerSecond', JSON.stringify(costToAddCostBuyTenPoopsPerSecond));
+        localStorage.setItem('costToBuyTenPoopsPerClick', JSON.stringify(costToBuyTenPoopsPerClick));
+        localStorage.setItem('costToAddCostBuyTenPoopsPerClick', JSON.stringify(costToAddCostBuyTenPoopsPerClick));
         localStorage.setItem('stockPrices', JSON.stringify(stockPrices));
         localStorage.setItem('stockContained', JSON.stringify(stockContained));
         localStorage.setItem('isDoubleCount', JSON.stringify(stockContained));
@@ -141,6 +153,12 @@ export default function SecretPage() {
         localStorage.setItem('isMoreLotteryLuck', JSON.stringify(isMoreLotteryLuck));
         localStorage.setItem('howManyTimeAutoClicked', JSON.stringify(howManyTimeAutoClicked));
         localStorage.setItem('isAutoClickerAllowed', JSON.stringify(isAutoClickerAllowed));
+        localStorage.setItem('frogsPerSecond', JSON.stringify(frogsPerSecond));
+        localStorage.setItem('poopPerFrog', JSON.stringify(poopPerFrog));
+        localStorage.setItem('costToBuyFrogsPerSecond', JSON.stringify(costToBuyFrogsPerSecond));
+        localStorage.setItem('addToCostFrogsPerSecond', JSON.stringify(addToCostFrogsPerSecond));
+        localStorage.setItem('costToBuyPoopPerFrog', JSON.stringify(costToBuyPoopPerFrog));
+        localStorage.setItem('addToCostPoopPerFrog', JSON.stringify(addToCostPoopPerFrog));
         console.log('Data saved successfully');
       }
     } catch (error) {
@@ -201,6 +219,8 @@ export default function SecretPage() {
       setIsMoreLotteryLuck(false);
       setIsAutoClickerAllowed(false);
       setIsFrogTurdAvailable(false);
+      setPoopPerFrog(10);
+      setFrogsPerSecond(0.5);
       localStorage.clear(); // Clear everything
     }
   }, [gameName]);
@@ -307,7 +327,7 @@ export default function SecretPage() {
     }
 
     // Sell Stock
-    function sellStock() {
+    function sellStock() { 
       if (stockContained > 0) {
         setCount(count + Math.round(buyStockPrice))
         setPoopsClickedEver(poopsClickedEver + Math.round(buyStockPrice))
@@ -337,7 +357,7 @@ export default function SecretPage() {
       responsive: true,
       maintainAspectRatio: false,  // Allow width and height to be set by container
       animation: {
-        duration: 10, // Speed up the animation
+        duration: 0, // Speed up the animation
         easing: 'linear' as const, // Use a valid easing value from Chart.js
       },
       scales: {
@@ -482,6 +502,47 @@ export default function SecretPage() {
   const [isFrogTurdAvailable, setIsFrogTurdAvailable] = useState(false);
   const isFrogTurdOpenRef = useRef(isFrogTurdOpen); // Ref to track isFrogTurdOpen
 
+  const savedPoopPerFrog = typeof window !== 'undefined' ? parseInt(localStorage.getItem("poopPerFrog") || "10") : 10;
+  const [poopPerFrog, setPoopPerFrog] = useState(savedPoopPerFrog);
+
+  const savedCostToBuyPoopPerFrog = typeof window !== 'undefined' ? parseInt(localStorage.getItem("costToBuyPoopPerFrog") || "100") : 100;
+  const [costToBuyPoopPerFrog, setCostToBuyPoopPerFrog] = useState(savedCostToBuyPoopPerFrog);
+
+  const savedAddToCostPoopPerFrog = typeof window !== 'undefined' ? parseInt(localStorage.getItem("addToCostPoopPerFrog") || "100") : 100;
+  const [addToCostPoopPerFrog, setAddToCostPoopPerFrog] = useState(savedAddToCostPoopPerFrog);
+
+  const savedFrogsPerSecond = typeof window !== 'undefined' ? parseFloat(localStorage.getItem("frogsPerSecond") || "0.25") : 0.25;
+  const [frogsPerSecond, setFrogsPerSecond] = useState(savedFrogsPerSecond);
+
+  const savedCostToBuyFrogsPerSecond = typeof window !== 'undefined' ? parseInt(localStorage.getItem("costToBuyFrogsPerSecond") || "100") : 100;
+  const [costToBuyFrogsPerSecond, setCostToBuyFrogsPerSecond] = useState(savedCostToBuyFrogsPerSecond);
+
+  const savedAddToCostFrogsPerSecond = typeof window !== 'undefined' ? parseInt(localStorage.getItem("addToCostFrogsPerSecond") || "100") : 100;
+  const [addToCostFrogsPerSecond, setAddToCostFrogsPerSecond] = useState(savedAddToCostFrogsPerSecond);
+
+  function addPoopPerFrog() {
+    if (count >= costToBuyPoopPerFrog) {
+      setPoopPerFrog(poopPerFrog + 1)
+      setCount(count - costToBuyPoopPerFrog)
+      setCostToBuyPoopPerFrog(costToBuyPoopPerFrog + addToCostPoopPerFrog)
+      setAddToCostPoopPerFrog(addToCostPoopPerFrog + 10)
+    } else {
+      alert("You don't have enough poops poop head!")
+    }
+  }
+
+  function addFrogsPerSecond() {
+    if (count >= costToBuyFrogsPerSecond) {
+      setFrogsPerSecond(frogsPerSecond + 0.25)
+      setCount(count - costToBuyFrogsPerSecond)
+      setCostToBuyFrogsPerSecond(costToBuyFrogsPerSecond + addToCostFrogsPerSecond)
+      setAddToCostFrogsPerSecond(addToCostFrogsPerSecond + 10)
+    } else {
+      alert("You don't have enough poops poop head!")
+    }
+  }
+  
+
   // Keep the ref in sync with the state
   useEffect(() => {
     isFrogTurdOpenRef.current = isFrogTurdOpen;
@@ -495,9 +556,9 @@ export default function SecretPage() {
 
   // Function to increment the count when a frog is clicked
   function incrementCount() {
-    setCount(prevCount => prevCount + 100)
-    setPoopsClickedEver(prevCount => prevCount + 100);
-    setPoopBarThing(prevCount => prevCount + 100);
+    setCount(prevCount => prevCount + poopPerFrog)
+    setPoopsClickedEver(prevCount => prevCount + poopPerFrog);
+    setPoopBarThing(prevCount => prevCount + poopPerFrog);
   }
 
   function toggleIsFrogTurdOpen() {
@@ -518,6 +579,7 @@ export default function SecretPage() {
     public isOnToilet: boolean = false;
     private screenWidth: number = window.innerWidth;
     private removed: boolean = false;
+    
 
     constructor(isFrogTurdOpenRef: React.MutableRefObject<boolean>) {
       this.element = document.createElement('img');
@@ -527,6 +589,7 @@ export default function SecretPage() {
       this.element.style.position = 'absolute';
       this.element.style.bottom = '30px'; // Start at a reasonable vertical position
       this.element.style.left = '0px'; // Start at the left side of the screen
+      this.element.style.opacity = isFrogTurdOpenRef.current ? '1' : '0';
       document.body.appendChild(this.element);
 
       // Add an event listener to the frog element
@@ -617,7 +680,7 @@ export default function SecretPage() {
       if (isFrogTurdAvailable){
         createFrog(); // Create a new frog every second when isFrogTurdOpen is true
       }
-    }, 2000);
+    }, 1000/frogsPerSecond);
 
     return () => clearInterval(interval); // Cleanup on unmount
   }, [isFrogTurdOpen]);
@@ -690,8 +753,28 @@ export default function SecretPage() {
         }
       }
     }
-    
-
+    function addTenMorePoopsPerClick() {
+      if (isHalvePrice == true) {
+        if (count >= costToBuyTenPoopsPerClick/2) {
+          setCount(count - costToBuyTenPoopsPerClick/2)
+          setCostToBuyTenPoopsPerClick(costToBuyTenPoopsPerClick + costToAddCostBuyTenPoopsPerClick);
+          setCostToAddCostBuyTenPoopsPerClick(costToAddCostBuyTenPoopsPerClick + 20); // Adjusted increment for bulk purchase
+          setPoopPerClick(PoopPerClick + 10)
+        } else {
+          alert("You don't have enough poops you poop head!");
+        }
+      } else {
+        if (count >= costToBuyTenPoopsPerClick) {
+          setCount(count - costToBuyTenPoopsPerClick);
+          setCostToBuyTenPoopsPerClick(costToBuyTenPoopsPerClick + costToAddCostBuyTenPoopsPerClick);
+          setCostToAddCostBuyTenPoopsPerClick(costToAddCostBuyTenPoopsPerClick + 20); // Adjusted increment for bulk purchase
+          setPoopPerClick(PoopPerClick + 10)
+        } else {
+          alert("You don't have enough poops you poop head!");
+        }
+      }
+    }
+  
     
     // Daily Deals
     // const dayOfWeek = new Date("July 13, 1983 01:15:00").getDay();
@@ -987,6 +1070,7 @@ export default function SecretPage() {
   return (
     <div className={styles.body}>
       <link href="https://fonts.cdnfonts.com/css/faith-hope" rel="stylesheet"/>
+      <link href="https://fonts.cdnfonts.com/css/earwig-factory" rel="stylesheet"/>
       {/* <style>@import url('https://fonts.cdnfonts.com/css/faith-hope');</style> */}
 
       {/* BACKGROUND IMAGE */}
@@ -1016,8 +1100,12 @@ export default function SecretPage() {
           Click to add more poop per second ({ isHalvePrice ? costToBuyPoopsPerSecond/2 : costToBuyPoopsPerSecond} Poops)
         </button> <br /> <br />
 
+        <button onClick={addTenMorePoopsPerClick} className={styles.addTenPoopsPerClick}>
+          Click to add 10 more poop per click ({ isHalvePrice ? costToBuyTenPoopsPerClick/2 : costToBuyTenPoopsPerClick} Poops)
+        </button> <br /><br />
+
         <button onClick={addTenMorePoopsPerSecond} className={styles.addTenPoopsPerSecond}>
-          Click to add 10 more poop per second ({ isHalvePrice ? costToBuyTenPoopsPerSecond/2 : costToBuyTenPoopsPerSecond} Poops)
+          Click to add 10 more poop per second ({ isHalvePrice ? costToBuyTenPoopsPerSecond : costToBuyTenPoopsPerSecond} Poops)
         </button> <br /><br />
 
         <div className={styles.poopMarket}>Daily Deals</div> <br />
@@ -1231,16 +1319,21 @@ export default function SecretPage() {
 
         </div> <br />
 
-        {/* CRAFTING TABLE */}
+        {/* FROG FECES FACTORY */}
         <div className={styles.stuffPicGroup} onClick={toggleIsFrogTurdOpen}>
           <img className={styles.stockMarketPic} src={isFrogTurdAvailable ? "frogTurdPic.png" : "frogTurdPicHide.png"} alt="stockMarketPic" />
           <span className={styles.stuffPicLabel}><strong>Frog Feces Factory</strong></span>
         </div>
 
-        <div style = {{ opacity: isFrogTurdOpen ? 1 : 0, pointerEvents: isFrogTurdOpen ? 'all' : 'none',}}>
-          <div className={styles.stuffyScreen}>
+          <div className={styles.stuffyScreen} style={{ opacity: isFrogTurdOpen ? 1 : 0, pointerEvents: isFrogTurdOpen ? 'all' : 'none' }}>
           <div className={styles.stuffyTitle}>Frog Feces Factory</div>
             <img className={styles.theFrogToilet} src="theFrogToilet.png" alt="TheFrogToilet" />
+            <div className={styles.frogTurdStats}>
+              stats
+              <button onClick={addPoopPerFrog} className={styles.buyMorePoopPerFrog}>Buy more poop per frog ({costToBuyPoopPerFrog})</button>
+              <button onClick={addFrogsPerSecond} className={styles.buyMoreFrogsPerSecond}>Buy more frogs per second ({costToBuyFrogsPerSecond})</button>
+              <div className={styles.frogStatWords}>Poop Per Frog: {poopPerFrog}</div> 
+              <div className={styles.frogStatWords}>Frogs Per Second: {frogsPerSecond}</div>
           </div>
           <button className={styles.stuffXExit} onClick={toggleIsFrogTurdOpen}>
               &#10008;
