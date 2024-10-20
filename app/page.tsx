@@ -512,7 +512,7 @@ export default function SecretPage() {
   const savedCostToBuyPoopPerFrog = typeof window !== 'undefined' ? parseInt(localStorage.getItem("costToBuyPoopPerFrog") || "100") : 100;
   const [costToBuyPoopPerFrog, setCostToBuyPoopPerFrog] = useState(savedCostToBuyPoopPerFrog);
 
-  const savedAddToCostPoopPerFrog = typeof window !== 'undefined' ? parseInt(localStorage.getItem("addToCostPoopPerFrog") || "10") : 10;
+  const savedAddToCostPoopPerFrog = typeof window !== 'undefined' ? parseInt(localStorage.getItem("addToCostPoopPerFrog") || "20") : 20;
   const [addToCostPoopPerFrog, setAddToCostPoopPerFrog] = useState(savedAddToCostPoopPerFrog);
 
   const savedFrogsPerSecond = typeof window !== 'undefined' ? parseFloat(localStorage.getItem("frogsPerSecond") || "0.1") : 0.1;
@@ -521,7 +521,7 @@ export default function SecretPage() {
   const savedCostToBuyFrogsPerSecond = typeof window !== 'undefined' ? parseInt(localStorage.getItem("costToBuyFrogsPerSecond") || "100") : 100;
   const [costToBuyFrogsPerSecond, setCostToBuyFrogsPerSecond] = useState(savedCostToBuyFrogsPerSecond);
 
-  const savedAddToCostFrogsPerSecond = typeof window !== 'undefined' ? parseInt(localStorage.getItem("addToCostFrogsPerSecond") || "10") : 10;
+  const savedAddToCostFrogsPerSecond = typeof window !== 'undefined' ? parseInt(localStorage.getItem("addToCostFrogsPerSecond") || "20") : 20;
   const [addToCostFrogsPerSecond, setAddToCostFrogsPerSecond] = useState(savedAddToCostFrogsPerSecond);
 
   function addPoopPerFrog() {
