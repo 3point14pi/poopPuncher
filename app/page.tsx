@@ -45,7 +45,7 @@ export default function SecretPage() {
         localStorage.setItem('costToBuyTenPoopsPerClick', JSON.stringify([900]));
         localStorage.setItem('costToAddCostBuyTenPoopsPerClick', JSON.stringify([20]));
         localStorage.setItem('poopPerFrog', JSON.stringify([10]));
-        localStorage.setItem('frogsPerSecond', JSON.stringify(0.25));
+        localStorage.setItem('frogsPerSecond', JSON.stringify(0.1));
       }
     }
   }, []);
@@ -221,6 +221,10 @@ export default function SecretPage() {
       setIsFrogTurdAvailable(false);
       setPoopPerFrog(10);
       setFrogsPerSecond(0.5);
+      setCostToBuyFrogsPerSecond(100);
+      setAddToCostFrogsPerSecond(10);
+      setCostToBuyPoopPerFrog(100);
+      setAddToCostPoopPerFrog(10);
       localStorage.clear(); // Clear everything
     }
   }, [gameName]);
@@ -508,16 +512,16 @@ export default function SecretPage() {
   const savedCostToBuyPoopPerFrog = typeof window !== 'undefined' ? parseInt(localStorage.getItem("costToBuyPoopPerFrog") || "100") : 100;
   const [costToBuyPoopPerFrog, setCostToBuyPoopPerFrog] = useState(savedCostToBuyPoopPerFrog);
 
-  const savedAddToCostPoopPerFrog = typeof window !== 'undefined' ? parseInt(localStorage.getItem("addToCostPoopPerFrog") || "100") : 100;
+  const savedAddToCostPoopPerFrog = typeof window !== 'undefined' ? parseInt(localStorage.getItem("addToCostPoopPerFrog") || "10") : 10;
   const [addToCostPoopPerFrog, setAddToCostPoopPerFrog] = useState(savedAddToCostPoopPerFrog);
 
-  const savedFrogsPerSecond = typeof window !== 'undefined' ? parseFloat(localStorage.getItem("frogsPerSecond") || "0.25") : 0.25;
+  const savedFrogsPerSecond = typeof window !== 'undefined' ? parseFloat(localStorage.getItem("frogsPerSecond") || "0.1") : 0.1;
   const [frogsPerSecond, setFrogsPerSecond] = useState(savedFrogsPerSecond);
 
   const savedCostToBuyFrogsPerSecond = typeof window !== 'undefined' ? parseInt(localStorage.getItem("costToBuyFrogsPerSecond") || "100") : 100;
   const [costToBuyFrogsPerSecond, setCostToBuyFrogsPerSecond] = useState(savedCostToBuyFrogsPerSecond);
 
-  const savedAddToCostFrogsPerSecond = typeof window !== 'undefined' ? parseInt(localStorage.getItem("addToCostFrogsPerSecond") || "100") : 100;
+  const savedAddToCostFrogsPerSecond = typeof window !== 'undefined' ? parseInt(localStorage.getItem("addToCostFrogsPerSecond") || "10") : 10;
   const [addToCostFrogsPerSecond, setAddToCostFrogsPerSecond] = useState(savedAddToCostFrogsPerSecond);
 
   function addPoopPerFrog() {
@@ -533,14 +537,18 @@ export default function SecretPage() {
 
   function addFrogsPerSecond() {
     if (count >= costToBuyFrogsPerSecond) {
-      setFrogsPerSecond(frogsPerSecond + 0.1)
-      setCount(count - costToBuyFrogsPerSecond)
-      setCostToBuyFrogsPerSecond(costToBuyFrogsPerSecond + addToCostFrogsPerSecond)
-      setAddToCostFrogsPerSecond(addToCostFrogsPerSecond + 10)
+      setFrogsPerSecond(prevFrogsPerSecond => {
+        const newFrogsPerSecond = parseFloat((prevFrogsPerSecond + 0.1).toFixed(3));
+        return newFrogsPerSecond;
+      });
+      setCount(count - costToBuyFrogsPerSecond);
+      setCostToBuyFrogsPerSecond(costToBuyFrogsPerSecond + addToCostFrogsPerSecond);
+      setAddToCostFrogsPerSecond(addToCostFrogsPerSecond + 10);
     } else {
-      alert("You don't have enough poops poop head!")
+      alert("You don't have enough poops poop head!");
     }
   }
+  
   
 
   // Keep the ref in sync with the state
