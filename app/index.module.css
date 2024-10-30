@@ -1,5 +1,5 @@
 .body { 
-  /* overflow: hidden;  */
+  overflow: hidden; 
   margin: auto; 
   background: white; 
   text-align: center; 
@@ -11,10 +11,6 @@
   height: 100vh;
   top: 0;
   left: 0;
-  /* background-image: url('toiletPaperBackround.png'); */
-  /* background-repeat: no-repeat; */
-  /* background-attachment: fixed; */
-  /* background-size: cover; */
 }
 
 /* POOP OBJECTS */
@@ -41,7 +37,6 @@
 
 .daPoop:active {
   height: 83vh;
-  top: 17vh;
 }
 
 /* TOP BAR */
@@ -64,7 +59,7 @@
   width: 45vw;
   height: 7vh;
   font-size: 4vw;
-  z-index: 10; /* Ensure it's on top of overlapping elements */
+  z-index: 10; 
   text-align: center;
   padding: 10px;
   background: transparent;
@@ -230,6 +225,17 @@
   padding: 5px;
 }
 
+.achievmentSection {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+}
+
+.achievmentIcons {
+  width: 90px;
+  margin-left: 0px;
+}
+
 
 /* STUFF */
 .stuff {
@@ -290,7 +296,8 @@
   background-color: rgb(24, 198, 59);
   pointer-events: none;
   border-radius: 20px;
-  /* z-index: 100000; */
+  overflow-y: auto;
+  z-index: 100000;
 }
 
 .stuffyTitle {
@@ -309,6 +316,10 @@
 
 .lotteryTickets {
   display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow-y: auto;
 }
 
 /* pooper man */
@@ -520,6 +531,7 @@
 .stockMarketGraph {
   width: 100%;  /* 100% of the parent's width */
   height: 70vh; /* 50% of the viewport height */
+  bottom: 0px;
 }
 
 .buyStock {
@@ -571,6 +583,8 @@
   margin-left: 10px;
 }
 
+
+
 @media (max-width: 768px) {
 .background {
   position: fixed;
@@ -580,22 +594,34 @@
   left: 0;
 }
 
+.body { 
+  overflow: hidden; 
+  margin: auto; 
+  background: white; 
+  text-align: center; 
+}
+
 /* POOP OBJECTS */
 .daPoop {
   position: fixed;
-  height: 50vh; /* Reduced height for mobile */
-  width: 25vw;  /* Reduced width for mobile */
+  height: 70vh; /* Reduced height for mobile */
+  width: 50vw;  /* Reduced width for mobile */
   bottom: 0vh;
-  right: 37.5vw; /* Centered */
+  right: 25vw; /* Centered */
+}
+
+.daPoop:active {
+  height: 68vh;
+  /* top: 10px; */
 }
 
 .stinkLines {
   position: absolute;
   opacity: 1;
-  top: 5vh;
-  right: 28vw;
-  width: 30vw;
-  height: 30vh;
+  top: 20vh;
+  right: 19vw;
+  width: 60vw;
+  height: 40vh;
   transition: 0.2s; 
 }
 
@@ -603,11 +629,11 @@
 .topBar {
   position: fixed;
   height: 8vh; /* Smaller height */
-  width: 80vw; /* Wider bar for mobile */
+  width: 98vw; /* Wider bar for mobile */
   background-color: rgb(214, 176, 52);
   border-radius: 20px;
   box-shadow: 4px 4px 6px rgba(0, 0, 0, 0.7);
-  right: 10vw; /* Centered */
+  right: 1vw; /* Centered */
   top: 2vh;
 }
 
@@ -617,10 +643,10 @@
   top: 1vh;
   width: 70vw; /* Adjusted for mobile */
   height: 6vh;
-  font-size: 4vw; /* Adjusted for mobile */
+  font-size: 6vw; /* Adjusted for mobile */
   z-index: 10;
   text-align: center;
-  padding: 10px;
+  padding: 0px;
   background: transparent;
   border: transparent;
   font-family: 'Faith Hope', sans-serif;
@@ -630,14 +656,15 @@
 .leftMenu {
   position: fixed;
   background-color: rgb(246, 48, 8);
-  top: 2vh;
+  top: 12vh;
   left: 1vw;
-  height: 90vh;
-  width: 15vw; /* Thinner for mobile */
+  height: 83vh;
+  width: 18vw; 
   border-radius: 15px;
   padding: 10px;
   box-shadow: 3px 3px 4px rgba(0, 0, 0, 0.7);
   overflow-y: auto; 
+  /* overflow: hidden; */
 }
 
 .poopMarket {
@@ -652,7 +679,6 @@
 /* Buttons */
 .morePoopClicker, .addMorePoopsPerSecond, .addTenPoopsPerSecond, .doublePoop {
   position: relative;
-  background-color: rgb(12, 197, 178);
   border-radius: 15px;
   padding: 2vw; /* Smaller padding for mobile */
   border: 0;
@@ -663,18 +689,17 @@
 
 .morePoopClicker:hover, .addMorePoopsPerSecond:hover, .addTenPoopsPerSecond:hover, .doublePoop:hover {
   box-shadow: 3px 3px 4px rgba(0, 0, 0, 0);
-  right: -1vw;
-  top: 1vh;
+  right: -0.5vw;
+  top: 0.5vh;
 }
 
 /* RIGHT BAR */
 .rightBar, .stuff {
   position: fixed;
-  background-color: rgb(0, 255, 157);
-  top: 2vh;
+  top: 12vh;
   right: 1vw;
-  height: 40vh; /* Reduced height for mobile */
-  width: 15vw; /* Thinner for mobile */
+  height: 33vh; /* Reduced height for mobile */
+  width: 20vw; /* Thinner for mobile */
   border-radius: 15px;
   padding: 10px;
   box-shadow: 3px 3px 4px rgba(0, 0, 0, 0.7);
@@ -685,20 +710,18 @@
   display: flex;
   justify-content: center;
   font-size: 3vw; /* Smaller font for mobile */
-  background-color: rgb(11, 233, 148);
   border-radius: 15px;
 }
 
 .level, .statsPoop, .statsShop, .statsStock {
-  background-color: rgb(127, 255, 127);
   border-radius: 15px;
   padding: 2vw; /* Adjusted padding */
 }
 
 /* STUFF (lower section) */
 .stuff {
-  top: 45vh;
-  height: 50vh; /* Adjusted for mobile */
+  top: 50vh;
+  height: 45vh; /* Adjusted for mobile */
 }
 
 .stuffTitle {
@@ -719,32 +742,41 @@
 
 .stuffPicGroup:hover {
   box-shadow: 3px 3px 4px rgba(0, 0, 0, 0);
-  right: -1vw;
-  top: 1vh;
+  right: -0.5vw;
+  top: 0.5vh;
+}
+
+.lotteryPic {
+  padding-left: 0px;
+  width: 80px;
+}
+
+.stockMarketPic {
+  width: 70px;
+  height: 100px;
 }
 
 /* Stock Market Section */
 .stockMarketGraph {
   width: 90%;  /* 90% of the parent's width */
-  height: 40vh; /* Adjusted height for mobile */
+  height: 80vh; /* Adjusted height for mobile */
 }
 
-.buyStock, .sellStock {
+/* .buyStock, .sellStock {
   position: fixed;
-  background-color: rgb(0, 0, 255);
   padding: 2vw;
   border-radius: 15px;
-  font-size: 3vw; /* Adjusted for mobile */
-}
+  font-size: 3vw; 
+} */
 
 .buyStock {
-  left: 5vw;
-  top: 20vh;
+  left: 20vw;
+  top: 10vh;
 }
 
 .sellStock {
-  right: 5vw;
-  top: 20vh;
+  right: 20vw;
+  top: 10vh;
 }
 
 /* Are You Sure Popups */

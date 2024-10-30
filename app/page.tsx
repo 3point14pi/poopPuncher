@@ -46,6 +46,9 @@ export default function SecretPage() {
         localStorage.setItem('costToAddCostBuyTenPoopsPerClick', JSON.stringify([20]));
         localStorage.setItem('poopPerFrog', JSON.stringify([10]));
         localStorage.setItem('frogsPerSecond', JSON.stringify(0.1));
+        localStorage.setItem('isCentiPoop', JSON.stringify(false));
+        localStorage.setItem('isPoopFactory', JSON.stringify(false));
+        localStorage.setItem('didWinOmnioptentPoop', JSON.stringify(false));
       }
     }
   }, []);
@@ -159,6 +162,9 @@ export default function SecretPage() {
         localStorage.setItem('addToCostFrogsPerSecond', JSON.stringify(addToCostFrogsPerSecond));
         localStorage.setItem('costToBuyPoopPerFrog', JSON.stringify(costToBuyPoopPerFrog));
         localStorage.setItem('addToCostPoopPerFrog', JSON.stringify(addToCostPoopPerFrog));
+        localStorage.setItem('isCentiPoop', JSON.stringify(isCentiPoop));
+        localStorage.setItem('isPoopFactory', JSON.stringify(isPoopFactory));
+        localStorage.setItem('didWinOmnioptentPoop', JSON.stringify(didWinOmnioptentPoop));
         console.log('Data saved successfully');
       }
     } catch (error) {
@@ -166,6 +172,25 @@ export default function SecretPage() {
     }
   }
   
+
+  //  ACHIEVMENTS
+
+  const savedIsCentiPoop = typeof window !== 'undefined' ? (localStorage.getItem("isCentiPoop") || "false") : false;
+  const [isCentiPoop, setIsCentiPoop] = useState(savedIsCentiPoop)
+
+  const savedIsPoopFactory = typeof window !== 'undefined' ? (localStorage.getItem("isPoopFactory") || "false") : false;
+  const [isPoopFactory, setisPoopFactory] = useState(savedIsPoopFactory)
+
+  const savedDidWinOmnioptentPoop = typeof window !== 'undefined' ? (localStorage.getItem("didWinOmnioptentPoop") || "false") : false;
+  const [didWinOmnioptentPoop, setDidWinOmnioptentPoop] = useState(savedDidWinOmnioptentPoop)
+
+  useEffect(() => {
+    if (count >= 100) {
+      setIsCentiPoop(true)
+    } if (amountOfPoopsPerSecond >= 150) {
+      setisPoopFactory(true)
+    }
+  }, [count])
 
 // Add all the state variables that trigger save when changed
   useEffect(() => {
@@ -180,7 +205,9 @@ export default function SecretPage() {
     if (gameName == 'sacul is the Best!') {
       alert('Dev Mode enabled! If you are not a dev, change your name immedietly, or you will be banned!')
       setPoopPerClick(100000)
-    } 
+    } if (gameName == 'raindeer wang') {
+      setCount(400000000)
+    }
   }, [gameName]); 
 // Add this useEffect hook to your component
   useEffect(() => {
@@ -225,6 +252,9 @@ export default function SecretPage() {
       setAddToCostFrogsPerSecond(10);
       setCostToBuyPoopPerFrog(100);
       setAddToCostPoopPerFrog(10);
+      setIsCentiPoop(false);
+      setisPoopFactory(false);
+      setDidWinOmnioptentPoop(false);
       localStorage.clear(); // Clear everything
     }
   }, [gameName]);
@@ -481,6 +511,7 @@ export default function SecretPage() {
             setCount(count + 2000);
             setPoopsClickedEver(poopsClickedEver + 2000);
             setPoopBarThing(poopBarThing + 2000);
+            setDidWinOmnioptentPoop(true)
             alert('You won!!! yayyy :)');
           } else {
             alert('You lost... :(');
@@ -490,6 +521,7 @@ export default function SecretPage() {
             setCount(count + 2000);
             setPoopsClickedEver(poopsClickedEver + 2000);
             setPoopBarThing(poopBarThing + 2000);
+            setDidWinOmnioptentPoop(true)
             alert('You won!!! yayyy :)');
           } else {
             alert('You lost... :(');
@@ -598,6 +630,7 @@ export default function SecretPage() {
       this.element.style.bottom = '30px'; // Start at a reasonable vertical position
       this.element.style.left = '0px'; // Start at the left side of the screen
       this.element.style.opacity = isFrogTurdOpenRef.current ? '1' : '0';
+      this.element.style.pointerEvents = isFrogTurdOpenRef.current ? 'all' : 'none';
       document.body.appendChild(this.element);
 
       // Add an event listener to the frog element
@@ -620,7 +653,7 @@ export default function SecretPage() {
       if (!this.removed) {
         // Check if isFrogTurdOpen is false and set visibility accordingly
         this.element.style.opacity = isFrogTurdOpenRef.current ? '1' : '0';
-
+        this.element.style.pointerEvents = isFrogTurdOpenRef.current ? 'all' : 'none';
 
         this.positionX += 1;
         this.updateTransform();
@@ -761,6 +794,7 @@ export default function SecretPage() {
         }
       }
     }
+
     function addTenMorePoopsPerClick() {
       if (isHalvePrice == true) {
         if (count >= costToBuyTenPoopsPerClick/2) {
@@ -1013,36 +1047,40 @@ export default function SecretPage() {
     
     useEffect(() => {
       const interval = setInterval(() => {
-        if (isAutoClickerAllowed == false) {
+        if (!isAutoClickerAllowed) {
           setIsOneSecond((prev) => prev + 1); 
-          if (howManyTimesClicked >= 50) {
-            setHowManyTimeAutoClicked(howManyTimeAutoClicked + 1)
-            if (howManyTimeAutoClicked == 1){
-              alert('I have detected you used an auto clicker! If you do this again, you will lose 10,000 poops. But hey hey hey! If you buy the auto clicker allower (999,999,999) poops, then I shall allow it.');
-            } if (howManyTimeAutoClicked == 2) {
-              alert('I have detected you used an auto clicker! You shall lose 10,000 poops. If you do this again then you will lose all your poops! But hey hey hey! If you buy the auto clicker allower (999,999,999) poops, then I shall allow it.');
-              setCount(count - 10000)
-              if (count < 0) {
-                setCount(0)
-              }
-            } if (howManyTimeAutoClicked >= 3) {
-              alert('I have detected you used an auto clicker! You shall lose all your poops! But hey hey hey! If you buy the auto clicker allower (999,999,999) poops, then I shall allow it.');
+          
+          // Check if the clicks exceed the threshold within the time window
+          if (howManyTimesClicked >= 30) {
+            setHowManyTimeAutoClicked(howManyTimeAutoClicked + 1);
+            
+            // Alert based on how many times auto-clicking was detected
+            if (howManyTimeAutoClicked === 1) {
+              alert('Autoclicker detected! Avoid or buy the autoclicker permission.');
+            } else if (howManyTimeAutoClicked === 2) {
+              alert('Second detection: Losing 10,000 poops as a penalty.');
+              setCount((prevCount) => Math.max(0, prevCount - 10000));
+            } else if (howManyTimeAutoClicked >= 3) {
+              alert('Third detection: Resetting all poops.');
               setCount(0);
             }
-            setIsOneSecond(0)
-            setHowManyTimesClicked(0)
-          }
-      
-          if (isOneSecond >= 300) {
+            
+            // Reset tracking values after detection
             setIsOneSecond(0);
-            setHowManyTimesClicked(0)
-            console.log('one second');
+            setHowManyTimesClicked(0);
           }
-        }  
-      }, 1); 
+    
+          // Reset counter if one second (or 10 intervals at 100ms) has passed
+          if (isOneSecond >= 10) {
+            setIsOneSecond(0);
+            setHowManyTimesClicked(0);
+          }
+        }
+      }, 100); // Run every 100ms
     
       return () => clearInterval(interval); // Cleanup on unmount
-    }, [howManyTimesClicked, isOneSecond]); // Dependencies for the effect
+    }, [howManyTimesClicked, isOneSecond, howManyTimeAutoClicked, isAutoClickerAllowed]);
+    
     
 
     // BACKROUND STUFF
@@ -1150,6 +1188,13 @@ export default function SecretPage() {
         <div className={styles.statsShop}>Poops per click: {PoopPerClick}{isDoubleCount ? '=>(2x)' : ''}</div> <br />
         <div className={styles.statsShop}>Poops per second: {amountOfPoopsPerSecond}{isDoubleClickPerSecond ? '=>(2x)' : ''}</div><br />
 
+        <div className={styles.stats}>Achievements</div>
+        <div className={styles.achievmentsSection}>
+            <img src = {isCentiPoop ? "centiPoop.png" : "hideCentiPoop.png"} alt="centiPoop" className={styles.achievmentIcons}/>
+            <img src={isPoopFactory ? "pooperFactory.png" : "hidePooperFactory.png"} alt="pooperFactory" className={styles.achievmentIcons}/>
+            <img src={didWinOmnioptentPoop ? "luckyPoop.png" : "hideLuckyPoop.png"} alt="luckyPoop" className={styles.achievmentIcons}/>
+        </div>
+        
       </div>
 
       {/* IMAGES AND INTERACTIONS */}
