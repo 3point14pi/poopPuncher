@@ -1273,25 +1273,28 @@ export default function SecretPage() {
           <img onClick={toggleIsPooperManSure} className={styles.pooperManLottery} src="pooperManLottery.png" alt="PooperManLottery" />
           {/* Pooper Man Confirmation */}
           <div className={styles.areYouSurePooperManBody} style={{ opacity: isPooperManAreYouSure ? 1 : 0, pointerEvents: isPooperManAreYouSure ? 'all' : 'none' }}>
-            <div className={styles.areYouSurePooperManBodyTitle}>Are you sure you want to buy Pooper Man?</div>
-            <div onClick={pooperManLotteryGo} className={styles.yesDoPooperMan}>Yes</div>
-            <div onClick={toggleIsPooperManSure} className={styles.noDoPooperMan}>No</div>
+            <div className={styles.areYouSurePooperManBodyTitle}>Are you sure you want to buy Pooper Man?
+              <div onClick={pooperManLotteryGo} className={styles.yesDoPooperMan}>Yes</div>
+              <div onClick={toggleIsPooperManSure} className={styles.noDoPooperMan}>No</div>
+            </div>
           </div>
 
           {/* Dog Turd Lottery */}
           <img onClick={toggleIsDogTurdSure} className={styles.pooperManLottery} src="dogTurdLottery.png" alt="DogTurdLottery" />
           <div className={styles.areYouSureDogTurdBody} style={{ opacity: isDogTurdAreYouSure ? 1 : 0, pointerEvents: isDogTurdAreYouSure ? 'all' : 'none' }}>
-            <div className={styles.areYouSureDogTurdBodyTitle}>Are you sure you want to buy Dog Turd?</div>
-            <div onClick={dogTurdLotteryGo} className={styles.yesDoDogTurd}>Yes</div>
-            <div onClick={toggleIsDogTurdSure} className={styles.noDoDogTurd}>No</div>
+            <div className={styles.areYouSureDogTurdBodyTitle}>Are you sure you want to buy Dog Turd?
+              <div onClick={dogTurdLotteryGo} className={styles.yesDoDogTurd}>Yes</div>
+              <div onClick={toggleIsDogTurdSure} className={styles.noDoDogTurd}>No</div>
+            </div>
           </div>
 
           {/* Omnipotent Poop Lottery */}
           <img onClick={toggleIsOmnipotentPoopSure} className={styles.omnipotentPoopLottery} src="omnipotentPoopLottery.png" alt="OmnipotentPoopLottery" />
           <div className={styles.areYouSureOmnipotentPoopBody} style={{ opacity: isOmnipotentPoopAreYouSure ? 1 : 0, pointerEvents: isOmnipotentPoopAreYouSure ? 'all' : 'none' }}>
-            <div className={styles.areYouSureOmnipotentPoopBodyTitle}>Are you sure you want to buy Omnipotent Poop?</div>
-            <div onClick={ominpotentPoopLotteryGo} className={styles.yesDoOmnipotentPoop}>Yes</div>
-            <div onClick={toggleIsOmnipotentPoopSure} className={styles.noDoOmnipotentPoop}>No</div>
+            <div className={styles.areYouSureOmnipotentPoopBodyTitle}>Are you sure you want to buy Omnipotent Poop?
+              <div onClick={ominpotentPoopLotteryGo} className={styles.yesDoOmnipotentPoop}>Yes</div>
+              <div onClick={toggleIsOmnipotentPoopSure} className={styles.noDoOmnipotentPoop}>No</div>
+            </div>
           </div>
         </div>
       </div>

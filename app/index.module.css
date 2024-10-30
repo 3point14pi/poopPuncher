@@ -334,22 +334,24 @@
 
 .areYouSurePooperManBody {
   position: fixed;
-  width: 50vw;
-  height: 40vh;
-  left: 25vw;
-  top: 30vh;
   background-color: rgb(152, 213, 20);
-  border-radius: 20px;
   opacity: 1;
   box-shadow: 4px 4px 6px rgba(0, 0, 0, 0.7);
+  width: 80vw;
+  height: 30vh;
+  left: 2vw;
+  top: 35vh;
+  border-radius: 15px;
+  padding: 5vw;
 }
 
+
 .yesDoPooperMan {
-  position: fixed;
+  position: absolute;
   font-size: 25px;
-  left: 390px;
-  top: 310px;
-  width: 8vw;
+  left: 4vw;
+  top: 18vh;
+  width: 20vw;
   background-color: rgb(163, 235, 7);
   padding: 7vw;
   border-radius: 20px;
@@ -358,16 +360,16 @@
 
 .yesDoPooperMan:hover {
   box-shadow: 4px 4px 6px rgba(0, 0, 0, 0);
-  left: 391px;
-  top: 311px;
+  left: 4.5vw;
+  top: 18.5vh;
 }
 
 .noDoPooperMan {
-  position: fixed;
+  position: absolute;
   font-size: 25px;
-  right: 390px;
-  top: 310px;
-  width: 8vw;
+  right: 4vw;
+  top: 18vh;
+  width: 20vw;
   background-color: rgb(163, 235, 7);
   padding: 7vw;
   border-radius: 20px;
@@ -376,8 +378,8 @@
 
 .noDoPooperMan:hover {
   box-shadow: 4px 4px 6px rgba(0, 0, 0, 0);
-  right: 389px;
-  top: 311px;
+  right: 3.5vw;
+  top: 18.5vh;
 }
 
 .areYouSurePooperManBodyTitle {
@@ -396,22 +398,23 @@
 
 .areYouSureDogTurdBody {
   position: fixed;
-  width: 50vw;
-  height: 40vh;
-  left: 25vw;
-  top: 30vh;
   background-color: rgb(152, 213, 20);
-  border-radius: 20px;
   opacity: 1;
   box-shadow: 4px 4px 6px rgba(0, 0, 0, 0.7);
+  width: 80vw;
+  height: 30vh;
+  left: 2vw;
+  top: 35vh;
+  border-radius: 15px;
+  padding: 5vw;
 }
 
 .yesDoDogTurd {
-  position: fixed;
+  position: absolute;
   font-size: 25px;
-  left: 390px;
-  top: 310px;
-  width: 8vw;
+  left: 4vw;
+  top: 18vh;
+  width: 20vw;
   background-color: rgb(163, 235, 7);
   padding: 7vw;
   border-radius: 20px;
@@ -420,16 +423,16 @@
 
 .yesDoDogTurd:hover {
   box-shadow: 4px 4px 6px rgba(0, 0, 0, 0);
-  left: 391px;
-  top: 311px;
+  left: 4.5vw;
+  top: 18.5vh;
 }
 
 .noDoDogTurd {
-  position: fixed;
+  position: absolute;
   font-size: 25px;
-  right: 390px;
-  top: 310px;
-  width: 8vw;
+  right: 4vw;
+  top: 18vh;
+  width: 20vw;
   background-color: rgb(163, 235, 7);
   padding: 7vw;
   border-radius: 20px;
@@ -438,8 +441,8 @@
 
 .noDoDogTurd:hover {
   box-shadow: 4px 4px 6px rgba(0, 0, 0, 0);
-  right: 389px;
-  top: 311px;
+  right: 3.5vw;
+  top: 18.5vh;
 }
 
 .areYouSureDogTurdBodyTitle {
@@ -458,22 +461,23 @@
 
 .areYouSureOmnipotentPoopBody {
   position: fixed;
-  width: 50vw;
-  height: 40vh;
-  left: 25vw;
-  top: 30vh;
   background-color: rgb(152, 213, 20);
-  border-radius: 20px;
   opacity: 1;
   box-shadow: 4px 4px 6px rgba(0, 0, 0, 0.7);
+  width: 80vw;
+  height: 30vh;
+  left: 2vw;
+  top: 35vh;
+  border-radius: 15px;
+  padding: 5vw;
 }
 
 .yesDoOmnipotentPoop {
-  position: fixed;
+  position: absolute;
   font-size: 25px;
-  left: 390px;
-  top: 310px;
-  width: 8vw;
+  left: 4vw;
+  top: 18vh;
+  width: 20vw;
   background-color: rgb(163, 235, 7);
   padding: 7vw;
   border-radius: 20px;
@@ -482,16 +486,16 @@
 
 .yesDoOmnipotentPoop:hover {
   box-shadow: 4px 4px 6px rgba(0, 0, 0, 0);
-  left: 391px;
-  top: 311px;
+  left: 4.5vw;
+  top: 18.5vh;
 }
 
 .noDoOmnipotentPoop {
-  position: fixed;
+  position: absolute;
   font-size: 25px;
-  right: 390px;
-  top: 310px;
-  width: 8vw;
+  right: 4vw;
+  top: 18vh;
+  width: 20vw;
   background-color: rgb(163, 235, 7);
   padding: 7vw;
   border-radius: 20px;
@@ -500,8 +504,8 @@
 
 .noDoOmnipotentPoop:hover {
   box-shadow: 4px 4px 6px rgba(0, 0, 0, 0);
-  right: 389px;
-  top: 311px;
+  right: 3.5vw;
+  top: 18.5vh;
 }
 
 .areYouSureOmnipotentPoopBodyTitle {
@@ -791,16 +795,19 @@
 .areYouSurePooperManBody, .areYouSureDogTurdBody, .areYouSureOmnipotentPoopBody {
   width: 80vw;
   height: 30vh;
-  left: 10vw;
+  left: 2vw;
   top: 35vh;
   border-radius: 15px;
   padding: 5vw;
 }
 
-.yesDoPooperMan, .noDoPooperMan, .yesDoDogTurd, .noDoDogTurd, .yesDoOmnipotentPoop, .noDoOmnipotentPoop {
+/* .yesDoPooperMan, .noDoPooperMan, .yesDoDogTurd, .noDoDogTurd, .yesDoOmnipotentPoop, .noDoOmnipotentPoop {
   font-size: 4vw;
   padding: 5vw;
   border-radius: 15px;
-}
+  width: 20vw;
+  height: 15vh;
+  top: 47vh;
+} */
 
   }
