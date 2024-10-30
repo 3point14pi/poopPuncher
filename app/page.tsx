@@ -1218,6 +1218,11 @@ export default function SecretPage() {
       />
 
       {/* STUFF SECTION */}
+
+    <div className={styles.body}>
+      {/* Other components, background image, etc. */}
+
+      {/* STUFF SECTION */}
       <div className={styles.stuff}>
         <div className={styles.stuffTitle}>Stuff</div>
         <br />
@@ -1233,166 +1238,104 @@ export default function SecretPage() {
             <strong>Lottery</strong>
           </span>
         </div>
-
-        <div
-          className={styles.stuffyScreen}
-          style={{
-            opacity: isLottery ? 1 : 0,
-            pointerEvents: isLottery ? 'all' : 'none',
-            zIndex: 1
-          }}
-        >
-          <div className={styles.stuffyTitle}>Lottery{isMoreLotteryLuck ? '=>2x Luck' : ''}</div>
-          <button className={styles.stuffXExit} onClick={toggleIsLottery}>
-            &#10008;
-          </button>
-
-          <div className={styles.lotteryTickets}>
-            {/* PooperMan Lottery */}
-            <img
-              onClick={toggleIsPooperManSure}
-              className={styles.pooperManLottery}
-              src="pooperManLottery.png"
-              alt="PooperManLottery"
-            />
-            <div
-              className={styles.areYouSurePooperManBody}
-              style={{
-                opacity: isPooperManAreYouSure ? 1 : 0,
-                pointerEvents: isPooperManAreYouSure ? 'all' : 'none',
-              }}
-            >
-              <div className={styles.areYouSurePooperManBodyTitle}>
-                Are you sure you want to buy Pooper Man?
-              </div>
-              <div onClick={pooperManLotteryGo} className={styles.yesDoPooperMan}>
-                Yes
-              </div>
-              <div onClick={toggleIsPooperManSure} className={styles.noDoPooperMan}>
-                No
-              </div>
-            </div>
-
-            {/* Dog Turd Lottery */}
-            <img
-              onClick={toggleIsDogTurdSure}
-              className={styles.pooperManLottery}
-              src="dogTurdLottery.png"
-              alt="DogTurdLottery"
-            />
-            <div
-              className={styles.areYouSureDogTurdBody}
-              style={{
-                opacity: isDogTurdAreYouSure ? 1 : 0,
-                pointerEvents: isDogTurdAreYouSure ? 'all' : 'none',
-              }}
-            >
-              <div className={styles.areYouSureDogTurdBodyTitle}>
-                Are you sure you want to buy Dog Turd?
-              </div>
-              <div onClick={dogTurdLotteryGo} className={styles.yesDoDogTurd}>
-                Yes
-              </div>
-              <div onClick={toggleIsDogTurdSure} className={styles.noDoDogTurd}>
-                No
-              </div>
-            </div>
-
-            {/* Omnipotent Poop Lottery */}
-            <img
-              onClick={toggleIsOmnipotentPoopSure}
-              className={styles.omnipotentPoopLottery}
-              src="omnipotentPoopLottery.png"
-              alt="OmnipotentPoopLottery"
-            />
-            <div
-              className={styles.areYouSureOmnipotentPoopBody}
-              style={{
-                opacity: isOmnipotentPoopAreYouSure ? 1 : 0,
-                pointerEvents: isOmnipotentPoopAreYouSure ? 'all' : 'none',
-              }}
-            >
-              <div className={styles.areYouSureOmnipotentPoopBodyTitle}>
-                Are you sure you want to buy Omnipotent Poop?
-              </div>
-              <div onClick={ominpotentPoopLotteryGo} className={styles.yesDoOmnipotentPoop}>
-                Yes
-              </div>
-              <div onClick={toggleIsOmnipotentPoopSure} className={styles.noDoOmnipotentPoop}>
-                No
-              </div>
-            </div>
-          </div>
-        </div>
         <br />
 
         {/* STOCK MARKET */}
         <div className={styles.stuffPicGroup} onClick={toggleStockMarket}>
-          <img className={styles.stockMarketPic} src={isStockMarketAvailable ? "stockMarketPic.png":"stockMarketPicHide.png"} alt="stockMarketPic" />
+          <img className={styles.stockMarketPic} src={isStockMarketAvailable ? "stockMarketPic.png" : "stockMarketPicHide.png"} alt="stockMarketPic" />
           <span className={styles.stuffPicLabel}><strong>Stock Market</strong></span>
         </div>
-
-
-        {/* Stock Market Modal */}
-        <div
-          className={styles.stuffyScreen}
-          style={{
-            opacity: isStockMarketOpen ? 1 : 0,
-            pointerEvents: isStockMarketOpen ? 'all' : 'none',
-          }}
-        >
-          <div className={styles.stuffyTitle}>Stock Market</div>
-          {/* <input
-            type="number"
-            min="0"
-            placeholder="Enter stocks to buy"
-            onChange={(e) => setStocksToBuy(Number(e.target.value))}
-            className={styles.inputField}
-          /> */}
-          <button onClick={buyStock} className={styles.buyStock}>Buy</button>  <br />
-
-          {/* <input
-            type="number"
-            min="0"
-            placeholder="Enter stocks to sell"
-            onChange={(e) => setStocksToBuy(Number(e.target.value))}
-            className={styles.inputField}
-          /> */}
-          <button onClick={sellStock} className={styles.sellStock}>Sell</button>
-          <button className={styles.stuffXExit} onClick={toggleStockMarket}>
-            &#10008;
-          </button>
-          {/* Stock Market Graph */}
-          <div className={styles.stockMarketGraphContainer}>
-            <div className={styles.stockMarketGraph}>
-              <Line data={stockMarketData} options={stockMarketOptions} />
-            </div>
-          </div>
-
-
-        </div> <br />
+        <br />
 
         {/* FROG FECES FACTORY */}
         <div className={styles.stuffPicGroup} onClick={toggleIsFrogTurdOpen}>
-          <img className={styles.stockMarketPic} src={isFrogTurdAvailable ? "frogTurdPic.png" : "frogTurdPicHide.png"} alt="stockMarketPic" />
+          <img className={styles.stockMarketPic} src={isFrogTurdAvailable ? "frogTurdPic.png" : "frogTurdPicHide.png"} alt="frogTurdPic" />
           <span className={styles.stuffPicLabel}><strong>Frog Feces Factory</strong></span>
         </div>
+      </div>
 
-          <div className={styles.stuffyScreen} style={{ opacity: isFrogTurdOpen ? 1 : 0, pointerEvents: isFrogTurdOpen ? 'all' : 'none' }}>
-          <div className={styles.stuffyTitle}>Frog Feces Factory</div>
-            <img className={styles.theFrogToilet} src="theFrogToilet.png" alt="TheFrogToilet" />
-            <div className={styles.frogTurdStats}>
-              stats
-              <button onClick={addPoopPerFrog} className={styles.buyMorePoopPerFrog}>Buy more poop per frog ({costToBuyPoopPerFrog})</button>
-              <button onClick={addFrogsPerSecond} className={styles.buyMoreFrogsPerSecond}>Buy more frogs per second ({costToBuyFrogsPerSecond})</button>
-              <div className={styles.frogStatWords}>Poop Per Frog: {poopPerFrog}</div> 
-              <div className={styles.frogStatWords}>Frogs Per Second: {frogsPerSecond}</div>
+      {/* LOTTERY SCREEN */}
+      <div
+        className={styles.stuffyScreen}
+        style={{
+          opacity: isLottery ? 1 : 0,
+          pointerEvents: isLottery ? 'all' : 'none',
+          zIndex: 1000
+        }}
+      >
+        <div className={styles.stuffyTitle}>Lottery{isMoreLotteryLuck ? '=>2x Luck' : ''}</div>
+        <button className={styles.stuffXExit} onClick={toggleIsLottery}>
+          &#10008;
+        </button>
+        <div className={styles.lotteryTickets}>
+          {/* Pooper Man Lottery */}
+          <img onClick={toggleIsPooperManSure} className={styles.pooperManLottery} src="pooperManLottery.png" alt="PooperManLottery" />
+          {/* Pooper Man Confirmation */}
+          <div className={styles.areYouSurePooperManBody} style={{ opacity: isPooperManAreYouSure ? 1 : 0, pointerEvents: isPooperManAreYouSure ? 'all' : 'none' }}>
+            <div className={styles.areYouSurePooperManBodyTitle}>Are you sure you want to buy Pooper Man?</div>
+            <div onClick={pooperManLotteryGo} className={styles.yesDoPooperMan}>Yes</div>
+            <div onClick={toggleIsPooperManSure} className={styles.noDoPooperMan}>No</div>
           </div>
-          <button className={styles.stuffXExit} onClick={toggleIsFrogTurdOpen}>
-              &#10008;
-          </button>
+
+          {/* Dog Turd Lottery */}
+          <img onClick={toggleIsDogTurdSure} className={styles.pooperManLottery} src="dogTurdLottery.png" alt="DogTurdLottery" />
+          <div className={styles.areYouSureDogTurdBody} style={{ opacity: isDogTurdAreYouSure ? 1 : 0, pointerEvents: isDogTurdAreYouSure ? 'all' : 'none' }}>
+            <div className={styles.areYouSureDogTurdBodyTitle}>Are you sure you want to buy Dog Turd?</div>
+            <div onClick={dogTurdLotteryGo} className={styles.yesDoDogTurd}>Yes</div>
+            <div onClick={toggleIsDogTurdSure} className={styles.noDoDogTurd}>No</div>
+          </div>
+
+          {/* Omnipotent Poop Lottery */}
+          <img onClick={toggleIsOmnipotentPoopSure} className={styles.omnipotentPoopLottery} src="omnipotentPoopLottery.png" alt="OmnipotentPoopLottery" />
+          <div className={styles.areYouSureOmnipotentPoopBody} style={{ opacity: isOmnipotentPoopAreYouSure ? 1 : 0, pointerEvents: isOmnipotentPoopAreYouSure ? 'all' : 'none' }}>
+            <div className={styles.areYouSureOmnipotentPoopBodyTitle}>Are you sure you want to buy Omnipotent Poop?</div>
+            <div onClick={ominpotentPoopLotteryGo} className={styles.yesDoOmnipotentPoop}>Yes</div>
+            <div onClick={toggleIsOmnipotentPoopSure} className={styles.noDoOmnipotentPoop}>No</div>
+          </div>
         </div>
       </div>
+
+      {/* STOCK MARKET SCREEN */}
+      <div
+        className={styles.stuffyScreen}
+        style={{
+          opacity: isStockMarketOpen ? 1 : 0,
+          pointerEvents: isStockMarketOpen ? 'all' : 'none',
+          zIndex: 1000
+        }}
+      >
+        <div className={styles.stuffyTitle}>Stock Market</div>
+        <button onClick={buyStock} className={styles.buyStock}>Buy</button>
+        <button onClick={sellStock} className={styles.sellStock}>Sell</button>
+        <button className={styles.stuffXExit} onClick={toggleStockMarket}>&#10008;</button>
+        <div className={styles.stockMarketGraphContainer}>
+          <div className={styles.stockMarketGraph}>
+            <Line data={stockMarketData} options={stockMarketOptions} />
+          </div>
+        </div>
+      </div>
+
+      {/* FROG FECES FACTORY SCREEN */}
+      <div
+        className={styles.stuffyScreen}
+        style={{
+          opacity: isFrogTurdOpen ? 1 : 0,
+          pointerEvents: isFrogTurdOpen ? 'all' : 'none',
+          zIndex: 1000
+        }}
+      >
+        <div className={styles.stuffyTitle}>Frog Feces Factory</div>
+        <img className={styles.theFrogToilet} src="theFrogToilet.png" alt="TheFrogToilet" />
+        <div className={styles.frogTurdStats}>
+          stats
+          <button onClick={addPoopPerFrog} className={styles.buyMorePoopPerFrog}>Buy more poop per frog ({costToBuyPoopPerFrog})</button>
+          <button onClick={addFrogsPerSecond} className={styles.buyMoreFrogsPerSecond}>Buy more frogs per second ({costToBuyFrogsPerSecond})</button>
+          <div className={styles.frogStatWords}>Poop Per Frog: {poopPerFrog}</div> 
+          <div className={styles.frogStatWords}>Frogs Per Second: {frogsPerSecond}</div>
+        </div>
+        <button className={styles.stuffXExit} onClick={toggleIsFrogTurdOpen}>&#10008;</button>
+      </div>
+    </div>
 
     </div>
   );
