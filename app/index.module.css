@@ -309,7 +309,7 @@
 
 .stuffXExit {
   position: fixed;
-  font-size: 50px;
+  font-size: 5vh;
   top: 50px;
   left: 5vw;
   /* z-index: 10; */
