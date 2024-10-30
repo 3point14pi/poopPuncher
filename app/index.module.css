@@ -298,6 +298,7 @@
   border-radius: 20px;
   overflow-y: auto;
   z-index: 100000;
+  transform: translateZ(0);
 }
 
 .stuffyTitle {
