@@ -631,6 +631,7 @@ export default function SecretPage() {
       this.element.style.left = '0px'; // Start at the left side of the screen
       this.element.style.opacity = isFrogTurdOpenRef.current ? '1' : '0';
       this.element.style.pointerEvents = isFrogTurdOpenRef.current ? 'all' : 'none';
+      this.element.style.zIndex = '10000000000';
       document.body.appendChild(this.element);
 
       // Add an event listener to the frog element

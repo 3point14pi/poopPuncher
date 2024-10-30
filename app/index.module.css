@@ -309,8 +309,8 @@
 
 .stuffXExit {
   position: fixed;
-  font-size: 6vw;
-  top: 3vh;
+  font-size: 50px;
+  top: 50px;
   left: 5vw;
   /* z-index: 10; */
 }
@@ -733,6 +733,14 @@
   border-radius: 15px;
 }
 
+.stuffXExit {
+  position: fixed;
+  font-size: 6vw;
+  top: 3vh;
+  left: 5vw;
+  /* z-index: 10; */
+}
+
 .stuffPicGroup {
   position: relative;
   background-color: red;
@@ -763,21 +771,20 @@
   height: 80vh; /* Adjusted height for mobile */
 }
 
-/* .buyStock, .sellStock {
-  position: fixed;
-  padding: 2vw;
-  border-radius: 15px;
-  font-size: 3vw; 
-} */
+.buyStock, .sellStock {
+  position: absolute;
+  height: 30px;
+  width: 50px;
+}
 
 .buyStock {
   left: 20vw;
-  top: 10vh;
+  top: 90vh;
 }
 
 .sellStock {
   right: 20vw;
-  top: 10vh;
+  top: 90vh;
 }
 
 /* Are You Sure Popups */
