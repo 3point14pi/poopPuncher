@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect, useRef, use } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Line } from 'react-chartjs-2';
 import styles from './index.module.css';
 import 'chart.js/auto';  // Automatically import everything needed for chart.js
@@ -14,10 +14,8 @@ export default function SecretPage() {
     if (typeof window !== 'undefined') {  // Ensure this runs only on the client
       const firstVisitCheck = localStorage.getItem('firstVisit');
       if (!firstVisitCheck) {
-        alert("Welcome to poop puncher! Dis is made by Lucas Cheng... Also credit to ben for helping give ideas :)");
+        alert("うんちパンチャーへようこそ！これは Lucas Cheng が作ったものです... アイデアを提供してくれた ben にも感謝します :)");
         localStorage.setItem('firstVisit', 'no');
-        localStorage.setItem('didChooseLanguage', JSON.stringify(false));
-        localStorage.setItem('language', '');
         // Initialize game values in localStorage
         localStorage.setItem('count', JSON.stringify(0));
         localStorage.setItem('level', JSON.stringify(1));
@@ -54,46 +52,8 @@ export default function SecretPage() {
       }
     }
   }, []);
-
   
-  // Initialize `didChooseLanguage` from localStorage once on initial render
-  const initialDidChooseLanguage = JSON.parse(localStorage.getItem("didChooseLanguage") || "false")
-  const [didChooseLanguage, setDidChooseLanguage] = useState(initialDidChooseLanguage);
-
-  // Update localStorage when `didChooseLanguage` changes
-  useEffect(() => {
-    if (typeof window !== 'undefined') {
-      localStorage.setItem('didChooseLanguage', JSON.stringify(didChooseLanguage));
-    }
-  }, [didChooseLanguage]);
-
-  // Language selection functions
-  function choseAmerica() {
-    setDidChooseLanguage(true);
-    setLanguage("English");
-  }
-
-  function choseJapanese() {
-    setDidChooseLanguage(true);
-    setLanguage("Japanese");
-  }
-
-  // Initialize and update the `language` state
-  const initialLanguage = typeof window !== 'undefined' ? (localStorage.getItem("language") || "") : "";
-  const [language, setLanguage] = useState(initialLanguage);
-
-  useEffect(() => {
-    if (typeof window !== 'undefined') {
-      localStorage.setItem('language', language);
-    }
-  }, [language]);
-
-  // Redirect if language is set to Japanese
-  useEffect(() => {
-    if (language === "Japanese") {
-      window.location.href = "/japanese";
-    }
-  }, [language]);
+  
   
 
   // Initialize state from localStorage
@@ -172,8 +132,6 @@ export default function SecretPage() {
     try {
       if (typeof window !== 'undefined') {
         localStorage.setItem('count', JSON.stringify(count));
-        localStorage.setItem('didChooseLanguage', JSON.stringify(didChooseLanguage));
-        localStorage.setItem('language', language);
         localStorage.setItem('level', JSON.stringify(level));
         localStorage.setItem('gameName', gameName);
         localStorage.setItem('amountOfCookiesForLevelUp', JSON.stringify(amountOfCookiesForLevelUp));
@@ -231,17 +189,17 @@ export default function SecretPage() {
   useEffect(() => {
     if (count >= 100 && isCentiPoop == false) {
       setIsCentiPoop(true)
-      alert("You won the centi poop badge!")
+      alert("センチうんちバッジを獲得しました!")
     } if (amountOfPoopsPerSecond >= 150 && isPoopFactory == false) {
       setisPoopFactory(true)
-      alert("You won the poop factory  badge!")
+      alert("うんち工場のバッジを獲得しました!")
     }
   }, [count])
 
 // Add all the state variables that trigger save when changed
   useEffect(() => {
     save();
-  }, [count, level, gameName, amountOfCookiesForLevelUp, addToAmountOfCookiesForLevelUp, poopBarThing, poopsClickedEver, PoopPerClick, costToBuyPoopClick, costToAddCostToBuyPoopClick, amountOfPoopsPerSecond, costToBuyPoopsPerSecond, costToAddCostBuyPoopsPerSecond, didChooseLanguage, language]);
+  }, [count, level, gameName, amountOfCookiesForLevelUp, addToAmountOfCookiesForLevelUp, poopBarThing, poopsClickedEver, PoopPerClick, costToBuyPoopClick, costToAddCostToBuyPoopClick, amountOfPoopsPerSecond, costToBuyPoopsPerSecond, costToAddCostBuyPoopsPerSecond]);
 
   
 
@@ -338,7 +296,7 @@ export default function SecretPage() {
       if (isStockMarketAvailable == true) {
         setIsStockMarketOpen((prevState) => !prevState);
       } else {
-        alert('Get to level 10 first!')
+        alert('まずはレベル10に到達しましょう！')
       }
     }
 
@@ -393,7 +351,7 @@ export default function SecretPage() {
           setPriceOfStockLastBought(Math.round(buyStockPrice)*0.75)
           setStockContained(stockContained + 1)
         } else {
-          alert("You don't have enough poops poop head!")
+          alert("うんちが足りないよ、うんち頭！")
           }
       } else {
         if (count >= Math.round(buyStockPrice)) {
@@ -401,7 +359,7 @@ export default function SecretPage() {
           setPriceOfStockLastBought(Math.round(buyStockPrice))
           setStockContained(stockContained + 1)
         } else {
-          alert("You don't have enough poops poop head!")
+          alert("うんちが足りないよ、うんち頭！")
         }
       }
     }
@@ -412,9 +370,9 @@ export default function SecretPage() {
         setCount(count + Math.round(buyStockPrice))
         setPoopsClickedEver(poopsClickedEver + Math.round(buyStockPrice))
         setStockContained(stockContained - 1)
-        alert(Math.round(buyStockPrice))
+        console.log(Math.round(buyStockPrice))
       } else {
-        alert("ya don't have no stocks to sell poopy!")
+        alert("売る株なんて無いんだよ！")
       }
     }
 
@@ -471,7 +429,7 @@ export default function SecretPage() {
       if (isLotteryAvailable) {
         setIsLottery((prevState) => !prevState);
       } else {
-        alert("Get to level 3 first!");
+        alert("まずはレベル3に到達しましょう！");
       }
     }
 
@@ -498,23 +456,23 @@ export default function SecretPage() {
             setCount(count + 500);
             setPoopsClickedEver(poopsClickedEver + 500);
             setPoopBarThing(poopBarThing + 500);
-            alert('You won!!! yayyy :)');
+            alert('勝ったよ!!! やったー :)');
           } else {
-            alert('You lost... :(');
+            alert('負けましたね... :(');
           }
         } else {
           if (winOrLose == 0) {
             setCount(count + 500);
             setPoopsClickedEver(poopsClickedEver + 500);
             setPoopBarThing(poopBarThing + 500);
-            alert('You won!!! yayyy :)');
+            alert('勝ったよ!!! やったー :)');
           } else {
-            alert('You lost... :(');
+            alert('負けましたね... :(');
           }
         }
 
       } else {
-        alert("Stop GAMBLING... GET SOME MORE POOPS, OR GET OUT!!!");
+        alert("ギャンブルはやめろ...もっとうんちをしろ、さもなくば出て行け!!!");
       }
     }
 
@@ -528,22 +486,22 @@ export default function SecretPage() {
             setCount(count + 1000);
             setPoopsClickedEver(poopsClickedEver + 1000);
             setPoopBarThing(poopBarThing + 1000);
-            alert('You won!!! yayyy :)');
+            alert('勝ったよ!!! やったー :)');
           } else {
-            alert('You lost... :(');
+            alert('負けましたね... :(');
           }
         } else {
           if (winOrLose === 0) {
             setCount(count + 1000);
             setPoopsClickedEver(poopsClickedEver + 1000);
             setPoopBarThing(poopBarThing + 1000);
-            alert('You won!!! yayyy :)');
+            alert('勝ったよ!!! やったー :)');
           } else {
-            alert('You lost... :(');
+            alert('負けましたね... :(');
           }
         }
       } else {
-        alert("Stop GAMBLING... GET SOME MORE POOPS, OR GET OUT!!!");
+        alert("ギャンブルはやめろ...もっとうんちをしろ、さもなくば出て行け!!!");
       }
     }
 
@@ -557,13 +515,13 @@ export default function SecretPage() {
             setCount(count + 2000);
             setPoopsClickedEver(poopsClickedEver + 2000);
             setPoopBarThing(poopBarThing + 2000);
-            alert('You won!!! yayyy :)');
+            alert('勝ったよ!!! やったー :)');
             if (didWinOmnioptentPoop == true) {
               setDidWinOmnioptentPoop(true)
-              alert("You won the omnipotent poop badge!")
+              alert("全能のうんちバッジを獲得しました！")
             }
           } else {
-            alert('You lost... :(');
+            alert('負けましたね... :(');
           }
         } else {
           if (winOrLose === 0) {
@@ -571,13 +529,13 @@ export default function SecretPage() {
             setPoopsClickedEver(poopsClickedEver + 2000);
             setPoopBarThing(poopBarThing + 2000);
             setDidWinOmnioptentPoop(true)
-            alert('You won!!! yayyy :)');
+            alert('勝ったよ!!! やったー :)');
           } else {
-            alert('You lost... :(');
+            alert('負けましたね... :(');
           }
         }
       } else {
-        alert("Stop GAMBLING... GET SOME MORE POOPS, OR GET OUT!!!");
+        alert("ギャンブルはやめろ...もっとうんちをしろ、さもなくば出て行け!!!");
       }
     }
 
@@ -612,7 +570,7 @@ export default function SecretPage() {
       setCostToBuyPoopPerFrog(costToBuyPoopPerFrog + addToCostPoopPerFrog)
       setAddToCostPoopPerFrog(addToCostPoopPerFrog + 10)
     } else {
-      alert("You don't have enough poops poop head!")
+      alert("うんちが足りないよ、うんち頭！")
     }
   }
 
@@ -626,7 +584,7 @@ export default function SecretPage() {
       setCostToBuyFrogsPerSecond(costToBuyFrogsPerSecond + addToCostFrogsPerSecond);
       setAddToCostFrogsPerSecond(addToCostFrogsPerSecond + 10);
     } else {
-      alert("You don't have enough poops poop head!");
+      alert("うんちが足りないよ、うんち頭！");
     }
   }
   
@@ -654,7 +612,7 @@ export default function SecretPage() {
     if (isFrogTurdAvailable) {
       setIsFrogTurdOpen((prevState) => !prevState);
     } else {
-      alert('You need to get to level 50 first!')
+      alert('まずはレベル50に到達する必要があります。')
     }
   }
 
@@ -787,7 +745,7 @@ export default function SecretPage() {
           setCostToAddCostToBuyPoopClick(costToAddCostToBuyPoopClick + 5);
           setCount(count - costToBuyPoopClick/2);
         } else {
-          alert("You don't have enough poops you poop head!");
+          alert("うんちが足りないよ、うんち頭！");
         }
       } else {
         if (count >= costToBuyPoopClick) {
@@ -796,7 +754,7 @@ export default function SecretPage() {
           setCostToAddCostToBuyPoopClick(costToAddCostToBuyPoopClick + 5);
           setCount(count - costToBuyPoopClick);
         } else {
-          alert("You don't have enough poops you poop head!");
+          alert("うんちが足りないよ、うんち頭！");
         }
       }
     }
@@ -809,7 +767,7 @@ export default function SecretPage() {
           setCostToAddCostBuyPoopsPerSecond(costToAddCostBuyPoopsPerSecond + 20);
           setAmountOfPoopsPerSecond(amountOfPoopsPerSecond + 1)
         } else {
-          alert("You don't have enough poops you poop head!");
+          alert("うんちが足りないよ、うんち頭！");
         }
       } else {
         if (count >= costToBuyPoopsPerSecond) {
@@ -818,7 +776,7 @@ export default function SecretPage() {
           setCostToAddCostBuyPoopsPerSecond(costToAddCostBuyPoopsPerSecond + 20);
           setAmountOfPoopsPerSecond(amountOfPoopsPerSecond + 1)
         } else {
-          alert("You don't have enough poops you poop head!");
+          alert("うんちが足りないよ、うんち頭！");
         }
       }
     };
@@ -831,7 +789,7 @@ export default function SecretPage() {
           setCostToAddCostBuyTenPoopsPerSecond(costToAddCostBuyTenPoopsPerSecond + 20); // Adjusted increment for bulk purchase
           setAmountOfPoopsPerSecond(amountOfPoopsPerSecond + 10)
         } else {
-          alert("You don't have enough poops you poop head!");
+          alert("うんちが足りないよ、うんち頭！");
         }
       } else {
         if (count >= costToBuyTenPoopsPerSecond) {
@@ -840,7 +798,7 @@ export default function SecretPage() {
           setCostToAddCostBuyTenPoopsPerSecond(costToAddCostBuyTenPoopsPerSecond + 20); // Adjusted increment for bulk purchase
           setAmountOfPoopsPerSecond(amountOfPoopsPerSecond + 10)
         } else {
-          alert("You don't have enough poops you poop head!");
+          alert("うんちが足りないよ、うんち頭！");
         }
       }
     }
@@ -853,7 +811,7 @@ export default function SecretPage() {
           setCostToAddCostBuyTenPoopsPerClick(costToAddCostBuyTenPoopsPerClick + 20); // Adjusted increment for bulk purchase
           setPoopPerClick(PoopPerClick + 10)
         } else {
-          alert("You don't have enough poops you poop head!");
+          alert("うんちが足りないよ、うんち頭！");
         }
       } else {
         if (count >= costToBuyTenPoopsPerClick) {
@@ -862,7 +820,7 @@ export default function SecretPage() {
           setCostToAddCostBuyTenPoopsPerClick(costToAddCostBuyTenPoopsPerClick + 20); // Adjusted increment for bulk purchase
           setPoopPerClick(PoopPerClick + 10)
         } else {
-          alert("You don't have enough poops you poop head!");
+          alert("うんちが足りないよ、うんち頭！");
         }
       }
     }
@@ -896,7 +854,7 @@ export default function SecretPage() {
     const saveIsMoreLotteryLuck = typeof window !== 'undefined' ? JSON.parse(localStorage.getItem("isMoreLotteryLuck") || "false") : false;
     const [isMoreLotteryLuck, setIsMoreLotteryLuck] = useState(saveIsMoreLotteryLuck)
 
-    const [dailyDealOneMessage, setDailyDealOneMessage] = useState('Nothing')
+    const [dailyDealOneMessage, setDailyDealOneMessage] = useState('いいえthing')
     
 
     const [isDailyDealOneBought, setIsDailyDealOneBought] = useState(false)
@@ -907,12 +865,12 @@ export default function SecretPage() {
             setIsDailyDealOneBought(true)
             setCount(count - 10000)
             setIsDoubleCount(true)
-            alert("You now have double poops per click!")
+            alert("クリックごとにうんちが 2 倍になります。")
           } else {
-            alert("You don't have enough poops poop head!")
+            alert("うんちが足りないよ、うんち頭！")
           }
         } else {
-          alert('You already bought this poop head!')
+          alert('このうんち頭はもう買ったでしょ！')
         }
       } if (dayOfWeek == 2) {
         if (isDoubleClickPerSecond == false) {
@@ -920,12 +878,12 @@ export default function SecretPage() {
             setIsDailyDealOneBought(true)
             setCount(count - 10000)
             setIsDoubleClickPerSecond(true)
-            alert("You now have double poops per second!")
+            alert("1秒あたりのうんちの回数が2倍になりました!")
           } else {
-            alert("You don't have enough poops poop head!")
+            alert("うんちが足りないよ、うんち頭！")
           }
         } else {
-          alert('You already bought this poop head!')
+          alert('このうんち頭はもう買ったでしょ！')
         }
       } if (dayOfWeek == 3) {
         if (isHalvePrice == false) {
@@ -933,12 +891,12 @@ export default function SecretPage() {
             setIsDailyDealOneBought(true)
             setCount(count - 50000)
             setIsHalvePrice(true)
-            alert("All market prices are half price")
+            alert("市場価格はすべて半額")
           } else {
-            alert("You don't have enough poops poop head!")
+            alert("うんちが足りないよ、うんち頭！")
           }
         } else {
-          alert('You already bought this poop head!')
+          alert('このうんち頭はもう買ったでしょ！')
         }
       } if (dayOfWeek == 4) {
         if (didBuyTenStocks == false) {
@@ -947,12 +905,12 @@ export default function SecretPage() {
             setCount(count - 1000)
             setDidBuyTenStocks(true)
             setStockContained(stockContained + 10)
-            alert("Got 10 Stocks!")
+            alert("10株ゲット！")
           } else {
-            alert("You don't have enough poops poop head!")
+            alert("うんちが足りないよ、うんち頭！")
           }
         } else {
-          alert('You already bought this poop head!')
+          alert('このうんち頭はもう買ったでしょ！')
         }
       } if (dayOfWeek == 5) {
         if (isHalveStockPrice == false) {
@@ -960,21 +918,21 @@ export default function SecretPage() {
             setIsDailyDealOneBought(true)
             setCount(count - 100000)
             setIsHalveStockPrice(true)
-            alert("Stocks are now less price!")
+            alert("株が今より安くなりました！")
           } else {
-            alert("You don't have enough poops poop head!")
+            alert("うんちが足りないよ、うんち頭！")
           }
         } else {
-          alert('You already bought this poop head!')
+          alert('このうんち頭はもう買ったでしょ！')
         }
       } if (dayOfWeek == 6) {
           if (count >= 0) {
             setIsDailyDealOneBought(true)
             setPrankPoop(true)
-            alert("I wouldn't let you die... would I?")
-            alert("Check your count... hehehe")
+            alert("私はあなたを死なせません...そうでしょう？")
+            alert("数えてみてください... ふふふ")
           } else {
-            alert("You gotta have a least 0 man. i aint payin 4 u")
+            alert("最低でも0人の男が必要だ。俺はお前に金を払わない")
           }
       } if (dayOfWeek == 0) {
         if (isMoreLotteryLuck == false) {
@@ -982,12 +940,12 @@ export default function SecretPage() {
             setIsDailyDealOneBought(true)
             setCount(count - 10000)
             setIsMoreLotteryLuck(true)
-            alert("You now have 50% more luck in lotteries")
+            alert("宝くじの当選確率が50%アップ")
           } else {
-            alert("You don't have enough poops poop head!")
+            alert("うんちが足りないよ、うんち頭！")
           }
         } else {
-          alert('You already bought this poop head!')
+          alert('このうんち頭はもう買ったでしょ！')
         }
       }
     }
@@ -1026,19 +984,19 @@ export default function SecretPage() {
 
     useEffect(() => {
       if (dayOfWeek == 1) {
-        setDailyDealOneMessage('Click to get double poops per click the whole day! (10,000 poops)')
+        setDailyDealOneMessage('クリックすると、1 日中クリックごとに 2 倍のうんちがもらえます! (10,000 うんち)')
       } else if (dayOfWeek == 2) {
-        setDailyDealOneMessage('Click to get double poops per second the whole day! (10,000 poops)')
+        setDailyDealOneMessage('クリックすると、1 日中 1 秒あたり 2 倍のうんちができます。(10,000 うんち)')
       } else if (dayOfWeek == 3) {
-        setDailyDealOneMessage('Click to halve price of poop shop the whole day! (50,000 poops)')
+        setDailyDealOneMessage('クリックすると、うんちショップの料金が一日中半額になります! (うんち 50,000 個)')
       } else if (dayOfWeek == 4) {
-        setDailyDealOneMessage('Click to get 10 free stocks! (1,000 poops) --- hehehe')
+        setDailyDealOneMessage('クリックすると10株が無料で手に入ります！（うんち1,000個） --- ふふふ')
       } else if (dayOfWeek == 5) {
-        setDailyDealOneMessage('Click to cut stock BUYING PRICE by 25% (100,000 poops)')
+        setDailyDealOneMessage('クリックすると、在庫購入価格が 25% 引き下げられます (100,000 うんち)')
       } else if (dayOfWeek == 6) {
-        setDailyDealOneMessage('Click to dieeeeeeeeeeee! (free)')
+        setDailyDealOneMessage('クリックして死ねー ...')
       } else if (dayOfWeek == 0) {
-        setDailyDealOneMessage("Click to increase lottery chances by 50% (10,000 poops)")
+        setDailyDealOneMessage("クリックすると抽選の確率が 50% 増加します (うんち 10,000 個)")
       } 
     }, [dayOfWeek]);
     
@@ -1050,7 +1008,7 @@ export default function SecretPage() {
       setHowManyTimesClicked(howManyTimesClicked + 1)
       if (prankPoop) {
         setPrankPoop(false)
-        alert("Jk, bro. I aint dat mean")
+        alert("冗談だよ。そんな意地悪なことしてないよ")
       }
       if (isDoubleCount) {
         setCount(count + 2 * (PoopPerClick));
@@ -1085,13 +1043,13 @@ export default function SecretPage() {
     function allowAutoclicker() {
       if (isAutoClickerAllowed == false) {
         if (count >= 999999999) {
-          alert("Yay! Auto clicker is allowed!")
+          alert("やった！オートクリッカーが許可されました！")
           setIsAutoClickerAllowed(true)
         } else {
-          alert("You don't have enough poops yet!")
+          alert("まだうんちが足りないよ！")
         }
       } else {
-        alert("You already got this poop head!")
+        alert("君はもうこのうんこ頭を手に入れたんだ！")
       }
     }
     
@@ -1106,12 +1064,12 @@ export default function SecretPage() {
             
             // Alert based on how many times auto-clicking was detected
             if (howManyTimeAutoClicked === 1) {
-              alert('Autoclicker detected! Avoid or buy the autoclicker permission.');
+              alert('オートクリッカーが検出されました。回避するか、オートクリッカーの許可を購入してください。');
             } else if (howManyTimeAutoClicked === 2) {
-              alert('Second detection: Losing 10,000 poops as a penalty.');
+              alert('2回目の検出: ペナルティとして10,000個のうんちを失う。');
               setCount((prevCount) => Math.max(0, prevCount - 10000));
             } else if (howManyTimeAutoClicked >= 3) {
-              alert('Third detection: Resetting all poops.');
+              alert('3 回目の検出: すべてのうんちをリセットします。');
               setCount(0);
             }
             
@@ -1172,12 +1130,6 @@ export default function SecretPage() {
       {/* BACKGROUND IMAGE */}
       <img className={styles.backround} src="toiletPaperBackround.png" alt="" />
 
-      <div className={styles.flagDiv} style={{ opacity: didChooseLanguage ? 0 : 0.9, pointerEvents: didChooseLanguage ? 'none' : 'all'}}></div>
-      <div className={styles.flagBox} style={{ opacity: didChooseLanguage ? 0 : 1, pointerEvents: didChooseLanguage ? 'none' : 'all'}}>
-        <img src="americanFlag.png" alt="americanFlag" className={styles.flags} onClick={choseAmerica}/>
-        <img src="japaneseFlag.png" alt="japaneseFlag" className={styles.flags} onClick={choseJapanese}/>
-      </div>
-
       {/* TOP BAR */}
 
       <div className={styles.topBar}>
@@ -1195,40 +1147,40 @@ export default function SecretPage() {
         <p className={styles.poopMarket}>Poop Market</p> <br />
 
         <button className={styles.morePoopClicker} onClick={morePoopPerClick}>
-          Click to add more poop per click ({ isHalvePrice ? costToBuyPoopClick/2 : costToBuyPoopClick} Poops)
+          クリックすると、クリックごとにうんちが追加されます ({ isHalvePrice ? costToBuyPoopClick/2 : costToBuyPoopClick} うんち)
         </button> <br /> <br />
 
         <button onClick={addMorePoopsPerSecond} className={styles.addMorePoopsPerSecond}>
-          Click to add more poop per second ({ isHalvePrice ? costToBuyPoopsPerSecond/2 : costToBuyPoopsPerSecond} Poops)
+          クリックすると1秒あたりのうんちの量が増えます ({ isHalvePrice ? costToBuyPoopsPerSecond/2 : costToBuyPoopsPerSecond} うんち)
         </button> <br /> <br />
 
         <button onClick={addTenMorePoopsPerClick} className={styles.addTenPoopsPerClick}>
-          Click to add 10 more poop per click ({ isHalvePrice ? costToBuyTenPoopsPerClick/2 : costToBuyTenPoopsPerClick} Poops)
+          クリックすると、1クリックにつき10個のうんちが追加されます ({ isHalvePrice ? costToBuyTenPoopsPerClick/2 : costToBuyTenPoopsPerClick} うんち)
         </button> <br /><br />
 
         <button onClick={addTenMorePoopsPerSecond} className={styles.addTenPoopsPerSecond}>
-          Click to add 10 more poop per second ({ isHalvePrice ? costToBuyTenPoopsPerSecond : costToBuyTenPoopsPerSecond} Poops)
+          クリックすると1秒あたり10個のうんちが追加されます ({ isHalvePrice ? costToBuyTenPoopsPerSecond : costToBuyTenPoopsPerSecond} うんち)
         </button> <br /><br />
 
-        <div className={styles.poopMarket}>Daily Deals</div> <br />
+        <div className={styles.poopMarket}>日替わりセール</div> <br />
 
         <button onClick={dailyDealOne} className={styles.doublePoop}>
           {dailyDealOneMessage} { isDailyDealOneBought ? '✅' : ''}
         </button> <br /><br />
 
-        <div className={styles.poopMarket}>Da stuff you shall need</div> <br />
+        <div className={styles.poopMarket}>必要なもの</div> <br />
         <button onClick={allowAutoclicker} className={styles.doublePoop}>
-          Allow Autoclicker { isAutoClickerAllowed ? '✅' : '(999,999,999 poops)'}
+          オートクリッカーを許可する { isAutoClickerAllowed ? '✅' : '(999,999,999 うんち)'}
         </button> <br /><br />
 
       </span>
 
       {/* RIGHT BAR (STATS) */}
       <div className={styles.rightBar}>
-        <div className={styles.stats}>Stats</div>
+        <div className={styles.stats}>統計</div>
         <br />
         <div className={styles.level}>
-          Level: {level}
+          レベル： {level}
           <div
             className={styles.levelBar}
             style={{
@@ -1239,12 +1191,12 @@ export default function SecretPage() {
           ></div>
         </div>
         <br />
-        <div className={styles.statsPoop}>Poops clicked: { prankPoop ? 0 : count}</div> <br />
-        <div className={styles.statsPoop}>Poops clicked ever: {poopsClickedEver}</div> <br />
-        <div className={styles.statsShop}>Poops per click: {PoopPerClick}{isDoubleCount ? '=>(2x)' : ''}</div> <br />
-        <div className={styles.statsShop}>Poops per second: {amountOfPoopsPerSecond}{isDoubleClickPerSecond ? '=>(2x)' : ''}</div><br />
+        <div className={styles.statsPoop}>うんちをクリック:{ prankPoop ? 0 : count}</div> <br />
+        <div className={styles.statsPoop}>今までクリックしたうんち：{poopsClickedEver}</div> <br />
+        <div className={styles.statsShop}>クリックあたりのうんち数:{PoopPerClick}{isDoubleCount ? '=>(2x)' : ''}</div> <br />
+        <div className={styles.statsShop}>秒あたりの排便回数:{amountOfPoopsPerSecond}{isDoubleClickPerSecond ? '=>(2x)' : ''}</div><br />
 
-        <div className={styles.stats}>Achievements</div>
+        <div className={styles.stats}>実績</div>
         <div className={styles.achievmentsSection}>
             <img src = {isCentiPoop ? "centiPoop.png" : "hideCentiPoop.png"} alt="centiPoop" className={styles.achievmentIcons}/>
             <img src={isPoopFactory ? "pooperFactory.png" : "hidePooperFactory.png"} alt="pooperFactory" className={styles.achievmentIcons}/>
@@ -1280,7 +1232,7 @@ export default function SecretPage() {
 
       {/* STUFF SECTION */}
       <div className={styles.stuff}>
-        <div className={styles.stuffTitle}>Stuff</div>
+        <div className={styles.stuffTitle}>もの</div>
         <br />
 
         {/* LOTTERY */}
@@ -1291,7 +1243,7 @@ export default function SecretPage() {
             alt="lotteryTicketPic"
           />
           <span className={styles.stuffPicLabel}>
-            <strong>Lottery</strong>
+            <strong>宝くじ</strong>
           </span>
         </div>
         <br />
@@ -1299,14 +1251,14 @@ export default function SecretPage() {
         {/* STOCK MARKET */}
         <div className={styles.stuffPicGroup} onClick={toggleStockMarket}>
           <img className={styles.stockMarketPic} src={isStockMarketAvailable ? "stockMarketPic.png" : "stockMarketPicHide.png"} alt="stockMarketPic" />
-          <span className={styles.stuffPicLabel}><strong>Stock Market</strong></span>
+          <span className={styles.stuffPicLabel}><strong>株式市場</strong></span>
         </div>
         <br />
 
         {/* FROG FECES FACTORY */}
         <div className={styles.stuffPicGroup} onClick={toggleIsFrogTurdOpen}>
           <img className={styles.stockMarketPic} src={isFrogTurdAvailable ? "frogTurdPic.png" : "frogTurdPicHide.png"} alt="frogTurdPic" />
-          <span className={styles.stuffPicLabel}><strong>Frog Feces Factory</strong></span>
+          <span className={styles.stuffPicLabel}><strong>カエルの糞工場</strong></span>
         </div>
       </div>
 
@@ -1319,7 +1271,7 @@ export default function SecretPage() {
           zIndex: 1000,
         }}
       >
-        <div className={styles.stuffyTitle}>Lottery {isMoreLotteryLuck ? '=>2x Luck' : ''}</div>
+        <div className={styles.stuffyTitle}>宝くじ {isMoreLotteryLuck ? '=>2x Luck' : ''}</div>
         <button className={styles.stuffXExit} onClick={toggleIsLottery}>
           &#10008;
         </button>
@@ -1333,25 +1285,25 @@ export default function SecretPage() {
       {/* Confirmation dialogs outside of the lottery screen div */}
       <div className={styles.areYouSurePooperManBody} style={{ opacity: isPooperManAreYouSure ? 1 : 0, pointerEvents: isPooperManAreYouSure ? 'all' : 'none' }}>
         <div className={styles.areYouSurePooperManBodyTitle}>
-          Are you sure you want to buy Pooper Man?
-          <div onClick={pooperManLotteryGo} className={styles.yesDoPooperMan}>Yes</div>
-          <div onClick={toggleIsPooperManSure} className={styles.noDoPooperMan}>No</div>
+          本当にPooper Manを購入しますか?
+          <div onClick={pooperManLotteryGo} className={styles.yesDoPooperMan}>はい</div>
+          <div onClick={toggleIsPooperManSure} className={styles.noDoPooperMan}>いいえ</div>
         </div>
       </div>
 
       <div className={styles.areYouSureDogTurdBody} style={{ opacity: isDogTurdAreYouSure ? 1 : 0, pointerEvents: isDogTurdAreYouSure ? 'all' : 'none' }}>
         <div className={styles.areYouSureDogTurdBodyTitle}>
-          Are you sure you want to buy Dog Turd?
-          <div onClick={dogTurdLotteryGo} className={styles.yesDoDogTurd}>Yes</div>
-          <div onClick={toggleIsDogTurdSure} className={styles.noDoDogTurd}>No</div>
+        本当にDog Turdを購入しますか?
+          <div onClick={dogTurdLotteryGo} className={styles.yesDoDogTurd}>はい</div>
+          <div onClick={toggleIsDogTurdSure} className={styles.noDoDogTurd}>いいえ</div>
         </div>
       </div>
 
       <div className={styles.areYouSureOmnipotentPoopBody} style={{ opacity: isOmnipotentPoopAreYouSure ? 1 : 0, pointerEvents: isOmnipotentPoopAreYouSure ? 'all' : 'none' }}>
         <div className={styles.areYouSureOmnipotentPoopBodyTitle}>
-          Are you sure you want to buy Omnipotent Poop?
-          <div onClick={ominpotentPoopLotteryGo} className={styles.yesDoOmnipotentPoop}>Yes</div>
-          <div onClick={toggleIsOmnipotentPoopSure} className={styles.noDoOmnipotentPoop}>No</div>
+        本当にOmnipotent Poopを購入しますか?
+          <div onClick={ominpotentPoopLotteryGo} className={styles.yesDoOmnipotentPoop}>はい</div>
+          <div onClick={toggleIsOmnipotentPoopSure} className={styles.noDoOmnipotentPoop}>いいえ</div>
         </div>
       </div>
 
@@ -1364,9 +1316,9 @@ export default function SecretPage() {
           zIndex: 1000
         }}
       >
-        <div className={styles.stuffyTitle}>Stock Market</div>
-        <button onClick={buyStock} className={styles.buyStock}>Buy</button>
-        <button onClick={sellStock} className={styles.sellStock}>Sell</button>
+        <div className={styles.stuffyTitle}>株式市場</div>
+        <button onClick={buyStock} className={styles.buyStock}>買う</button>
+        <button onClick={sellStock} className={styles.sellStock}>売る</button>
         <button className={styles.stuffXExit} onClick={toggleStockMarket}>&#10008;</button>
         <div className={styles.stockMarketGraphContainer}>
           <div className={styles.stockMarketGraph}>
@@ -1384,14 +1336,14 @@ export default function SecretPage() {
           zIndex: 1000
         }}
       >
-        <div className={styles.stuffyTitle}>Frog Feces Factory</div>
+        <div className={styles.stuffyTitle}>カエルの糞工場</div>
         <img className={styles.theFrogToilet} src="theFrogToilet.png" alt="TheFrogToilet" />
         <div className={styles.frogTurdStats}>
-          stats
-          <button onClick={addPoopPerFrog} className={styles.buyMorePoopPerFrog}>Buy more poop per frog ({costToBuyPoopPerFrog})</button>
-          <button onClick={addFrogsPerSecond} className={styles.buyMoreFrogsPerSecond}>Buy more frogs per second ({costToBuyFrogsPerSecond})</button>
-          <div className={styles.frogStatWords}>Poop Per Frog: {poopPerFrog}</div> 
-          <div className={styles.frogStatWords}>Frogs Per Second: {frogsPerSecond}</div>
+          統計
+          <button onClick={addPoopPerFrog} className={styles.buyMorePoopPerFrog}>カエル1匹につき糞をもっと買う ({costToBuyPoopPerFrog})</button>
+          <button onClick={addFrogsPerSecond} className={styles.buyMoreFrogsPerSecond}>1秒あたりにカエルをもっと買う ({costToBuyFrogsPerSecond})</button>
+          <div className={styles.frogStatWords}>カエル1匹あたりの糞数: {poopPerFrog}</div> 
+          <div className={styles.frogStatWords}>1秒あたりのカエル数: {frogsPerSecond}</div>
         </div>
         <button className={styles.stuffXExit} onClick={toggleIsFrogTurdOpen}>&#10008;</button>
       </div>
