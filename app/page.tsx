@@ -112,7 +112,7 @@ export default function SecretPage() {
     return 'My Skibidi Toilet'; // Fallback value if window is not available
   });
 
-  // Level-related states
+  // Level-related statess
   const savedAmountOfCookiesForLevelUp = typeof window !== 'undefined' ? parseInt(localStorage.getItem("amountOfCookiesForLevelUp") || "100") : 100;
   const [amountOfCookiesForLevelUp, setAmountOfCookiesForLevelUp] = useState(savedAmountOfCookiesForLevelUp);
 
