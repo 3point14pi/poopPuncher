@@ -1159,11 +1159,11 @@ export default function SecretPage() {
       {/* BACKGROUND IMAGE */}
       <img className={styles.backround} src="toiletPaperBackround.png" alt="" />
 
-      <div className={styles.flagDiv} style={{ opacity: didChooseLanguage ? 0 : 0.9, pointerEvents: didChooseLanguage ? 'none' : 'all'}}></div>
+      {/* <div className={styles.flagDiv} style={{ opacity: didChooseLanguage ? 0 : 0.9, pointerEvents: didChooseLanguage ? 'none' : 'all'}}></div>
      <div className={styles.flagBox} style={{ opacity: didChooseLanguage ? 0 : 1, pointerEvents: didChooseLanguage ? 'none' : 'all'}}>
        <img src="americanFlag.png" alt="americanFlag" className={styles.flags} onClick={choseAmerica}/>
        <img src="japaneseFlag.png" alt="japaneseFlag" className={styles.flags} onClick={choseJapanese}/>
-     </div>
+     </div> */}
 
       {/* TOP BAR */}
 
