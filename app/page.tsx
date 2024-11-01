@@ -89,11 +89,11 @@ export default function SecretPage() {
   }, [language]);
 
   // Redirect if language is set to Japanese
-  useEffect(() => {
-    if (language === "Japanese") {
-      window.location.href = "/japanese";
-    }
-  }, [language]);
+  // useEffect(() => {
+  //   if (language === "Japanese") {
+  //     window.location.href = "/japanese";
+  //   }
+  // }, [language]);
   
 
   // Initialize state from localStorage
@@ -112,7 +112,7 @@ export default function SecretPage() {
     return 'My Skibidi Toilet'; // Fallback value if window is not available
   });
 
-  // Level-related statess
+  // Level-related states
   const savedAmountOfCookiesForLevelUp = typeof window !== 'undefined' ? parseInt(localStorage.getItem("amountOfCookiesForLevelUp") || "100") : 100;
   const [amountOfCookiesForLevelUp, setAmountOfCookiesForLevelUp] = useState(savedAmountOfCookiesForLevelUp);
 
