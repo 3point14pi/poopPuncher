@@ -55,37 +55,37 @@ export default function SecretPage() {
 
 
    // Initialize `didChooseLanguage` from localStorage once on initial render
- const initialDidChooseLanguage = JSON.parse(localStorage.getItem("didChooseLanguage") || "false")
- const [didChooseLanguage, setDidChooseLanguage] = useState(initialDidChooseLanguage);
+//  const initialDidChooseLanguage = JSON.parse(localStorage.getItem("didChooseLanguage") || "false")
+//  const [didChooseLanguage, setDidChooseLanguage] = useState(initialDidChooseLanguage);
 
- const savedLanguage = (localStorage.getItem("language") || '')
- const [language, setLanguage] = useState(savedLanguage)
+//  const savedLanguage = (localStorage.getItem("language") || '')
+//  const [language, setLanguage] = useState(savedLanguage)
 
- // Update localStorage when `didChooseLanguage` changes
- useEffect(() => {
-   if (typeof window !== 'undefined') {
-     localStorage.setItem('didChooseLanguage', JSON.stringify(didChooseLanguage));
-   }
- }, [didChooseLanguage]);
-
-
- // Language selection functions
- function choseAmerica() {
-   setDidChooseLanguage(true);
-   setLanguage("English");
- }
+//  // Update localStorage when `didChooseLanguage` changes
+//  useEffect(() => {
+//    if (typeof window !== 'undefined') {
+//      localStorage.setItem('didChooseLanguage', JSON.stringify(didChooseLanguage));
+//    }
+//  }, [didChooseLanguage]);
 
 
- function choseJapanese() {
-   setDidChooseLanguage(true);
-  //  setLanguage("Japanese");
- }
+//  // Language selection functions
+//  function choseAmerica() {
+//    setDidChooseLanguage(true);
+//    setLanguage("English");
+//  }
 
- useEffect(() => {
-  if (language === 'Japanese') {
-    alert("Japanese!")
-  }
- })
+
+//  function choseJapanese() {
+//    setDidChooseLanguage(true);
+//   //  setLanguage("Japanese");
+//  }
+
+//  useEffect(() => {
+//   if (language === 'Japanese') {
+//     alert("Japanese!")
+//   }
+//  })
 
 
   // Initialize state from localStorage
