@@ -89,11 +89,11 @@ export default function SecretPage() {
   }, [language]);
 
   // Redirect if language is set to Japanese
-  useEffect(() => {
-    if (language === "Japanese") {
-      window.location.href = "/japanese";
-    }
-  }, [language]);
+  // useEffect(() => {
+  //   if (language === "Japanese") {
+  //     window.location.href = "/japanese";
+  //   }
+  // }, [language]);
   
 
   // Initialize state from localStorage
