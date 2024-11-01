@@ -32,8 +32,6 @@ export default function SecretPage() {
         localStorage.setItem('amountOfPoopsPerSecond', JSON.stringify(0));
         localStorage.setItem('divideAmountOfPoopsPerSecond', JSON.stringify(0));
         localStorage.setItem('realDivideAmountOfPoopsPerSecond', JSON.stringify(100));
-        localStorage.setItem('displayPoopPerSecond', JSON.stringify(0));
-        localStorage.setItem('didExceedPoop', JSON.stringify(false));
         localStorage.setItem('costToBuyPoopsPerSecond', JSON.stringify(100));
         localStorage.setItem('costToAddCostBuyPoopsPerSecond', JSON.stringify(20));
         localStorage.setItem('costToBuyTenPoopsPerSecond', JSON.stringify(900));
@@ -80,7 +78,7 @@ export default function SecretPage() {
 
  function choseJapanese() {
    setDidChooseLanguage(true);
-   setLanguage("Japanese");
+  //  setLanguage("Japanese");
  }
 
  useEffect(() => {
