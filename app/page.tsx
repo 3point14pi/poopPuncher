@@ -55,37 +55,30 @@ export default function SecretPage() {
 
 
    // Initialize `didChooseLanguage` from localStorage once on initial render
-//  const initialDidChooseLanguage = JSON.parse(localStorage.getItem("didChooseLanguage") || "false")
-//  const [didChooseLanguage, setDidChooseLanguage] = useState(initialDidChooseLanguage);
+ const initialDidChooseLanguage = JSON.parse(localStorage.getItem("didChooseLanguage") || "false")
+ const [didChooseLanguage, setDidChooseLanguage] = useState(initialDidChooseLanguage);
 
-//  const savedLanguage = (localStorage.getItem("language") || '')
-//  const [language, setLanguage] = useState(savedLanguage)
-
-//  // Update localStorage when `didChooseLanguage` changes
-//  useEffect(() => {
-//    if (typeof window !== 'undefined') {
-//      localStorage.setItem('didChooseLanguage', JSON.stringify(didChooseLanguage));
-//    }
-//  }, [didChooseLanguage]);
+ const savedLanguage = (localStorage.getItem("language") || '')
+ const [language, setLanguage] = useState(savedLanguage)
 
 
-//  // Language selection functions
-//  function choseAmerica() {
-//    setDidChooseLanguage(true);
-//    setLanguage("English");
-//  }
+ // Language selection functions
+ function choseAmerica() {
+   setDidChooseLanguage(true);
+   setLanguage("English");
+ }
 
 
-//  function choseJapanese() {
-//    setDidChooseLanguage(true);
-//   //  setLanguage("Japanese");
-//  }
+ function choseJapanese() {
+   setDidChooseLanguage(true);
+   setLanguage("Japanese");
+ }
 
-//  useEffect(() => {
-//   if (language === 'Japanese') {
-//     alert("Japanese!")
-//   }
-//  })
+ useEffect(() => {
+  if (language === 'Japanese') {
+    alert("Japanese!")
+  }
+ })
 
 
   // Initialize state from localStorage
@@ -1159,11 +1152,11 @@ export default function SecretPage() {
       {/* BACKGROUND IMAGE */}
       <img className={styles.backround} src="toiletPaperBackround.png" alt="" />
 
-      {/* <div className={styles.flagDiv} style={{ opacity: didChooseLanguage ? 0 : 0.9, pointerEvents: didChooseLanguage ? 'none' : 'all'}}></div>
+      <div className={styles.flagDiv} style={{ opacity: didChooseLanguage ? 0 : 0.9, pointerEvents: didChooseLanguage ? 'none' : 'all'}}></div>
      <div className={styles.flagBox} style={{ opacity: didChooseLanguage ? 0 : 1, pointerEvents: didChooseLanguage ? 'none' : 'all'}}>
        <img src="americanFlag.png" alt="americanFlag" className={styles.flags} onClick={choseAmerica}/>
        <img src="japaneseFlag.png" alt="japaneseFlag" className={styles.flags} onClick={choseJapanese}/>
-     </div> */}
+     </div>
 
       {/* TOP BAR */}
 
