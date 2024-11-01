@@ -60,7 +60,7 @@ export default function SecretPage() {
  const initialDidChooseLanguage = JSON.parse(localStorage.getItem("didChooseLanguage") || "false")
  const [didChooseLanguage, setDidChooseLanguage] = useState(initialDidChooseLanguage);
 
- const savedLanguage = JSON.parse(localStorage.getItem("language") || '')
+ const savedLanguage = (localStorage.getItem("language") || '')
  const [language, setLanguage] = useState(savedLanguage)
 
  // Update localStorage when `didChooseLanguage` changes
