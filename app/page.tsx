@@ -249,7 +249,8 @@ export default function SecretPage() {
   // DEV MODE
 
   useEffect(() => {
-    if (gameName == 'sacul is the Best!') {
+    if (gameName == '@!') {
+      setGameName("Oink")
       alert('Dev Mode enabled! If you are not a dev, change your name immedietly, or you will be banned!')
       setPoopPerClick(100000)
     } if (gameName == 'raindeer wang') {
