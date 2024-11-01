@@ -77,6 +77,7 @@ export default function SecretPage() {
     setDidChooseLanguage(true);
     setLanguage("Japanese");
   }
+  
 
   // Initialize and update the `language` state
   const initialLanguage = typeof window !== 'undefined' ? (localStorage.getItem("language") || "") : "";
@@ -240,7 +241,51 @@ export default function SecretPage() {
 
 // Add all the state variables that trigger save when changed
   useEffect(() => {
-    save();
+    try {
+      if (typeof window !== 'undefined') {
+        localStorage.setItem('count', JSON.stringify(count));
+        localStorage.setItem('didChooseLanguage', JSON.stringify(didChooseLanguage));
+        localStorage.setItem('language', language);
+        localStorage.setItem('level', JSON.stringify(level));
+        localStorage.setItem('gameName', gameName);
+        localStorage.setItem('amountOfCookiesForLevelUp', JSON.stringify(amountOfCookiesForLevelUp));
+        localStorage.setItem('addToAmountOfCookiesForLevelUp', JSON.stringify(addToAmountOfCookiesForLevelUp));
+        localStorage.setItem('poopBarThing', JSON.stringify(poopBarThing));
+        localStorage.setItem('poopsClickedEver', JSON.stringify(poopsClickedEver));
+        localStorage.setItem('poopsPerClick', JSON.stringify(PoopPerClick));
+        localStorage.setItem('costToBuyPoopClick', JSON.stringify(costToBuyPoopClick));
+        localStorage.setItem('costToAddCostToBuyPoopClick', JSON.stringify(costToAddCostToBuyPoopClick));
+        localStorage.setItem('amountOfPoopsPerSecond', JSON.stringify(amountOfPoopsPerSecond));
+        localStorage.setItem('costToBuyPoopsPerSecond', JSON.stringify(costToBuyPoopsPerSecond));
+        localStorage.setItem('costToAddCostBuyPoopsPerSecond', JSON.stringify(costToAddCostBuyPoopsPerSecond));
+        localStorage.setItem('costToBuyTenPoopsPerSecond', JSON.stringify(costToBuyTenPoopsPerSecond));
+        localStorage.setItem('costToAddCostBuyTenPoopsPerSecond', JSON.stringify(costToAddCostBuyTenPoopsPerSecond));
+        localStorage.setItem('costToBuyTenPoopsPerClick', JSON.stringify(costToBuyTenPoopsPerClick));
+        localStorage.setItem('costToAddCostBuyTenPoopsPerClick', JSON.stringify(costToAddCostBuyTenPoopsPerClick));
+        localStorage.setItem('stockPrices', JSON.stringify(stockPrices));
+        localStorage.setItem('stockContained', JSON.stringify(stockContained));
+        localStorage.setItem('isDoubleCount', JSON.stringify(stockContained));
+        localStorage.setItem('isDoubleClickPerSecond', JSON.stringify(isDoubleClickPerSecond));
+        localStorage.setItem('isHalvePrice', JSON.stringify(isHalvePrice));
+        localStorage.setItem('didBuyTenStocks', JSON.stringify(didBuyTenStocks));
+        localStorage.setItem('isHalveStockPrice', JSON.stringify(isHalveStockPrice));
+        localStorage.setItem('isMoreLotteryLuck', JSON.stringify(isMoreLotteryLuck));
+        localStorage.setItem('howManyTimeAutoClicked', JSON.stringify(howManyTimeAutoClicked));
+        localStorage.setItem('isAutoClickerAllowed', JSON.stringify(isAutoClickerAllowed));
+        localStorage.setItem('frogsPerSecond', JSON.stringify(frogsPerSecond));
+        localStorage.setItem('poopPerFrog', JSON.stringify(poopPerFrog));
+        localStorage.setItem('costToBuyFrogsPerSecond', JSON.stringify(costToBuyFrogsPerSecond));
+        localStorage.setItem('addToCostFrogsPerSecond', JSON.stringify(addToCostFrogsPerSecond));
+        localStorage.setItem('costToBuyPoopPerFrog', JSON.stringify(costToBuyPoopPerFrog));
+        localStorage.setItem('addToCostPoopPerFrog', JSON.stringify(addToCostPoopPerFrog));
+        localStorage.setItem('isCentiPoop', JSON.stringify(isCentiPoop));
+        localStorage.setItem('isPoopFactory', JSON.stringify(isPoopFactory));
+        localStorage.setItem('didWinOmnioptentPoop', JSON.stringify(didWinOmnioptentPoop));
+        console.log('Data saved successfully');
+      }
+    } catch (error) {
+      console.error('Failed to save data to localStorage:', error);
+    }
   }, [count, level, gameName, amountOfCookiesForLevelUp, addToAmountOfCookiesForLevelUp, poopBarThing, poopsClickedEver, PoopPerClick, costToBuyPoopClick, costToAddCostToBuyPoopClick, amountOfPoopsPerSecond, costToBuyPoopsPerSecond, costToAddCostBuyPoopsPerSecond, didChooseLanguage, language]);
 
   
