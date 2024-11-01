@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect, useRef} from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Line } from 'react-chartjs-2';
 import styles from './index.module.css';
 import 'chart.js/auto';  // Automatically import everything needed for chart.js
@@ -16,8 +16,6 @@ export default function SecretPage() {
       if (!firstVisitCheck) {
         alert("Welcome to poop puncher! Dis is made by Lucas Cheng... Also credit to ben for helping give ideas :)");
         localStorage.setItem('firstVisit', 'no');
-        localStorage.setItem('didChooseLanguage', JSON.stringify(false));
-        localStorage.setItem('language', '');
         // Initialize game values in localStorage
         localStorage.setItem('count', JSON.stringify(0));
         localStorage.setItem('level', JSON.stringify(1));
@@ -55,47 +53,6 @@ export default function SecretPage() {
     }
   }, []);
 
-  
-  // Initialize `didChooseLanguage` from localStorage once on initial render
-  const initialDidChooseLanguage = JSON.parse(localStorage.getItem("didChooseLanguage") || "false")
-  const [didChooseLanguage, setDidChooseLanguage] = useState(initialDidChooseLanguage);
-
-  // Update localStorage when `didChooseLanguage` changes
-  useEffect(() => {
-    if (typeof window !== 'undefined') {
-      localStorage.setItem('didChooseLanguage', JSON.stringify(didChooseLanguage));
-    }
-  }, [didChooseLanguage]);
-
-  // Language selection functions
-  function choseAmerica() {
-    setDidChooseLanguage(true);
-    setLanguage("English");
-  }
-
-  function choseJapanese() {
-    setDidChooseLanguage(true);
-    setLanguage("Japanese");
-  }
-  
-
-  // Initialize and update the `language` state
-  const initialLanguage = typeof window !== 'undefined' ? (localStorage.getItem("language") || "") : "";
-  const [language, setLanguage] = useState(initialLanguage);
-
-  useEffect(() => {
-    if (language === 'Japanese' && typeof window !== 'undefined') {
-      window.location.href = '/japanese';
-    }
-  }, [language]);
-
-  // Redirect if language is set to Japanese
-  // useEffect(() => {
-  //   if (language === "Japanese") {
-  //     window.location.href = "/japanese";
-  //   }
-  // }, [language]);
-  
 
   // Initialize state from localStorage
   const savedCount = typeof window !== 'undefined' ? parseInt(localStorage.getItem("count") || "0") : 0;
@@ -173,8 +130,6 @@ export default function SecretPage() {
     try {
       if (typeof window !== 'undefined') {
         localStorage.setItem('count', JSON.stringify(count));
-        localStorage.setItem('didChooseLanguage', JSON.stringify(didChooseLanguage));
-        localStorage.setItem('language', language);
         localStorage.setItem('level', JSON.stringify(level));
         localStorage.setItem('gameName', gameName);
         localStorage.setItem('amountOfCookiesForLevelUp', JSON.stringify(amountOfCookiesForLevelUp));
@@ -230,63 +185,17 @@ export default function SecretPage() {
   const [didWinOmnioptentPoop, setDidWinOmnioptentPoop] = useState(savedDidWinOmnioptentPoop)
 
   useEffect(() => {
-    if (count >= 100 && isCentiPoop == false) {
+    if (count >= 100) {
       setIsCentiPoop(true)
-      alert("You won the centi poop badge!")
-    } if (amountOfPoopsPerSecond >= 150 && isPoopFactory == false) {
+    } if (amountOfPoopsPerSecond >= 150) {
       setisPoopFactory(true)
-      alert("You won the poop factory  badge!")
     }
   }, [count])
 
 // Add all the state variables that trigger save when changed
   useEffect(() => {
-    try {
-      if (typeof window !== 'undefined') {
-        localStorage.setItem('count', JSON.stringify(count));
-        localStorage.setItem('didChooseLanguage', JSON.stringify(didChooseLanguage));
-        localStorage.setItem('language', language);
-        localStorage.setItem('level', JSON.stringify(level));
-        localStorage.setItem('gameName', gameName);
-        localStorage.setItem('amountOfCookiesForLevelUp', JSON.stringify(amountOfCookiesForLevelUp));
-        localStorage.setItem('addToAmountOfCookiesForLevelUp', JSON.stringify(addToAmountOfCookiesForLevelUp));
-        localStorage.setItem('poopBarThing', JSON.stringify(poopBarThing));
-        localStorage.setItem('poopsClickedEver', JSON.stringify(poopsClickedEver));
-        localStorage.setItem('poopsPerClick', JSON.stringify(PoopPerClick));
-        localStorage.setItem('costToBuyPoopClick', JSON.stringify(costToBuyPoopClick));
-        localStorage.setItem('costToAddCostToBuyPoopClick', JSON.stringify(costToAddCostToBuyPoopClick));
-        localStorage.setItem('amountOfPoopsPerSecond', JSON.stringify(amountOfPoopsPerSecond));
-        localStorage.setItem('costToBuyPoopsPerSecond', JSON.stringify(costToBuyPoopsPerSecond));
-        localStorage.setItem('costToAddCostBuyPoopsPerSecond', JSON.stringify(costToAddCostBuyPoopsPerSecond));
-        localStorage.setItem('costToBuyTenPoopsPerSecond', JSON.stringify(costToBuyTenPoopsPerSecond));
-        localStorage.setItem('costToAddCostBuyTenPoopsPerSecond', JSON.stringify(costToAddCostBuyTenPoopsPerSecond));
-        localStorage.setItem('costToBuyTenPoopsPerClick', JSON.stringify(costToBuyTenPoopsPerClick));
-        localStorage.setItem('costToAddCostBuyTenPoopsPerClick', JSON.stringify(costToAddCostBuyTenPoopsPerClick));
-        localStorage.setItem('stockPrices', JSON.stringify(stockPrices));
-        localStorage.setItem('stockContained', JSON.stringify(stockContained));
-        localStorage.setItem('isDoubleCount', JSON.stringify(stockContained));
-        localStorage.setItem('isDoubleClickPerSecond', JSON.stringify(isDoubleClickPerSecond));
-        localStorage.setItem('isHalvePrice', JSON.stringify(isHalvePrice));
-        localStorage.setItem('didBuyTenStocks', JSON.stringify(didBuyTenStocks));
-        localStorage.setItem('isHalveStockPrice', JSON.stringify(isHalveStockPrice));
-        localStorage.setItem('isMoreLotteryLuck', JSON.stringify(isMoreLotteryLuck));
-        localStorage.setItem('howManyTimeAutoClicked', JSON.stringify(howManyTimeAutoClicked));
-        localStorage.setItem('isAutoClickerAllowed', JSON.stringify(isAutoClickerAllowed));
-        localStorage.setItem('frogsPerSecond', JSON.stringify(frogsPerSecond));
-        localStorage.setItem('poopPerFrog', JSON.stringify(poopPerFrog));
-        localStorage.setItem('costToBuyFrogsPerSecond', JSON.stringify(costToBuyFrogsPerSecond));
-        localStorage.setItem('addToCostFrogsPerSecond', JSON.stringify(addToCostFrogsPerSecond));
-        localStorage.setItem('costToBuyPoopPerFrog', JSON.stringify(costToBuyPoopPerFrog));
-        localStorage.setItem('addToCostPoopPerFrog', JSON.stringify(addToCostPoopPerFrog));
-        localStorage.setItem('isCentiPoop', JSON.stringify(isCentiPoop));
-        localStorage.setItem('isPoopFactory', JSON.stringify(isPoopFactory));
-        localStorage.setItem('didWinOmnioptentPoop', JSON.stringify(didWinOmnioptentPoop));
-        console.log('Data saved successfully');
-      }
-    } catch (error) {
-      console.error('Failed to save data to localStorage:', error);
-    }
-  }, [count, level, gameName, amountOfCookiesForLevelUp, addToAmountOfCookiesForLevelUp, poopBarThing, poopsClickedEver, PoopPerClick, costToBuyPoopClick, costToAddCostToBuyPoopClick, amountOfPoopsPerSecond, costToBuyPoopsPerSecond, costToAddCostBuyPoopsPerSecond, didChooseLanguage, language]);
+    save();
+  }, [count, level, gameName, amountOfCookiesForLevelUp, addToAmountOfCookiesForLevelUp, poopBarThing, poopsClickedEver, PoopPerClick, costToBuyPoopClick, costToAddCostToBuyPoopClick, amountOfPoopsPerSecond, costToBuyPoopsPerSecond, costToAddCostBuyPoopsPerSecond]);
 
   
 
@@ -602,11 +511,8 @@ export default function SecretPage() {
             setCount(count + 2000);
             setPoopsClickedEver(poopsClickedEver + 2000);
             setPoopBarThing(poopBarThing + 2000);
+            setDidWinOmnioptentPoop(true)
             alert('You won!!! yayyy :)');
-            if (didWinOmnioptentPoop == true) {
-              setDidWinOmnioptentPoop(true)
-              alert("You won the omnipotent poop badge!")
-            }
           } else {
             alert('You lost... :(');
           }
@@ -1217,12 +1123,6 @@ export default function SecretPage() {
       {/* BACKGROUND IMAGE */}
       <img className={styles.backround} src="toiletPaperBackround.png" alt="" />
 
-      <div className={styles.flagDiv} style={{ opacity: didChooseLanguage ? 0 : 0.9, pointerEvents: didChooseLanguage ? 'none' : 'all'}}></div>
-      <div className={styles.flagBox} style={{ opacity: didChooseLanguage ? 0 : 1, pointerEvents: didChooseLanguage ? 'none' : 'all'}}>
-        <img src="americanFlag.png" alt="americanFlag" className={styles.flags} onClick={choseAmerica}/>
-        <img src="japaneseFlag.png" alt="japaneseFlag" className={styles.flags} onClick={choseJapanese}/>
-      </div>
-
       {/* TOP BAR */}
 
       <div className={styles.topBar}>
@@ -1355,48 +1255,47 @@ export default function SecretPage() {
         </div>
       </div>
 
-      {/* Lottery Screen (with no confirmations inside) */}
+      {/* LOTTERY SCREEN */}
       <div
         className={styles.stuffyScreen}
         style={{
           opacity: isLottery ? 1 : 0,
           pointerEvents: isLottery ? 'all' : 'none',
-          zIndex: 1000,
+          zIndex: 1000
         }}
       >
-        <div className={styles.stuffyTitle}>Lottery {isMoreLotteryLuck ? '=>2x Luck' : ''}</div>
+        <div className={styles.stuffyTitle}>Lottery{isMoreLotteryLuck ? '=>2x Luck' : ''}</div>
         <button className={styles.stuffXExit} onClick={toggleIsLottery}>
           &#10008;
         </button>
         <div className={styles.lotteryTickets}>
+          {/* Pooper Man Lottery */}
           <img onClick={toggleIsPooperManSure} className={styles.pooperManLottery} src="pooperManLottery.png" alt="PooperManLottery" />
+          {/* Pooper Man Confirmation */}
+          <div className={styles.areYouSurePooperManBody} style={{ opacity: isPooperManAreYouSure ? 1 : 0, pointerEvents: isPooperManAreYouSure ? 'all' : 'none' }}>
+            <div className={styles.areYouSurePooperManBodyTitle}>Are you sure you want to buy Pooper Man?
+              <div onClick={pooperManLotteryGo} className={styles.yesDoPooperMan}>Yes</div>
+              <div onClick={toggleIsPooperManSure} className={styles.noDoPooperMan}>No</div>
+            </div>
+          </div>
+
+          {/* Dog Turd Lottery */}
           <img onClick={toggleIsDogTurdSure} className={styles.pooperManLottery} src="dogTurdLottery.png" alt="DogTurdLottery" />
+          <div className={styles.areYouSureDogTurdBody} style={{ opacity: isDogTurdAreYouSure ? 1 : 0, pointerEvents: isDogTurdAreYouSure ? 'all' : 'none' }}>
+            <div className={styles.areYouSureDogTurdBodyTitle}>Are you sure you want to buy Dog Turd?
+              <div onClick={dogTurdLotteryGo} className={styles.yesDoDogTurd}>Yes</div>
+              <div onClick={toggleIsDogTurdSure} className={styles.noDoDogTurd}>No</div>
+            </div>
+          </div>
+
+          {/* Omnipotent Poop Lottery */}
           <img onClick={toggleIsOmnipotentPoopSure} className={styles.omnipotentPoopLottery} src="omnipotentPoopLottery.png" alt="OmnipotentPoopLottery" />
-        </div>
-      </div>
-
-      {/* Confirmation dialogs outside of the lottery screen div */}
-      <div className={styles.areYouSurePooperManBody} style={{ opacity: isPooperManAreYouSure ? 1 : 0, pointerEvents: isPooperManAreYouSure ? 'all' : 'none' }}>
-        <div className={styles.areYouSurePooperManBodyTitle}>
-          Are you sure you want to buy Pooper Man?
-          <div onClick={pooperManLotteryGo} className={styles.yesDoPooperMan}>Yes</div>
-          <div onClick={toggleIsPooperManSure} className={styles.noDoPooperMan}>No</div>
-        </div>
-      </div>
-
-      <div className={styles.areYouSureDogTurdBody} style={{ opacity: isDogTurdAreYouSure ? 1 : 0, pointerEvents: isDogTurdAreYouSure ? 'all' : 'none' }}>
-        <div className={styles.areYouSureDogTurdBodyTitle}>
-          Are you sure you want to buy Dog Turd?
-          <div onClick={dogTurdLotteryGo} className={styles.yesDoDogTurd}>Yes</div>
-          <div onClick={toggleIsDogTurdSure} className={styles.noDoDogTurd}>No</div>
-        </div>
-      </div>
-
-      <div className={styles.areYouSureOmnipotentPoopBody} style={{ opacity: isOmnipotentPoopAreYouSure ? 1 : 0, pointerEvents: isOmnipotentPoopAreYouSure ? 'all' : 'none' }}>
-        <div className={styles.areYouSureOmnipotentPoopBodyTitle}>
-          Are you sure you want to buy Omnipotent Poop?
-          <div onClick={ominpotentPoopLotteryGo} className={styles.yesDoOmnipotentPoop}>Yes</div>
-          <div onClick={toggleIsOmnipotentPoopSure} className={styles.noDoOmnipotentPoop}>No</div>
+          <div className={styles.areYouSureOmnipotentPoopBody} style={{ opacity: isOmnipotentPoopAreYouSure ? 1 : 0, pointerEvents: isOmnipotentPoopAreYouSure ? 'all' : 'none' }}>
+            <div className={styles.areYouSureOmnipotentPoopBodyTitle}>Are you sure you want to buy Omnipotent Poop?
+              <div onClick={ominpotentPoopLotteryGo} className={styles.yesDoOmnipotentPoop}>Yes</div>
+              <div onClick={toggleIsOmnipotentPoopSure} className={styles.noDoOmnipotentPoop}>No</div>
+            </div>
+          </div>
         </div>
       </div>
 
