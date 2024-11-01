@@ -62,11 +62,11 @@ export default function SecretPage() {
  const [language, setLanguage] = useState(savedLanguage)
 
  // Update localStorage when `didChooseLanguage` changes
- useEffect(() => {
-   if (typeof window !== 'undefined') {
-     localStorage.setItem('didChooseLanguage', JSON.stringify(didChooseLanguage));
-   }
- }, [didChooseLanguage]);
+//  useEffect(() => {
+//    if (typeof window !== 'undefined') {
+//      localStorage.setItem('didChooseLanguage', JSON.stringify(didChooseLanguage));
+//    }
+//  }, [didChooseLanguage]);
 
 
  // Language selection functions
