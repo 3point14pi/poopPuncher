@@ -82,18 +82,18 @@ export default function SecretPage() {
   const initialLanguage = typeof window !== 'undefined' ? (localStorage.getItem("language") || "") : "";
   const [language, setLanguage] = useState(initialLanguage);
 
-  useEffect(() => {
-    if (typeof window !== 'undefined') {
-      localStorage.setItem('language', language);
-    }
-  }, [language]);
-
-  // Redirect if language is set to Japanese
   // useEffect(() => {
-  //   if (language === "Japanese") {
-  //     window.location.href = "/japanese";
+  //   if (typeof window !== 'undefined') {
+  //     localStorage.setItem('language', language);
   //   }
   // }, [language]);
+
+  // Redirect if language is set to Japanese
+  useEffect(() => {
+    if (language === "Japanese") {
+      window.location.href = "/japanese";
+    }
+  }, [language]);
   
 
   // Initialize state from localStorage
