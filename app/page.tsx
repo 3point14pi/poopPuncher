@@ -58,7 +58,7 @@ export default function SecretPage() {
  const initialDidChooseLanguage = JSON.parse(localStorage.getItem("didChooseLanguage") || "false")
  const [didChooseLanguage, setDidChooseLanguage] = useState(initialDidChooseLanguage);
 
- const savedLanguage = (localStorage.getItem("language") || 'hi')
+ const savedLanguage = (localStorage.getItem("language") || '')
  const [language, setLanguage] = useState(savedLanguage)
 
  // Update localStorage when `didChooseLanguage` changes
@@ -165,8 +165,8 @@ export default function SecretPage() {
       if (typeof window !== 'undefined') {
         localStorage.setItem('count', JSON.stringify(count));
         localStorage.setItem('level', JSON.stringify(level));
-        localStorage.setItem('didChooseLanguage', JSON.stringify(didChooseLanguage));
-        localStorage.setItem('language', JSON.stringify(language));
+        // localStorage.setItem('didChooseLanguage', JSON.stringify(didChooseLanguage));
+        // localStorage.setItem('language', JSON.stringify(language));
         localStorage.setItem('gameName', gameName);
         localStorage.setItem('amountOfCookiesForLevelUp', JSON.stringify(amountOfCookiesForLevelUp));
         localStorage.setItem('addToAmountOfCookiesForLevelUp', JSON.stringify(addToAmountOfCookiesForLevelUp));
