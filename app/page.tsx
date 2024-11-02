@@ -58,7 +58,7 @@ export default function SecretPage() {
   
   // Initialize `didChooseLanguage` from localStorage once on initial render
   const initialDidChooseLanguage = typeof window !== 'undefined' ? parseInt(localStorage.getItem("didChooseLanguage") || "false") : false;
-  const [didChooseLanguage, setDidChooseLanguage] = useState(initialDidChooseLanguage);
+  const [didChooseLanguage, setDidChooseLanguage] = useState(true);
 
   // Update localStorage when `didChooseLanguage` changes
   useEffect(() => {
@@ -83,18 +83,17 @@ export default function SecretPage() {
   const initialLanguage = typeof window !== 'undefined' ? (localStorage.getItem("language") || "") : "";
   const [language, setLanguage] = useState(initialLanguage);
 
-  // useEffect(() => {
-  //   if (typeof window !== 'undefined') {
-  //     localStorage.setItem('language', language);
-  //   }
-  // }, [language]);
-
   // Redirect if language is set to Japanese
-  // useEffect(() => {
-  //   if (language === "Japanese") {
-  //     window.location.href = "/japanese";
-  //   }
-  // }, [language]);
+  useEffect(() => {
+    // alert(language)
+    if (language === "Japanese") {
+      window.location.href = "/japanese";
+    } else if (language === 'English') {
+      setDidChooseLanguage(true)
+    } else {
+      setDidChooseLanguage(false)
+    }
+  }, [language]);
   
 
   // Initialize state from localStorage
