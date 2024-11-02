@@ -57,7 +57,7 @@ export default function SecretPage() {
 
   
   // Initialize `didChooseLanguage` from localStorage once on initial render
-  const initialDidChooseLanguage = typeof window !== 'undefined' ? parseInt(localStorage.getItem("didChooseLanguage") || "false") : false;
+  // const initialDidChooseLanguage = typeof window !== 'undefined' ? parseInt(localStorage.getItem("didChooseLanguage") || "false") : false;
   const [didChooseLanguage, setDidChooseLanguage] = useState(true);
 
   // Update localStorage when `didChooseLanguage` changes
