@@ -363,7 +363,7 @@
   top: 35vh;
   border-radius: 15px;
   padding: 5vw;
-  z-index: 100;
+  z-index: 10000;
 }
 
 
@@ -428,7 +428,7 @@
   top: 35vh;
   border-radius: 15px;
   padding: 5vw;
-  z-index: 100;
+  z-index: 10000;
 }
 
 .yesDoDogTurd {
@@ -492,7 +492,7 @@
   top: 35vh;
   border-radius: 15px;
   padding: 5vw;
-  z-index: 100;
+  z-index: 10000;
 }
 
 .yesDoOmnipotentPoop {

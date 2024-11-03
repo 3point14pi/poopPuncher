@@ -219,16 +219,17 @@ export default function SecretPage() {
 
   //  ACHIEVMENTS
 
-  const savedIsCentiPoop = typeof window !== 'undefined' ? (localStorage.getItem("isCentiPoop") || "false") : false;
-  const [isCentiPoop, setIsCentiPoop] = useState(savedIsCentiPoop)
+  const savedIsCentiPoop = typeof window !== 'undefined' ? JSON.parse(localStorage.getItem("isCentiPoop") || "false") : false;
+  const [isCentiPoop, setIsCentiPoop] = useState(savedIsCentiPoop);  
 
-  const savedIsPoopFactory = typeof window !== 'undefined' ? (localStorage.getItem("isPoopFactory") || "false") : false;
+  const savedIsPoopFactory = typeof window !== 'undefined' ? JSON.parse(localStorage.getItem("isPoopFactory") || "false") : false;
   const [isPoopFactory, setisPoopFactory] = useState(savedIsPoopFactory)
 
-  const savedDidWinOmnioptentPoop = typeof window !== 'undefined' ? (localStorage.getItem("didWinOmnioptentPoop") || "false") : false;
+  const savedDidWinOmnioptentPoop = typeof window !== 'undefined' ? JSON.parse(localStorage.getItem("didWinOmnioptentPoop") || "false") : false;
   const [didWinOmnioptentPoop, setDidWinOmnioptentPoop] = useState(savedDidWinOmnioptentPoop)
 
   useEffect(() => {
+    console.log(amountOfPoopsPerSecond, isCentiPoop)
     if (count >= 100 && isCentiPoop == false) {
       setIsCentiPoop(true)
       alert("You won the centi poop badge!")
@@ -413,7 +414,7 @@ export default function SecretPage() {
         setCount(count + Math.round(buyStockPrice))
         setPoopsClickedEver(poopsClickedEver + Math.round(buyStockPrice))
         setStockContained(stockContained - 1)
-        alert(Math.round(buyStockPrice))
+        console.log(Math.round(buyStockPrice))
       } else {
         alert("ya don't have no stocks to sell poopy!")
       }
