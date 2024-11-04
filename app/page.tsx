@@ -58,7 +58,8 @@ export default function SecretPage() {
   
   // Initialize `didChooseLanguage` from localStorage once on initial render
   // const initialDidChooseLanguage = typeof window !== 'undefined' ? parseInt(localStorage.getItem("didChooseLanguage") || "false") : false;
-  const [didChooseLanguage, setDidChooseLanguage] = useState(true);
+  // const [didChooseLanguage, setDidChooseLanguage] = useState(true);
+  const [didChooseLanguage, setDidChooseLanguage] = useState(false);
 
   // Update localStorage when `didChooseLanguage` changes
   useEffect(() => {
@@ -1103,7 +1104,7 @@ export default function SecretPage() {
           setIsOneSecond((prev) => prev + 1); 
           
           // Check if the clicks exceed the threshold within the time window
-          if (howManyTimesClicked >= 30) {
+          if (howManyTimesClicked >= 40) {
             setHowManyTimeAutoClicked(howManyTimeAutoClicked + 1);
             
             // Alert based on how many times auto-clicking was detected
