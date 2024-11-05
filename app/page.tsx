@@ -58,8 +58,7 @@ export default function SecretPage() {
   
   // Initialize `didChooseLanguage` from localStorage once on initial render
   // const initialDidChooseLanguage = typeof window !== 'undefined' ? parseInt(localStorage.getItem("didChooseLanguage") || "false") : false;
-  // const [didChooseLanguage, setDidChooseLanguage] = useState(true);
-  const [didChooseLanguage, setDidChooseLanguage] = useState(false);
+  const [didChooseLanguage, setDidChooseLanguage] = useState(true);
 
   // Update localStorage when `didChooseLanguage` changes
   useEffect(() => {
@@ -85,15 +84,15 @@ export default function SecretPage() {
   const [language, setLanguage] = useState(initialLanguage);
 
   // Redirect if language is set to Japanese
-  // useEffect(() => {
-  //   if (language === "Japanese") {
-  //     window.location.href = "/japanese";
-  //   } else if (language === 'English') {
-  //     setDidChooseLanguage(true)
-  //   } else {
-  //     setDidChooseLanguage(false)
-  //   }
-  // }, [language]);
+  useEffect(() => {
+    if (language === "Japanese") {
+      window.location.href = "/japanese";
+    } else if (language === 'English') {
+      setDidChooseLanguage(true)
+    } else {
+      setDidChooseLanguage(false)
+    }
+  }, [language]);
   
 
   // Initialize state from localStorage
@@ -215,8 +214,13 @@ export default function SecretPage() {
       console.error('Failed to save data to localStorage:', error);
     }
   }
-  
 
+  // SETTINGS
+  const [isSettingsOpen, setIsSettingsOpen] = useState(false);
+  
+  function toggleIsSettings() {
+    setIsSettingsOpen((prevState) => !prevState)
+  }
   //  ACHIEVMENTS
 
   const savedIsCentiPoop = typeof window !== 'undefined' ? JSON.parse(localStorage.getItem("isCentiPoop") || "false") : false;
@@ -1183,14 +1187,40 @@ export default function SecretPage() {
       {/* TOP BAR */}
 
       <div className={styles.topBar}>
-      <input
-        className={styles.gameName}
-        type="text"
-        value={gameName}
-        onChange={(e) => setGameName(e.target.value)}
-        maxLength={20}
-      />
+        <img 
+          className={styles.settingsButton} 
+            src="settingsButton.png" 
+            alt="settingsButton" 
+            onClick={toggleIsSettings}/>
+        <input
+          className={styles.gameName}
+          type="text"
+          value={gameName}
+          onChange={(e) => setGameName(e.target.value)}
+          maxLength={15}
+        />
       </div>
+    <div
+      className={styles.settingsScreen}
+      style={{
+        opacity: isSettingsOpen ? 0.9 : 0,
+        pointerEvents: isSettingsOpen ? 'all' : 'none'
+      }}
+    >
+      <div className={styles.stuffXExit} onClick={toggleIsSettings}>
+        &#10008;
+      </div>
+      <div className={styles.settingsTitle}>Settings</div>
+      <form className={styles.settingsLanguage}>
+        <label htmlFor="browser">Language: </label>
+        <input onChange={(e) => setLanguage(e.target.value)} list="browsers" name="browser" id="browser" />
+          <datalist id="browsers">
+            <option value="English" />
+            <option value="Japanese" />
+          </datalist>
+      </form>
+    </div>
+
 
       {/* LEFT MENU (SHOP) */}
       <span className={styles.leftMenu}>

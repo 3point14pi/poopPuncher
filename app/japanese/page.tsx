@@ -52,9 +52,16 @@ export default function SecretPage() {
       }
     }
   }, []);
-  
-  
-  
+
+  const initialLanguage = typeof window !== 'undefined' ? (localStorage.getItem("language") || "") : "";
+  const [language, setLanguage] = useState(initialLanguage);
+
+  useEffect(() => {
+    if (language === "English") {
+      save()
+      window.location.href = "/";
+    }
+  }, [language]);
 
   // Initialize state from localStorage
   const savedCount = typeof window !== 'undefined' ? parseInt(localStorage.getItem("count") || "0") : 0;
@@ -134,6 +141,7 @@ export default function SecretPage() {
         localStorage.setItem('count', JSON.stringify(count));
         localStorage.setItem('level', JSON.stringify(level));
         localStorage.setItem('gameName', gameName);
+        localStorage.setItem('language', language);
         localStorage.setItem('amountOfCookiesForLevelUp', JSON.stringify(amountOfCookiesForLevelUp));
         localStorage.setItem('addToAmountOfCookiesForLevelUp', JSON.stringify(addToAmountOfCookiesForLevelUp));
         localStorage.setItem('poopBarThing', JSON.stringify(poopBarThing));
@@ -173,6 +181,13 @@ export default function SecretPage() {
       console.error('Failed to save data to localStorage:', error);
     }
   }
+
+    // SETTINGS
+    const [isSettingsOpen, setIsSettingsOpen] = useState(false);
+  
+    function toggleIsSettings() {
+      setIsSettingsOpen((prevState) => !prevState)
+    }
   
 
   //  ACHIEVMENTS
@@ -1133,14 +1148,39 @@ export default function SecretPage() {
       {/* TOP BAR */}
 
       <div className={styles.topBar}>
-      <input
-        className={styles.gameName}
-        type="text"
-        value={gameName}
-        onChange={(e) => setGameName(e.target.value)}
-        maxLength={20}
-      />
+        <img 
+          className={styles.settingsButton} 
+            src="settingsButton.png" 
+            alt="settingsButton" 
+            onClick={toggleIsSettings}/>
+        <input
+          className={styles.gameName}
+          type="text"
+          value={gameName}
+          onChange={(e) => setGameName(e.target.value)}
+          maxLength={15}
+        />
       </div>
+    <div
+      className={styles.settingsScreen}
+      style={{
+        opacity: isSettingsOpen ? 0.9 : 0,
+        pointerEvents: isSettingsOpen ? 'all' : 'none'
+      }}
+    >
+      <div className={styles.stuffXExit} onClick={toggleIsSettings}>
+        &#10008;
+      </div>
+      <div className={styles.settingsTitle}>Settings</div>
+      <form className={styles.settingsLanguage}>
+        <label htmlFor="browser">Language: </label>
+        <input onChange={(e) => setLanguage(e.target.value)} list="browsers" name="browser" id="browser" />
+          <datalist id="browsers">
+            <option value="English" />
+            <option value="Japanese" />
+          </datalist>
+      </form>
+    </div>
 
       {/* LEFT MENU (SHOP) */}
       <span className={styles.leftMenu}>

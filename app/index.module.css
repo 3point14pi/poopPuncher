@@ -73,12 +73,19 @@
   top: 2vh;
 }
 
+.settingsButton {
+  position: fixed;
+  top: 5vh;
+  left: 27vw;
+  width: 7vh;
+}
+
 .gameName {
   position: relative;
   left: 0vw;
   top: 2vh;
   box-sizing: border-box;
-  width: 45vw;
+  width: 30vw;
   height: 7vh;
   font-size: 4vw;
   z-index: 10; 
@@ -87,6 +94,33 @@
   background: transparent;
   border: transparent;
   font-family: 'Faith Hope', sans-serif;
+}
+
+.settingsScreen {
+  position: fixed;
+  top: 3%;
+  left: 3%; 
+  width: 94%;
+  height: 94%;
+  background-color: rgb(152, 164, 165);
+  pointer-events: none;
+  opacity: 0.9;
+  border-radius: 20px;
+  overflow-y: auto;
+  z-index: 100000;
+}
+
+.settingsTitle {
+  font-size: 50px;
+}
+
+.settingsLanguage {
+  position: absolute;
+  /* text-align: left; */
+  left: 10px;
+  font-size: 20px;
+  padding-left: 30px;
+  padding-top: 10px;
 }
 
 /* LEFT MENU */
@@ -663,6 +697,13 @@
   box-shadow: 4px 4px 6px rgba(0, 0, 0, 0.7);
   right: 1vw; /* Centered */
   top: 2vh;
+}
+
+.settingsButton {
+  position: fixed;
+  top: 3vh;
+  left: 30px;
+  width: 7vh;
 }
 
 .gameName {
