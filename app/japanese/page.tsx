@@ -1173,7 +1173,7 @@ export default function SecretPage() {
       </div>
       <div className={styles.settingsTitle}>Settings</div>
       <form className={styles.settingsLanguage}>
-        <label htmlFor="browser">Language: </label>
+        <label htmlFor="browser">言語： </label>
         <input onChange={(e) => setLanguage(e.target.value)} list="browsers" name="browser" id="browser" />
           <datalist id="browsers">
             <option value="English" />
@@ -1184,7 +1184,7 @@ export default function SecretPage() {
 
       {/* LEFT MENU (SHOP) */}
       <span className={styles.leftMenu}>
-        <p className={styles.poopMarket}>Poop Market</p> <br />
+        <p className={styles.poopMarket}>うんち市場</p> <br />
 
         <button className={styles.morePoopClicker} onClick={morePoopPerClick}>
           クリックすると、クリックごとにうんちが追加されます ({ isHalvePrice ? costToBuyPoopClick/2 : costToBuyPoopClick} うんち)

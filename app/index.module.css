@@ -1,3 +1,30 @@
+.updateScreen {
+  position: fixed;
+  width: 60vw;
+  height: 98vh;
+  top: 1vh;
+  left: 20vw;
+  border-radius: 20px;
+  background-color: green;
+  z-index: 10000000;
+}
+
+.updateTitle {
+  font-size: 30px;
+  margin-top: 10px;
+}
+
+.updateStuff {
+  font-size: 20px;
+  margin-top: 5px;
+}
+
+.updateX {
+  position: fixed;
+  font-size: 40px;
+  margin-left: 10px;
+}
+
 .flagDiv {
   position: fixed;
   width: 100vw;

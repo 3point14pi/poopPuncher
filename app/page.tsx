@@ -55,6 +55,29 @@ export default function SecretPage() {
     }
   }, []);
 
+  // Updates
+
+  const savedUpdate = typeof window !== 'undefined' ? (localStorage.getItem("update") || 1.0) : 1.0;
+  const [update, setUpdate] = useState(savedUpdate);
+
+  const [showUpdate, setShowUpdate] = useState(false);
+
+  useEffect(() => {
+    if (update !== 2.0) {
+      setShowUpdate(true)
+      // setUpdate(2.0)
+      save()
+    } else {
+      setShowUpdate(false)
+    }
+  })
+
+  function hideUpdate() {
+    setShowUpdate(false)
+    setUpdate(2.0)
+  }
+
+
   
   // Initialize `didChooseLanguage` from localStorage once on initial render
   // const initialDidChooseLanguage = typeof window !== 'undefined' ? parseInt(localStorage.getItem("didChooseLanguage") || "false") : false;
@@ -170,6 +193,7 @@ export default function SecretPage() {
   function save() {
     try {
       if (typeof window !== 'undefined') {
+        localStorage.setItem('update', JSON.stringify(update));
         localStorage.setItem('count', JSON.stringify(count));
         localStorage.setItem('didChooseLanguage', JSON.stringify(didChooseLanguage));
         localStorage.setItem('language', language);
@@ -1175,6 +1199,14 @@ export default function SecretPage() {
       <link href="https://fonts.cdnfonts.com/css/earwig-factory" rel="stylesheet"/>
       {/* <style>@import url('https://fonts.cdnfonts.com/css/faith-hope');</style> */}
 
+
+      {/* Updates */}
+      <div className={styles.updateScreen} style={{ opacity: showUpdate ? 1 : 0, pointerEvents: showUpdate ? 'all' : 'none'}}>
+        <div className={styles.updateX} onClick={hideUpdate}>&#10008;</div>
+        <div className={styles.updateTitle}>Updates</div>
+        <div className={styles.updateStuff}>1. Now you can see updates!</div>
+        <div className={styles.updateStuff}>2. Settings to change language</div>
+      </div>
       {/* BACKGROUND IMAGE */}
       <img className={styles.backround} src="toiletPaperBackround.png" alt="" />
 
