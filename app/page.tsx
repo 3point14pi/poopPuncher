@@ -65,7 +65,7 @@ export default function SecretPage() {
   useEffect(() => {
     if (update !== 2.0) {
       setShowUpdate(true)
-      // setUpdate(2.0)
+      setUpdate(2.0)
       save()
     } else {
       setShowUpdate(false)
@@ -74,6 +74,8 @@ export default function SecretPage() {
 
   function hideUpdate() {
     setShowUpdate(false)
+    save()
+    alert(showUpdate)
     setUpdate(2.0)
   }
 
