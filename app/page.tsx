@@ -1133,7 +1133,7 @@ export default function SecretPage() {
           setIsOneSecond((prev) => prev + 1); 
           
           // Check if the clicks exceed the threshold within the time window
-          if (howManyTimesClicked >= 40) {
+          if (howManyTimesClicked >= 70) {
             setHowManyTimeAutoClicked(howManyTimeAutoClicked + 1);
             
             // Alert based on how many times auto-clicking was detected
