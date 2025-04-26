@@ -1116,7 +1116,7 @@ export default function SecretPage() {
 
     function allowAutoclicker() {
       if (isAutoClickerAllowed == false) {
-        if (count >= 999999999) {
+        if (count >= 333333333) {
           alert("Yay! Auto clicker is allowed!")
           setIsAutoClickerAllowed(true)
         } else {
