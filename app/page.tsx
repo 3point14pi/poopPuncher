@@ -1284,7 +1284,7 @@ export default function SecretPage() {
 
         <div className={styles.poopMarket}>Da stuff you shall need</div> <br />
         <button onClick={allowAutoclicker} className={styles.doublePoop}>
-          Allow Autoclicker { isAutoClickerAllowed ? '✅' : '(999,999,999 poops)'}
+          Allow Autoclicker { isAutoClickerAllowed ? '✅' : '(333,333,333 poops)'}
         </button> <br /><br />
 
       </span>
